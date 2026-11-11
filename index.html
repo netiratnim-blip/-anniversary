@@ -1,1088 +1,732 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Anniversary ❤️ ALEEN & NA</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Mitr:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        * {
-            -webkit-tap-highlight-color: transparent;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mitr', 'Sarabun', sans-serif;
-            background-color: #07070d;
-            color: #f1f5f9;
-            overflow-x: hidden;
-            user-select: none;
-        }
-        .font-serif-title {
-            font-family: 'Playfair Display', serif;
-        }
-        .font-mono-code {
-            font-family: 'Fira Code', monospace;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Anniversary ❤️ ALEEN & NA</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Mitr:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Projector Light Beam */
-        .projector-beam {
-            position: absolute;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(ellipse at 50% 0%, rgba(254, 205, 211, 0.18) 0%, rgba(244, 63, 94, 0.08) 35%, rgba(0, 0, 0, 0) 75%);
-            pointer-events: none;
-            z-index: 1;
-            filter: blur(25px);
-            animation: beamPulse 6s ease-in-out infinite alternate;
-        }
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      font-family: 'Mitr', sans-serif;
+      background-color: #07070d;
+      color: #f1f5f9;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .font-serif-title { font-family: 'Playfair Display', serif; }
+    .font-mono-code { font-family: 'Fira Code', monospace; }
 
-        @keyframes beamPulse {
-            0% { opacity: 0.7; transform: translateX(-50%) scale(0.98); }
-            100% { opacity: 1; transform: translateX(-50%) scale(1.03); }
-        }
+    /* Projector Light Beam - ปลอดภัยต่อการกด */
+    .projector-beam {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140vw;
+      height: 120vh;
+      background: radial-gradient(ellipse at 50% 0%, rgba(254, 205, 211, 0.16) 0%, rgba(244, 63, 94, 0.08) 35%, transparent 70%);
+      pointer-events: none !important;
+      z-index: 1;
+      filter: blur(20px);
+      animation: beamPulse 5s ease-in-out infinite alternate;
+    }
+    @keyframes beamPulse {
+      0% { opacity: 0.7; transform: translateX(-50%) scale(0.98); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.02); }
+    }
 
-        /* Electronic Theater Curtains */
-        .curtain-container {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: flex;
-            pointer-events: none;
-            transition: opacity 1.2s ease;
-        }
-        .curtain-left, .curtain-right {
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(135deg, #180509 0%, #3f0914 30%, #1a0408 60%, #0d0205 100%);
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
-            transition: transform 2.2s cubic-bezier(0.77, 0, 0.175, 1);
-            position: relative;
-            pointer-events: auto;
-        }
-        .curtain-left::after, .curtain-right::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            background: repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(0,0,0,0.4) 35px, rgba(255, 180, 200, 0.06) 70px);
-        }
-        .curtain-open .curtain-left {
-            transform: translateX(-105%);
-        }
-        .curtain-open .curtain-right {
-            transform: translateX(105%);
-        }
+    /* Curtain System */
+    #curtain-container {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      pointer-events: none;
+      transition: opacity 1s ease 1.5s;
+    }
+    .curtain-panel {
+      flex: 1;
+      height: 100%;
+      background: linear-gradient(135deg, #180509 0%, #3f0914 40%, #150307 100%);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+      position: relative;
+      transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .curtain-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(255, 180, 200, 0.04) 25px, rgba(0, 0, 0, 0.3) 50px);
+    }
+    .curtain-open .curtain-left { transform: translateX(-100%); }
+    .curtain-open .curtain-right { transform: translateX(100%); }
 
-        /* Film Grain Effect */
-        .film-dust {
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 0);
-            background-size: 32px 32px;
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 2;
-            animation: dustFloat 12s linear infinite;
-        }
-        @keyframes dustFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-32px); }
-        }
+    /* Curtain Open Screen */
+    #curtain-launch-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(7, 7, 13, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease;
+    }
 
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(22, 16, 29, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(244, 114, 182, 0.2);
-            box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(244, 63, 94, 0.15);
-        }
+    /* Cards */
+    .glass-card {
+      background: rgba(22, 16, 29, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(244, 114, 182, 0.25);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(244, 63, 94, 0.15);
+    }
 
-        /* Floating Particle Animations */
-        .float-emoji {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-            font-size: 28px;
-            animation: floatUpBurst 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-        @keyframes floatUpBurst {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(0.6) rotate(0deg);
-            }
-            50% {
-                opacity: 0.95;
-                transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(var(--rot));
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), calc(var(--ty) - 80px)) scale(1.5) rotate(calc(var(--rot) * 2));
-            }
-        }
+    /* Keypad */
+    .keypad-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(244, 114, 182, 0.25);
+      color: #fce7f3;
+      font-size: 1.35rem;
+      font-weight: 500;
+      padding: 0.85rem 0;
+      border-radius: 1rem;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .keypad-btn:active {
+      transform: scale(0.92);
+      background: rgba(244, 63, 94, 0.4);
+    }
 
-        /* Spinning Vinyl */
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .spin-vinyl {
-            animation: spinSlow 7s linear infinite;
-        }
-        .spin-paused {
-            animation-play-state: paused;
-        }
+    /* Floating Popups */
+    .float-emoji {
+      position: fixed;
+      pointer-events: none !important;
+      z-index: 9999;
+      font-size: 30px;
+      animation: floatUp 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--tx), -120px) scale(1.4) rotate(var(--rot)); }
+    }
 
-        /* Equalizer Bar Animation */
-        @keyframes eqBounce {
-            0%, 100% { height: 4px; }
-            50% { height: 22px; }
-        }
-        .eq-bar {
-            width: 3px;
-            background: #f43f5e;
-            border-radius: 2px;
-            animation: eqBounce 1s ease-in-out infinite alternate;
-        }
-        .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #fb7185; }
-        .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #fda4af; }
-        .eq-bar:nth-child(4) { animation-delay: 0.1s; background: #e11d48; }
+    /* Spinning Vinyl */
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-vinyl { animation: spinVinyl 6s linear infinite; }
+    .spin-paused { animation-play-state: paused; }
 
-        /* Shake animation for incorrect password */
-        .shake-box {
-            animation: shake 0.45s cubic-bezier(.36,.07,.19,.97) both;
-        }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-2px, 0, 0); }
-            20%, 80% { transform: translate3d(4px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-            40%, 60% { transform: translate3d(6px, 0, 0); }
-        }
+    /* Equalizer */
+    @keyframes eqWave {
+      0%, 100% { height: 4px; }
+      50% { height: 20px; }
+    }
+    .eq-bar {
+      width: 3px;
+      background: #f43f5e;
+      border-radius: 2px;
+      animation: eqWave 1s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #fb7185; }
+    .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #fda4af; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a060d;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4a1525;
-            border-radius: 4px;
-        }
-    </style>
+    /* Shake Error */
+    .shake-box { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* Lyric Line */
+    .lyric-line {
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: rgba(253, 226, 236, 0.4);
+    }
+    .lyric-line.active {
+      color: #ffffff;
+      font-weight: 600;
+      background: rgba(244, 63, 94, 0.3);
+      border: 1px solid rgba(244, 114, 182, 0.6);
+      transform: scale(1.02);
+      text-shadow: 0 0 15px rgba(244, 63, 94, 0.8);
+    }
+
+    /* YouTube iframe container ซ่อนแบบยังรันได้ปกติ */
+    #yt-hidden-wrap {
+      position: fixed;
+      top: -200px;
+      left: -200px;
+      width: 10px;
+      height: 10px;
+      opacity: 0.01;
+      pointer-events: none;
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative selection:bg-rose-500 selection:text-white">
+<body class="flex flex-col justify-between min-h-screen">
 
-    <!-- Atmospheric Layers -->
-    <div class="projector-beam"></div>
-    <div class="film-dust"></div>
+  <div class="projector-beam"></div>
 
-    <!-- Hidden YouTube Audio Engine -->
-    <div id="yt-player-container" class="hidden">
-        <div id="yt-player"></div>
+  <!-- Hidden YouTube Player -->
+  <div id="yt-hidden-wrap">
+    <div id="yt-player"></div>
+  </div>
+
+  <!-- Theater Curtains -->
+  <div id="curtain-container">
+    <div class="curtain-panel curtain-left"></div>
+    <div class="curtain-panel curtain-right"></div>
+  </div>
+
+  <!-- Open Curtains Screen -->
+  <div id="curtain-launch-screen">
+    <button onclick="startExperience(event)" class="px-8 py-4 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white rounded-full font-medium text-lg tracking-wider shadow-[0_0_35px_rgba(244,63,94,0.7)] transform active:scale-95 transition-all flex items-center gap-3 border border-rose-300/40">
+      <i class="fa-solid fa-film text-xl text-rose-200"></i>
+      <span>เปิดม่านฉายความทรงจำ</span>
+      <span class="animate-ping text-sm">✨</span>
+    </button>
+    <p class="text-rose-200/70 text-sm mt-4 tracking-wider flex items-center gap-2">
+      <i class="fa-solid fa-volume-high"></i> แตะเพื่อเปิดเสียงเพลง & รับชมบรรยากาศ
+    </p>
+  </div>
+
+  <!-- Floating Music Pill -->
+  <header class="fixed top-4 right-4 z-40">
+    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/70 backdrop-blur-md border border-rose-500/30 rounded-full shadow-lg cursor-pointer">
+      <div id="vinyl-disc" class="w-7 h-7 rounded-full bg-rose-950 border border-rose-400 flex items-center justify-center spin-vinyl spin-paused">
+        <div class="w-2 h-2 rounded-full bg-rose-300"></div>
+      </div>
+      <div class="hidden sm:flex flex-col text-left">
+        <span class="text-xs font-semibold text-rose-200">รักให้เธอได้รู้</span>
+        <span class="text-[9px] text-gray-400">PUN</span>
+      </div>
+      <div class="flex items-center gap-1 h-4 px-1">
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+      </div>
+      <i class="fa-solid fa-play text-rose-300 text-xs ml-1" id="music-icon-state"></i>
     </div>
+  </header>
 
-    <!-- Electronic Theater Curtains Overlay -->
-    <div id="theater-curtains" class="curtain-container">
-        <div class="curtain-left flex items-center justify-end pr-6">
-            <div class="text-rose-300/40 font-serif-title tracking-widest text-2xl font-light transform -rotate-90 origin-center hidden sm:block">
-                CINEMA D'AMOUR
-            </div>
+  <!-- Main Containers -->
+  <main class="flex-grow flex items-center justify-center px-4 py-16 z-20 w-full max-w-4xl mx-auto">
+
+    <!-- SCENE 1: ANNIVERSARY TIMER -->
+    <section id="scene-counter" class="w-full flex flex-col items-center text-center">
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs tracking-widest uppercase mb-4">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          Now Projecting Our Love Story
         </div>
-        <div class="curtain-right flex items-center justify-start pl-6">
-            <div class="text-rose-300/40 font-serif-title tracking-widest text-2xl font-light transform rotate-90 origin-center hidden sm:block">
-                ALEEN & NA
-            </div>
+        <h1 class="font-serif-title text-3xl sm:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-200 via-rose-300 to-rose-400 leading-tight">
+          Happy Anniversary ❤️<br>ALEEN & NA
+        </h1>
+        <p class="text-rose-200/90 text-base sm:text-lg font-light mt-3 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-heart text-rose-500 text-sm"></i>
+          เราเดินข้างกันมานานแค่ไหนแล้วนะ
+          <i class="fa-solid fa-heart text-rose-500 text-sm"></i>
+        </p>
+      </div>
+
+      <div class="mb-8 px-5 py-2 bg-gradient-to-r from-rose-950/60 via-pink-950/50 to-rose-950/60 rounded-2xl border border-rose-400/20 text-rose-200 text-sm sm:text-base">
+        ✨ ครบรอบ <span class="text-rose-300 font-bold text-lg">3 เดือนเต็ม</span> แห่งความสุข (12 พฤศจิกายน) ✨
+      </div>
+
+      <!-- Modern Counter -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-10">
+        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
+          <span id="c-days" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
+          <span class="text-xs text-rose-300/80 mt-1">วัน (Days)</span>
         </div>
-        
-        <!-- Start Cinema Invitation Button -->
-        <div id="curtain-launch-btn-box" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-black/40 backdrop-blur-[2px]">
-            <button onclick="openCurtainsAndPlay()" class="group relative px-8 py-4 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white rounded-full font-medium text-lg tracking-wider shadow-[0_0_35px_rgba(244,63,94,0.6)] transform transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-rose-300/30">
-                <i class="fa-solid fa-film text-xl text-rose-200 group-hover:rotate-12 transition-transform"></i>
-                <span>เปิดม่านฉายความทรงจำ</span>
-                <span class="inline-block animate-ping text-rose-300 text-sm">✨</span>
-            </button>
-            <p class="text-rose-200/70 text-xs sm:text-sm mt-4 tracking-wider animate-pulse flex items-center gap-2">
-                <i class="fa-solid fa-volume-high"></i> แตะเพื่อเปิดเสียงเพลงรัก & บรรยากาศภาพยนตร์
-            </p>
+        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
+          <span id="c-hours" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
+          <span class="text-xs text-rose-300/80 mt-1">ชั่วโมง (Hours)</span>
         </div>
-    </div>
-
-    <!-- Floating Mini Music Player Indicator -->
-    <header class="fixed top-4 right-4 z-40 flex items-center gap-3">
-        <div id="music-pill" class="flex items-center gap-3 px-4 py-2 bg-black/60 backdrop-blur-md border border-rose-500/30 rounded-full shadow-lg transition-all cursor-pointer hover:border-rose-400" onclick="toggleAudioPlayback()">
-            <div id="vinyl-icon" class="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-900 via-rose-950 to-black border border-rose-500/50 flex items-center justify-center spin-vinyl spin-paused shadow-sm">
-                <div class="w-2.5 h-2.5 rounded-full bg-rose-400"></div>
-            </div>
-            <div class="hidden sm:flex flex-col text-left">
-                <span class="text-xs font-semibold text-rose-200 tracking-wide">รักให้เธอได้รู้</span>
-                <span class="text-[10px] text-gray-400">PUN</span>
-            </div>
-            <div class="flex items-center gap-1 h-5 px-1">
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-                <div class="eq-bar"></div>
-            </div>
-            <button id="audio-toggle-btn" class="text-rose-300 text-xs ml-1 hover:text-white">
-                <i class="fa-solid fa-play" id="audio-icon-status"></i>
-            </button>
+        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
+          <span id="c-minutes" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
+          <span class="text-xs text-rose-300/80 mt-1">นาที (Minutes)</span>
         </div>
-    </header>
+        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
+          <span id="c-seconds" class="text-3xl sm:text-5xl font-bold text-rose-400 font-serif-title">00</span>
+          <span class="text-xs text-rose-300/80 mt-1">วินาที (Seconds)</span>
+        </div>
+      </div>
 
-    <!-- Main Dynamic Container -->
-    <main class="flex-grow flex items-center justify-center px-4 py-16 sm:py-20 z-10 w-full max-w-5xl mx-auto">
-        
-        <!-- ================= SCENE 1: PROJECTOR REVEAL & ANNIVERSARY COUNTER ================= -->
-        <section id="scene-counter" class="w-full flex flex-col items-center text-center transition-all duration-700">
-            <!-- Projector Glow Header -->
-            <div class="relative mb-6">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                    Now Projecting Our Love Story
-                </div>
-                <h1 class="font-serif-title text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-200 via-rose-300 to-rose-400 drop-shadow-[0_0_30px_rgba(244,63,94,0.45)] leading-tight">
-                    Happy Anniversary ❤️<br class="hidden sm:inline" /> ALEEN & NA
-                </h1>
-                <p class="text-rose-200/90 text-base sm:text-xl font-light mt-3 tracking-wide flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-heart text-rose-500 text-sm animate-pulse"></i>
-                    เราเดินข้างกันมานานแค่ไหนแล้วนะ
-                    <i class="fa-solid fa-heart text-rose-500 text-sm animate-pulse"></i>
-                </p>
-            </div>
+      <button onclick="gotoScene('scene-passcode', event)" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium text-lg shadow-[0_4px_25px_rgba(244,63,94,0.4)] active:scale-95 transition-all flex items-center gap-3">
+        <span>ถัดไป</span>
+        <i class="fa-solid fa-arrow-right text-sm"></i>
+      </button>
+    </section>
 
-            <!-- Milestone Ribbon -->
-            <div class="mb-8 inline-block px-5 py-2 bg-gradient-to-r from-rose-900/50 via-pink-900/40 to-rose-900/50 rounded-2xl border border-rose-400/20 text-rose-200 text-sm sm:text-base font-medium shadow-inner">
-                ✨ ครบรอบ <span class="text-rose-300 font-bold text-lg">3 เดือนเต็ม</span> แห่งความสุข (12 พฤศจิกายน) ✨
-            </div>
+    <!-- SCENE 2: PASSCODE -->
+    <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center">
+      <div id="passcode-card" class="glass-card w-full p-6 sm:p-8 rounded-3xl">
+        <div class="w-14 h-14 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 class="text-2xl font-semibold text-rose-100 mb-1">ใส่รหัสผ่านความทรงจำ</h2>
+        <p class="text-xs sm:text-sm text-rose-200/80 mb-5 leading-relaxed">
+          วันที่เรื่องราวของเราเริ่มต้นขึ้น... ✨<br>
+          <span class="text-rose-300 font-mono text-xs">Hint: วันที่คบกัน เช่น 12/09/68 หรือ 120968</span>
+        </p>
 
-            <!-- Modern Glass Counter Cards -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 w-full max-w-3xl mb-10">
-                <!-- Days -->
-                <div class="glass-card p-4 sm:p-6 rounded-3xl flex flex-col items-center relative overflow-hidden group hover:border-rose-400/50 transition-all">
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition-all"></div>
-                    <span id="counter-days" class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-rose-200 tracking-tight font-serif-title">
-                        00
-                    </span>
-                    <span class="text-xs sm:text-sm font-light text-rose-300/80 uppercase tracking-widest mt-1">วัน (Days)</span>
-                </div>
-                <!-- Hours -->
-                <div class="glass-card p-4 sm:p-6 rounded-3xl flex flex-col items-center relative overflow-hidden group hover:border-rose-400/50 transition-all">
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition-all"></div>
-                    <span id="counter-hours" class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-rose-200 tracking-tight font-serif-title">
-                        00
-                    </span>
-                    <span class="text-xs sm:text-sm font-light text-rose-300/80 uppercase tracking-widest mt-1">ชั่วโมง (Hours)</span>
-                </div>
-                <!-- Minutes -->
-                <div class="glass-card p-4 sm:p-6 rounded-3xl flex flex-col items-center relative overflow-hidden group hover:border-rose-400/50 transition-all">
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition-all"></div>
-                    <span id="counter-minutes" class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-rose-200 tracking-tight font-serif-title">
-                        00
-                    </span>
-                    <span class="text-xs sm:text-sm font-light text-rose-300/80 uppercase tracking-widest mt-1">นาที (Minutes)</span>
-                </div>
-                <!-- Seconds -->
-                <div class="glass-card p-4 sm:p-6 rounded-3xl flex flex-col items-center relative overflow-hidden group hover:border-rose-400/50 transition-all">
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition-all"></div>
-                    <span id="counter-seconds" class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-rose-300 to-rose-500 tracking-tight font-serif-title">
-                        00
-                    </span>
-                    <span class="text-xs sm:text-sm font-light text-rose-300/80 uppercase tracking-widest mt-1">วินาที (Seconds)</span>
-                </div>
-            </div>
+        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/60 border-2 border-rose-500/40 rounded-2xl text-rose-200 mb-2 focus:outline-none">
+        <div id="pass-error" class="text-xs text-rose-400 mb-4 hidden">รหัสไม่ถูกต้อง ลองนึกถึงวันที่ 12/09/68 อีกทีนะ ❤️</div>
 
-            <!-- Next Navigation Button -->
-            <button onclick="goToPasscodeScreen()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-medium text-base sm:text-lg shadow-[0_4px_25px_rgba(244,63,94,0.4)] hover:shadow-[0_6px_35px_rgba(244,63,94,0.6)] transform hover:scale-105 active:scale-95 transition-all flex items-center gap-3">
-                <span>ถัดไป</span>
-                <i class="fa-solid fa-arrow-right text-sm"></i>
-            </button>
-        </section>
+        <!-- Keypad -->
+        <div class="grid grid-cols-3 gap-2.5 mb-4">
+          <button onclick="tapKey('1', event)" class="keypad-btn">1</button>
+          <button onclick="tapKey('2', event)" class="keypad-btn">2</button>
+          <button onclick="tapKey('3', event)" class="keypad-btn">3</button>
+          <button onclick="tapKey('4', event)" class="keypad-btn">4</button>
+          <button onclick="tapKey('5', event)" class="keypad-btn">5</button>
+          <button onclick="tapKey('6', event)" class="keypad-btn">6</button>
+          <button onclick="tapKey('7', event)" class="keypad-btn">7</button>
+          <button onclick="tapKey('8', event)" class="keypad-btn">8</button>
+          <button onclick="tapKey('9', event)" class="keypad-btn">9</button>
+          <button onclick="clearKey(event)" class="keypad-btn text-rose-400 text-sm">ลบ</button>
+          <button onclick="tapKey('0', event)" class="keypad-btn">0</button>
+          <button onclick="backKey(event)" class="keypad-btn text-rose-400"><i class="fa-solid fa-delete-left"></i></button>
+        </div>
 
-        <!-- ================= SCENE 2: PASSCODE UNLOCK VAULT ================= -->
-        <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center transition-all duration-500">
-            <div id="passcode-card" class="glass-card w-full p-6 sm:p-8 rounded-3xl relative overflow-hidden">
-                <div class="w-16 h-16 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)]">
-                    <i class="fa-solid fa-lock-keyhole"></i>
-                </div>
-                
-                <h2 class="text-2xl font-semibold text-rose-100 mb-1">ใส่รหัสผ่านความทรงจำ</h2>
-                <p class="text-xs sm:text-sm text-rose-200/80 mb-6">
-                    วันที่เรื่องราวของเราเริ่มต้นขึ้น... ✨<br/>
-                    <span class="text-rose-300 font-mono text-xs">Hint: วันที่คบกัน เช่น 12/09/68 หรือ 120968</span>
-                </p>
+        <div class="flex items-center justify-between text-xs text-gray-400 pt-2 border-t border-rose-900/30">
+          <button onclick="gotoScene('scene-counter', event)" class="hover:text-rose-300 flex items-center gap-1">
+            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
+          </button>
+          <button onclick="checkPasscode(event)" class="text-rose-200 bg-rose-600 px-4 py-1.5 rounded-full font-medium">
+            ปลดล็อก <i class="fa-solid fa-key"></i>
+          </button>
+        </div>
+      </div>
+    </section>
 
-                <!-- Passcode Input Display -->
-                <div class="relative mb-6">
-                    <input type="text" id="passcode-input" readonly placeholder="• • • • • •" 
-                        class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3.5 px-4 bg-black/50 border-2 border-rose-500/40 rounded-2xl text-rose-200 placeholder-rose-700/50 focus:outline-none focus:border-rose-400 shadow-inner">
-                    <div id="passcode-error-msg" class="text-xs text-rose-400 mt-2 font-medium hidden">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> รหัสไม่ถูกต้อง ลองนึกถึงวันที่ 12/09/68 อีกทีนะ ❤️
-                    </div>
-                </div>
+    <!-- SCENE 3: PHOTO GALLERY -->
+    <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
+      <div class="text-center mb-6">
+        <span class="px-3 py-1 rounded-full bg-rose-950/50 border border-rose-400/30 text-rose-300 text-xs">OUR MEMORIES</span>
+        <h2 class="text-2xl sm:text-4xl font-serif-title font-bold text-white mt-2">กล่องเก็บภาพความทรงจำของเรา 📸</h2>
+        <p class="text-rose-200/70 text-xs sm:text-sm mt-1">รูปที่ใส่ไว้จะถูกบันทึกไว้ในเครื่องนี้อย่างถาวร!</p>
+      </div>
 
-                <!-- Custom Interactive Keypad -->
-                <div class="grid grid-cols-3 gap-2.5 sm:gap-3 mb-4">
-                    <button onclick="pressKey('1', event)" class="keypad-btn">1</button>
-                    <button onclick="pressKey('2', event)" class="keypad-btn">2</button>
-                    <button onclick="pressKey('3', event)" class="keypad-btn">3</button>
-                    <button onclick="pressKey('4', event)" class="keypad-btn">4</button>
-                    <button onclick="pressKey('5', event)" class="keypad-btn">5</button>
-                    <button onclick="pressKey('6', event)" class="keypad-btn">6</button>
-                    <button onclick="pressKey('7', event)" class="keypad-btn">7</button>
-                    <button onclick="pressKey('8', event)" class="keypad-btn">8</button>
-                    <button onclick="pressKey('9', event)" class="keypad-btn">9</button>
-                    <button onclick="clearPasscode(event)" class="keypad-btn text-rose-400 font-normal text-xs sm:text-sm">ลบหมด</button>
-                    <button onclick="pressKey('0', event)" class="keypad-btn">0</button>
-                    <button onclick="backspacePasscode(event)" class="keypad-btn text-rose-400"><i class="fa-solid fa-delete-left"></i></button>
-                </div>
+      <div class="flex items-center gap-3 mb-8">
+        <label class="cursor-pointer px-5 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-sm font-medium shadow-md flex items-center gap-2">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>เพิ่มรูปภาพคู่ของเรา</span>
+          <input type="file" id="photo-upload" accept="image/*" class="hidden" onchange="uploadImage(event)">
+        </label>
+      </div>
 
-                <div class="flex items-center justify-between text-xs text-gray-400 pt-2 border-t border-rose-900/30">
-                    <button onclick="backToCounterScreen()" class="hover:text-rose-300 transition-colors flex items-center gap-1">
-                        <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
-                    </button>
-                    <button onclick="submitPasscode()" class="text-rose-300 hover:text-white font-medium flex items-center gap-1 bg-rose-600/30 px-3 py-1 rounded-full border border-rose-500/40">
-                        ปลดล็อก <i class="fa-solid fa-key"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
+      <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10">
+        <!-- Photo Cards -->
+      </div>
 
-        <!-- ================= SCENE 3: MEMORY PHOTO GALLERY ================= -->
-        <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center transition-all duration-500">
-            <!-- Gallery Title -->
-            <div class="text-center mb-6">
-                <span class="px-3 py-1 rounded-full bg-rose-950/50 border border-rose-400/30 text-rose-300 text-xs tracking-wider">
-                    OUR PRECIOUS MEMORIES
-                </span>
-                <h2 class="text-2xl sm:text-4xl font-serif-title font-bold text-white mt-2">
-                    กล่องเก็บภาพความทรงจำของเรา 📸
-                </h2>
-                <p class="text-rose-200/70 text-xs sm:text-sm mt-1">
-                    รูปภาพที่ใส่ไว้จะถูกบันทึกไว้ในเครื่องนี้อย่างถาวร ส่งต่อให้คนที่รักได้เลย!
-                </p>
-            </div>
+      <button onclick="gotoScene('scene-lyrics', event)" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 text-white font-medium text-base shadow-[0_0_25px_rgba(244,63,94,0.5)] active:scale-95 transition-all flex items-center gap-3">
+        <span>เปิด Terminal of Love & ซิงค์เพลงรัก</span>
+        <i class="fa-solid fa-code text-sm"></i>
+      </button>
+    </section>
 
-            <!-- Upload Bar & Action Buttons -->
-            <div class="w-full flex flex-wrap items-center justify-center gap-3 mb-8">
-                <label class="cursor-pointer px-5 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-medium shadow-md transition-all flex items-center gap-2 border border-rose-300/30">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>เพิ่มรูปภาพคู่ของเรา</span>
-                    <input type="file" id="image-upload-input" accept="image/*" multiple class="hidden" onchange="handleImageUpload(event)">
-                </label>
-                <button onclick="resetGalleryToDefaults()" class="px-4 py-2.5 rounded-full bg-black/40 hover:bg-black/60 text-rose-300/80 text-xs border border-rose-900/40 transition-colors">
-                    <i class="fa-solid fa-rotate-right mr-1"></i> รีเซ็ตตัวอย่าง
-                </button>
-            </div>
+    <!-- SCENE 4: CODE TERMINAL & LYRICS -->
+    <section id="scene-lyrics" class="w-full max-w-4xl hidden flex-col items-center">
+      <div class="w-full flex justify-between items-center mb-4 px-2">
+        <button onclick="gotoScene('scene-gallery', event)" class="text-rose-300 text-xs hover:text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรูป
+        </button>
+        <span class="text-xs text-rose-300 font-mono">ALEEN_NA_CORE // CONNECTED</span>
+      </div>
 
-            <!-- Photos Grid Container -->
-            <div id="photos-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mb-10">
-                <!-- Dynamically generated Polaroid Cards -->
-            </div>
+      <!-- Code Terminal -->
+      <div class="w-full glass-card rounded-2xl overflow-hidden mb-6">
+        <div class="bg-black/80 px-4 py-2 border-b border-rose-900/40 flex justify-between items-center">
+          <div class="flex gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="text-[11px] text-gray-400 font-mono ml-2">love_forever.cpp</span>
+          </div>
+          <span class="text-xs font-mono text-rose-300">Love Index: <strong id="love-val" class="text-rose-400">1%</strong></span>
+        </div>
+        <div class="p-4 font-mono-code text-xs sm:text-sm bg-black/60 text-gray-300 min-h-[140px] text-left" id="terminal-content"></div>
+        <div class="w-full bg-black h-2">
+          <div id="love-bar" class="h-full bg-gradient-to-r from-rose-600 to-amber-400" style="width: 1%;"></div>
+        </div>
+      </div>
 
-            <!-- Continue to Code & Sync Lyrics Button -->
-            <div class="text-center">
-                <button onclick="goToLyricsTerminalScreen()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-500 hover:to-rose-500 text-white font-medium text-base shadow-[0_0_25px_rgba(244,63,94,0.5)] transform hover:scale-105 active:scale-95 transition-all flex items-center gap-3 mx-auto">
-                    <span>เปิด Terminal of Love & เพลงรัก</span>
-                    <i class="fa-solid fa-code text-sm"></i>
-                </button>
-            </div>
-        </section>
+      <!-- Synchronized Lyrics -->
+      <div class="w-full glass-card rounded-3xl p-6 sm:p-8 text-center border border-rose-500/40">
+        <div class="text-rose-300 text-xs uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-music"></i>
+          <span>เนื้อเพลงซิงค์คาราโอเกะ // รักให้เธอได้รู้ - PUN</span>
+          <i class="fa-solid fa-music"></i>
+        </div>
 
-        <!-- ================= SCENE 4: CODE TERMINAL & SYNCED KARAOKE LYRICS ================= -->
-        <section id="scene-lyrics" class="w-full max-w-4xl hidden flex-col items-center transition-all duration-500">
-            <!-- Header Status -->
-            <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-4 px-2">
-                <button onclick="backToGalleryScreen()" class="text-rose-300 text-xs hover:text-white flex items-center gap-1.5">
-                    <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรูป
-                </button>
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
-                    <span class="text-xs text-rose-300 font-mono tracking-wide">ALEEN_NA_OS v3.0 // CONNECTED</span>
-                </div>
-            </div>
+        <div id="lyrics-wrap" class="flex flex-col gap-3 my-2 max-h-[300px] overflow-y-auto px-1">
+          <!-- Lyrics lines -->
+        </div>
 
-            <!-- Dev Code Typing Window -->
-            <div class="w-full glass-card rounded-2xl overflow-hidden border border-rose-500/30 mb-8 shadow-2xl">
-                <!-- Terminal Header Bar -->
-                <div class="bg-black/80 px-4 py-2.5 border-b border-rose-900/40 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                        <span class="text-[11px] text-gray-400 font-mono ml-2">love_story.js — รักให้เธอได้รู้ PUN</span>
-                    </div>
-                    <div class="text-[11px] font-mono text-rose-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-heart text-rose-500"></i>
-                        <span>Love Index: <strong id="love-percent" class="text-rose-400 font-bold">1%</strong></span>
-                    </div>
-                </div>
+        <div class="mt-4 pt-3 border-t border-rose-900/30 flex justify-between items-center text-xs text-gray-400">
+          <span id="player-time-tag" class="font-mono text-rose-300">0:00</span>
+          <span class="text-[11px] text-rose-300/70">❤️ แตะที่ท่อนเพลงเพื่อข้ามไปจังหวะนั้น</span>
+        </div>
+      </div>
+    </section>
 
-                <!-- Terminal Body (Self-typing code) -->
-                <div class="p-4 sm:p-5 font-mono-code text-xs sm:text-sm bg-black/70 text-gray-300 leading-relaxed overflow-x-auto min-h-[170px]" id="terminal-body">
-                    <!-- Typing will stream in here -->
-                    <span id="terminal-typed-content"></span><span class="inline-block w-2 h-4 bg-rose-400 ml-1 animate-pulse"></span>
-                </div>
-                
-                <!-- Love Percent Progress Bar (1% -> 1000%) -->
-                <div class="w-full bg-black/90 h-2 relative overflow-hidden">
-                    <div id="love-progress-bar" class="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-rose-400 transition-all duration-300" style="width: 1%;"></div>
-                </div>
-            </div>
+  </main>
 
-            <!-- Synchronized Karaoke Lyrics Display -->
-            <div class="w-full glass-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden border border-rose-500/40">
-                <div class="flex items-center justify-center gap-2 text-rose-300 text-xs uppercase tracking-widest mb-3">
-                    <i class="fa-solid fa-music"></i>
-                    <span>LYRICS SYNCHRONIZATION // PUN - รักให้เธอได้รู้</span>
-                    <i class="fa-solid fa-music"></i>
-                </div>
+  <footer class="w-full py-4 text-center text-xs text-rose-200/50 z-20 border-t border-rose-950/30">
+    Forever & Always ❤️ ALEEN & NA
+  </footer>
 
-                <!-- Lyrics Lines Container -->
-                <div id="lyrics-stream" class="flex flex-col gap-3.5 my-4 max-h-[340px] overflow-y-auto px-2 py-2">
-                    <!-- Populated dynamically with timestamps -->
-                </div>
+  <!-- SCRIPT ENGINE -->
+  <script>
+    /* 1. Timer Logic */
+    const START_TIME = new Date('2026-08-12T00:00:00+07:00').getTime();
+    function runTimer() {
+      const now = new Date().getTime();
+      let diff = now - START_TIME;
+      if (diff < 0) diff = 92 * 24 * 3600 * 1000;
 
-                <!-- Manual / Auto Sync Help Bar -->
-                <div class="mt-4 pt-4 border-t border-rose-900/30 flex flex-wrap items-center justify-between text-xs text-gray-400 gap-2">
-                    <div class="flex items-center gap-2">
-                        <button onclick="toggleAudioPlayback()" class="px-3 py-1.5 rounded-full bg-rose-950/70 border border-rose-500/40 text-rose-300 hover:text-white flex items-center gap-1.5">
-                            <i class="fa-solid fa-play" id="btn-lyric-play-icon"></i>
-                            <span id="btn-lyric-play-text">เล่นเพลงต่อเนื่อง</span>
-                        </button>
-                        <span id="audio-time-display" class="font-mono text-rose-300/80">0:00</span>
-                    </div>
-                    <span class="text-[11px] text-rose-300/60">❤️ คลิกที่เนื้อเพลงเพื่อข้ามไปยังท่อนนั้นได้เลย</span>
-                </div>
-            </div>
-        </section>
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-    </main>
+      const pad = (n) => String(n).padStart(2, '0');
+      document.getElementById('c-days').innerText = pad(d);
+      document.getElementById('c-hours').innerText = pad(h);
+      document.getElementById('c-minutes').innerText = pad(m);
+      document.getElementById('c-seconds').innerText = pad(s);
+    }
+    setInterval(runTimer, 1000);
+    runTimer();
 
-    <!-- Footer Copyright & Sweet Words -->
-    <footer class="w-full py-5 text-center text-xs text-rose-200/50 z-10 border-t border-rose-950/30 px-4">
-        Forever & Always ❤️ Made with all my heart for <span class="text-rose-400 font-medium">ALEEN & NA</span>
-    </footer>
+    /* 2. Floating Emojis */
+    const emojis = ['❤️', '💖', '🌸', '🐱', '✨', '🐾', '💐'];
+    function popEmoji(x, y) {
+      const el = document.createElement('div');
+      el.className = 'float-emoji';
+      el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (x - 15) + 'px';
+      el.style.top = (y - 15) + 'px';
+      el.style.setProperty('--tx', (Math.random() * 80 - 40) + 'px');
+      el.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
 
-    <!-- Styling for Custom Keypad Buttons -->
-    <style>
-        .keypad-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(244, 114, 182, 0.18);
-            color: #fce7f3;
-            font-size: 1.25rem;
-            font-weight: 500;
-            padding: 0.85rem 0;
-            border-radius: 1rem;
-            transition: all 0.15s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            user-select: none;
-        }
-        .keypad-btn:hover {
-            background: rgba(244, 63, 94, 0.2);
-            border-color: rgba(244, 63, 94, 0.5);
-            transform: translateY(-1px);
-        }
-        .keypad-btn:active {
-            transform: scale(0.92);
-            background: rgba(244, 63, 94, 0.4);
-        }
+    /* 3. Curtains & Audio Start */
+    function startExperience(e) {
+      const screen = document.getElementById('curtain-launch-screen');
+      screen.style.opacity = '0';
+      setTimeout(() => screen.remove(), 800);
 
-        /* Synced lyric line classes */
-        .lyric-line {
-            padding: 0.65rem 1rem;
-            border-radius: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            color: rgba(253, 226, 236, 0.45);
-        }
-        @media (min-width: 640px) {
-            .lyric-line {
-                font-size: 1.15rem;
-            }
-        }
-        .lyric-line.active {
-            color: #ffffff;
-            font-weight: 600;
-            background: rgba(244, 63, 94, 0.28);
-            border: 1px solid rgba(244, 114, 182, 0.5);
-            transform: scale(1.03);
-            text-shadow: 0 0 16px rgba(244, 63, 94, 0.8);
-        }
-    </style>
+      document.getElementById('curtain-container').classList.add('curtain-open');
+      playSong();
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
-    <script>
-        /* -------------------------------------------------------------
-           1. ANNIVERSARY REALTIME COUNTER LOGIC
-           Target Date: 12 สิงหาคม 2569 (หรือ 12/08/2026) 
-           เพื่อให้ 12 พฤศจิกายน ครบ 3 เดือนเต็มอย่างสมบูรณ์แบบ
-           ------------------------------------------------------------- */
-        const ANNIVERSARY_START_DATE = new Date('2026-08-12T00:00:00+07:00').getTime();
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          popEmoji(window.innerWidth * 0.2 + Math.random() * (window.innerWidth * 0.6), window.innerHeight * 0.5);
+        }, i * 60);
+      }
+    }
 
-        function updateLiveAnniversaryCounter() {
-            const now = new Date().getTime();
-            let elapsed = now - ANNIVERSARY_START_DATE;
+    /* 4. YouTube Audio API */
+    let player = null;
+    let isPlaying = false;
 
-            // In case of slight clock difference, default to at least 3 months baseline
-            if (elapsed < 0) elapsed = 92 * 24 * 60 * 60 * 1000;
+    const ytScript = document.createElement('script');
+    ytScript.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(ytScript);
 
-            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-
-            const pad = (n) => String(n).padStart(2, '0');
-
-            document.getElementById('counter-days').innerText = pad(days);
-            document.getElementById('counter-hours').innerText = pad(hours);
-            document.getElementById('counter-minutes').innerText = pad(minutes);
-            document.getElementById('counter-seconds').innerText = pad(seconds);
-        }
-        setInterval(updateLiveAnniversaryCounter, 1000);
-        updateLiveAnniversaryCounter();
-
-        /* -------------------------------------------------------------
-           2. CURTAIN & PROJECTOR OPENING EFFECT WITH AUDIO
-           ------------------------------------------------------------- */
-        let isCurtainOpened = false;
-
-        function openCurtainsAndPlay() {
-            if (isCurtainOpened) return;
-            isCurtainOpened = true;
-
-            const curtain = document.getElementById('theater-curtains');
-            const launchBtnBox = document.getElementById('curtain-launch-btn-box');
-            
-            // Fade out the launch button
-            launchBtnBox.style.opacity = '0';
-            launchBtnBox.style.transition = 'opacity 0.6s ease';
-            setTimeout(() => launchBtnBox.remove(), 600);
-
-            // Open the curtains
-            curtain.classList.add('curtain-open');
-
-            // Trigger music play immediately on user gesture
-            playYouTubeTrack();
-
-            // Burst initial celebration emojis
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    createFloatingEmoji(
-                        window.innerWidth * 0.2 + Math.random() * (window.innerWidth * 0.6),
-                        window.innerHeight * 0.5 + (Math.random() * 200 - 100)
-                    );
-                }, i * 75);
-            }
-        }
-
-        /* -------------------------------------------------------------
-           3. EMOJI BURST EFFECT (❤️, 🌸, 🐱, ✨)
-           ------------------------------------------------------------- */
-        const popEmojis = ['❤️', '💖', '🌸', '🐱', '✨', '🐾', '🌹', '🥰'];
-
-        function createFloatingEmoji(x, y) {
-            const el = document.createElement('div');
-            el.className = 'float-emoji';
-            el.innerText = popEmojis[Math.floor(Math.random() * popEmojis.length)];
-            
-            // Random trajectory
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 40 + Math.random() * 80;
-            const tx = Math.cos(angle) * distance;
-            const ty = Math.sin(angle) * distance - 30; // slightly upward
-            const rot = (Math.random() * 60 - 30) + 'deg';
-
-            el.style.left = (x - 14) + 'px';
-            el.style.top = (y - 14) + 'px';
-            el.style.setProperty('--tx', tx + 'px');
-            el.style.setProperty('--ty', ty + 'px');
-            el.style.setProperty('--rot', rot);
-
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 1200);
-        }
-
-        /* -------------------------------------------------------------
-           4. PASSCODE LOGIC WITH POPUP PARTICLES
-           ------------------------------------------------------------- */
-        let currentPasscode = '';
-        const validPasscodes = ['120968', '12/09/68', '12092568', '12092025'];
-
-        function pressKey(num, e) {
-            if (currentPasscode.length < 8) {
-                currentPasscode += num;
-                updatePasscodeDisplay();
-            }
-            // Trigger pop emojis at tap position
-            const rect = e.currentTarget.getBoundingClientRect();
-            createFloatingEmoji(rect.left + rect.width / 2, rect.top + rect.height / 2);
-
-            // Auto validate when length reaches 6
-            if (currentPasscode.length === 6) {
-                setTimeout(submitPasscode, 300);
-            }
-        }
-
-        function clearPasscode(e) {
-            currentPasscode = '';
-            updatePasscodeDisplay();
-            document.getElementById('passcode-error-msg').classList.add('hidden');
-            if (e) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                createFloatingEmoji(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            }
-        }
-
-        function backspacePasscode(e) {
-            currentPasscode = currentPasscode.slice(0, -1);
-            updatePasscodeDisplay();
-            if (e) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                createFloatingEmoji(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            }
-        }
-
-        function updatePasscodeDisplay() {
-            const input = document.getElementById('passcode-input');
-            input.value = currentPasscode ? currentPasscode.replace(/./g, '• ') : '';
-        }
-
-        function submitPasscode() {
-            const cleanCode = currentPasscode.replace(/[^0-9]/g, '');
-            if (validPasscodes.includes(cleanCode) || validPasscodes.includes(currentPasscode)) {
-                // Correct Code!
-                document.getElementById('passcode-error-msg').classList.add('hidden');
-                
-                // Big burst celebration
-                for (let i = 0; i < 25; i++) {
-                    setTimeout(() => {
-                        createFloatingEmoji(
-                            window.innerWidth / 2 + (Math.random() * 260 - 130),
-                            window.innerHeight / 2 + (Math.random() * 200 - 100)
-                        );
-                    }, i * 40);
-                }
-
-                setTimeout(goToGalleryScreen, 600);
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('yt-player', {
+        height: '10',
+        width: '10',
+        videoId: 'OYPiXBIgvJ8',
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'loop': 1,
+          'playlist': 'OYPiXBIgvJ8',
+          'playsinline': 1
+        },
+        events: {
+          'onStateChange': (evt) => {
+            const vinyl = document.getElementById('vinyl-disc');
+            const icon = document.getElementById('music-icon-state');
+            if (evt.data === YT.PlayerState.PLAYING) {
+              isPlaying = true;
+              vinyl.classList.remove('spin-paused');
+              icon.className = 'fa-solid fa-pause';
             } else {
-                // Wrong Code shake
-                const card = document.getElementById('passcode-card');
-                card.classList.remove('shake-box');
-                void card.offsetWidth; // force reflow
-                card.classList.add('shake-box');
-                document.getElementById('passcode-error-msg').classList.remove('hidden');
+              isPlaying = false;
+              vinyl.classList.add('spin-paused');
+              icon.className = 'fa-solid fa-play';
             }
+          }
         }
+      });
+    };
 
-        /* -------------------------------------------------------------
-           5. SCENE SWITCHING NAVIGATION
-           ------------------------------------------------------------- */
-        function switchScene(showId) {
-            const scenes = ['scene-counter', 'scene-passcode', 'scene-gallery', 'scene-lyrics'];
-            scenes.forEach(id => {
-                const el = document.getElementById(id);
-                if (id === showId) {
-                    el.classList.remove('hidden');
-                    el.classList.add('flex');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    el.classList.remove('flex');
-                    el.classList.add('hidden');
-                }
-            });
+    function playSong() {
+      if (player && typeof player.playVideo === 'function') {
+        player.playVideo();
+      }
+    }
+
+    function toggleMusic(e) {
+      if (!player || typeof player.getPlayerState !== 'function') return;
+      if (isPlaying) player.pauseVideo();
+      else player.playVideo();
+      popEmoji(e.clientX || window.innerWidth / 2, e.clientY || 50);
+    }
+
+    /* 5. Scene Management */
+    function gotoScene(sceneId, e) {
+      const scenes = ['scene-counter', 'scene-passcode', 'scene-gallery', 'scene-lyrics'];
+      scenes.forEach(id => {
+        const el = document.getElementById(id);
+        if (id === sceneId) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          el.classList.remove('flex');
+          el.classList.add('hidden');
         }
+      });
 
-        function goToPasscodeScreen() {
-            switchScene('scene-passcode');
+      if (sceneId === 'scene-gallery') loadGallery();
+      if (sceneId === 'scene-lyrics') {
+        runTerminal();
+        renderLyrics();
+      }
+      if (e && e.clientX) popEmoji(e.clientX, e.clientY);
+    }
+
+    /* 6. Passcode Keypad */
+    let inputPass = '';
+    const correctCodes = ['120968', '12/09/68', '12092568'];
+
+    function tapKey(k, e) {
+      if (inputPass.length < 8) inputPass += k;
+      document.getElementById('pass-display').value = inputPass.replace(/./g, '• ');
+      popEmoji(e.clientX, e.clientY);
+      if (inputPass.length === 6) setTimeout(() => checkPasscode(e), 250);
+    }
+    function clearKey(e) {
+      inputPass = '';
+      document.getElementById('pass-display').value = '';
+      document.getElementById('pass-error').classList.add('hidden');
+      popEmoji(e.clientX, e.clientY);
+    }
+    function backKey(e) {
+      inputPass = inputPass.slice(0, -1);
+      document.getElementById('pass-display').value = inputPass.replace(/./g, '• ');
+      popEmoji(e.clientX, e.clientY);
+    }
+    function checkPasscode(e) {
+      const clean = inputPass.replace(/\D/g, '');
+      if (correctCodes.includes(clean) || correctCodes.includes(inputPass)) {
+        document.getElementById('pass-error').classList.add('hidden');
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight / 2), i * 35);
         }
+        setTimeout(() => gotoScene('scene-gallery', e), 400);
+      } else {
+        const card = document.getElementById('passcode-card');
+        card.classList.remove('shake-box');
+        void card.offsetWidth;
+        card.classList.add('shake-box');
+        document.getElementById('pass-error').classList.remove('hidden');
+      }
+    }
 
-        function backToCounterScreen() {
-            switchScene('scene-counter');
+    /* 7. Gallery System */
+    const DEFAULT_IMGS = [
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80'
+    ];
+
+    function loadGallery() {
+      const container = document.getElementById('photos-container');
+      container.innerHTML = '';
+      let photos = DEFAULT_IMGS;
+      const saved = localStorage.getItem('anniv_photos');
+      if (saved) {
+        try { photos = JSON.parse(saved); } catch(err){}
+      }
+
+      photos.forEach((url, i) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-4 rounded-2xl flex flex-col items-center';
+        card.innerHTML = `
+          <div class="w-full aspect-square rounded-xl overflow-hidden mb-3">
+            <img src="${url}" class="w-full h-full object-cover">
+          </div>
+          <p class="text-xs text-rose-200">ความทรงจำพิเศษของเรา ❤️</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function uploadImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        let photos = DEFAULT_IMGS;
+        const saved = localStorage.getItem('anniv_photos');
+        if (saved) {
+          try { photos = JSON.parse(saved); } catch(err){}
         }
+        photos.unshift(evt.target.result);
+        if (photos.length > 6) photos = photos.slice(0, 6);
+        localStorage.setItem('anniv_photos', JSON.stringify(photos));
+        loadGallery();
+        popEmoji(window.innerWidth / 2, 250);
+      };
+      reader.readAsDataURL(file);
+    }
 
-        function goToGalleryScreen() {
-            switchScene('scene-gallery');
-            renderSavedGallery();
+    /* 8. Terminal Typing & 1000% */
+    let terminalStarted = false;
+    const lines = [
+      '// Executing ALEEN_NA_Love_Protocol...',
+      'Relationship story("ALEEN", "NA");',
+      'story.setStart("12 สิงหาคม 2569");',
+      'while (story.isAlive()) {',
+      '    story.love += Infinity;',
+      '    story.protectEachOther();',
+      '}',
+      '// Always and Forever ❤️'
+    ];
+
+    function runTerminal() {
+      if (terminalStarted) return;
+      terminalStarted = true;
+      const box = document.getElementById('terminal-content');
+      box.innerHTML = '';
+      let l = 0;
+      function addLine() {
+        if (l < lines.length) {
+          const div = document.createElement('div');
+          div.textContent = lines[l];
+          div.className = 'text-rose-300 py-0.5';
+          box.appendChild(div);
+          l++;
+          setTimeout(addLine, 220);
         }
+      }
+      addLine();
 
-        function backToGalleryScreen() {
-            switchScene('scene-gallery');
+      let val = 1;
+      const bar = document.getElementById('love-bar');
+      const valText = document.getElementById('love-val');
+      const counter = setInterval(() => {
+        val += 6;
+        if (val >= 1000) {
+          val = 1000;
+          clearInterval(counter);
         }
+        valText.innerText = val + '%';
+        bar.style.width = Math.min(100, val / 10) + '%';
+      }, 40);
+    }
 
-        function goToLyricsTerminalScreen() {
-            switchScene('scene-lyrics');
-            startTerminalTyping();
-            initLyricsKaraoke();
-        }
+    /* 9. Sync Lyrics */
+    const lyricsData = [
+      { t: 0, text: "🎶 (ดนตรีบรรเลงเริ่มต้น...)" },
+      { t: 10, text: "แค่อยากให้เธอได้รู้ว่าความรักมันเป็นยังไง (เอ้)" },
+      { t: 15, text: "ให้เธอมองทางนี้ baby, look into my eyes (eyes)" },
+      { t: 20, text: "Baby, come get your love ให้ฉัน get you the world" },
+      { t: 25, text: "โลกที่เหมือนฝันละเมอโลกที่เธอไม่คิดว่าจะได้เจอ (โอ้วเย๊)" },
+      { t: 30, text: "ถ้าเธอยังสงสัยว่า ความรักหน้าตาเป็นไง (เอ้)" },
+      { t: 35, text: "ก่อนที่เธอจะไป ขอให้มันเป็นฉันได้ไหม (ได้ไหม)" },
+      { t: 40, text: "คนที่รักเธอและคนที่เธอเปิดให้ฉันรักให้เธอได้รู้" },
+      { t: 47, text: "ให้ได้รู้ อู๊อูฮู้อู๊โฮโอ่โฮ้โอ๊โอ น้านานา (baby, I want you)" },
+      { t: 55, text: "❤️ ALEEN & NA : จะรักเธอในทุกๆ วันตลอดไป ❤️" }
+    ];
 
-        /* -------------------------------------------------------------
-           6. PERSISTENT PHOTO GALLERY (IndexedDB / LocalStorage)
-           ------------------------------------------------------------- */
-        const STORAGE_KEY = 'aleen_na_anniversary_photos';
-
-        const DEFAULT_PHOTOS = [
-            {
-                url: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80',
-                caption: 'วันแรกที่สบตากัน วันที่เราเริ่มต้นการเดินทาง ❤️'
-            },
-            {
-                url: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80',
-                caption: 'ทุกที่ที่มีเธอ กลายเป็นสถานที่โปรดของฉันเสมอ 🌸'
-            },
-            {
-                url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80',
-                caption: '3 เดือนแห่งความสุข และจะรักแบบนี้ไปอีกพันปี ✨'
-            }
-        ];
-
-        function getSavedPhotos() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                }
-            } catch (err) {
-                console.warn('Storage error, fallback to defaults', err);
-            }
-            return DEFAULT_PHOTOS;
-        }
-
-        function savePhotos(photos) {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
-            } catch (e) {
-                // If quota exceeded with high-res base64, keep the latest 4 photos
-                if (photos.length > 3) {
-                    try {
-                        localStorage.setItem(STORAGE_KEY, JSON.stringify(photos.slice(0, 3)));
-                    } catch (err) {}
-                }
-            }
-        }
-
-        function renderSavedGallery() {
-            const container = document.getElementById('photos-grid');
-            container.innerHTML = '';
-            const photos = getSavedPhotos();
-
-            photos.forEach((photo, idx) => {
-                const card = document.createElement('div');
-                card.className = 'glass-card p-4 rounded-3xl flex flex-col group hover:-translate-y-2 transition-all duration-300 relative';
-                card.innerHTML = `
-                    <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-black/60 mb-3.5 border border-rose-500/20">
-                        <img src="${photo.url}" alt="Memory ${idx+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/1e0e18/f43f5e?text=Our+Precious+Memory'">
-                        <button onclick="deletePhoto(${idx})" title="ลบภาพนี้" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/70 hover:bg-rose-600 text-rose-200 hover:text-white flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
-                    <div class="flex items-start justify-between gap-2 px-1">
-                        <p class="text-xs sm:text-sm text-rose-100/90 font-light leading-relaxed">${photo.caption || 'ความทรงจำที่แสนพิเศษของเราสองคน ❤️'}</p>
-                        <i class="fa-solid fa-heart text-rose-500/80 text-xs mt-1"></i>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function handleImageUpload(e) {
-            const files = e.target.files;
-            if (!files || files.length === 0) return;
-
-            const current = getSavedPhotos();
-
-            Array.from(files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const base64Url = evt.target.result;
-                    current.unshift({
-                        url: base64Url,
-                        caption: `ความทรงจำเมื่อ ${new Date().toLocaleDateString('th-TH')} ❤️`
-                    });
-                    savePhotos(current);
-                    renderSavedGallery();
-
-                    // Mini celebration
-                    for (let i = 0; i < 8; i++) {
-                        createFloatingEmoji(window.innerWidth / 2 + (Math.random() * 200 - 100), 300);
-                    }
-                };
-                reader.readAsDataURL(file);
-            });
-            e.target.value = '';
-        }
-
-        function deletePhoto(idx) {
-            const current = getSavedPhotos();
-            current.splice(idx, 1);
-            savePhotos(current);
-            renderSavedGallery();
-        }
-
-        function resetGalleryToDefaults() {
-            savePhotos(DEFAULT_PHOTOS);
-            renderSavedGallery();
-        }
-
-        /* -------------------------------------------------------------
-           7. YOUTUBE IFRAME AUDIO API INTEGRATION
-           Track: https://youtu.be/OYPiXBIgvJ8 (PUN - รักให้เธอได้รู้)
-           Video ID: OYPiXBIgvJ8
-           ------------------------------------------------------------- */
-        let ytPlayer = null;
-        let isYtReady = false;
-        let isPlayingAudio = false;
-
-        // Load YouTube IFrame API Script asynchronously
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        window.onYouTubeIframeAPIReady = function() {
-            ytPlayer = new YT.Player('yt-player', {
-                height: '10',
-                width: '10',
-                videoId: 'OYPiXBIgvJ8',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'OYPiXBIgvJ8',
-                    'playsinline': 1,
-                    'modestbranding': 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
+    function renderLyrics() {
+      const wrap = document.getElementById('lyrics-wrap');
+      wrap.innerHTML = '';
+      lyricsData.forEach((row, idx) => {
+        const div = document.createElement('div');
+        div.className = 'lyric-line';
+        div.id = 'lyric-' + idx;
+        div.innerText = row.text;
+        div.onclick = (e) => {
+          if (player && typeof player.seekTo === 'function') {
+            player.seekTo(row.t, true);
+            player.playVideo();
+          }
+          popEmoji(e.clientX, e.clientY);
         };
+        wrap.appendChild(div);
+      });
 
-        function onPlayerReady(event) {
-            isYtReady = true;
-            // If user has already opened the curtain, start playback
-            if (isCurtainOpened) {
-                playYouTubeTrack();
-            }
+      setInterval(syncCurrentTime, 350);
+    }
+
+    let curLyric = -1;
+    function syncCurrentTime() {
+      if (!player || typeof player.getCurrentTime !== 'function') return;
+      let sec = 0;
+      try { sec = player.getCurrentTime() || 0; } catch(e){ return; }
+
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      document.getElementById('player-time-tag').innerText = `${m}:${String(s).padStart(2, '0')}`;
+
+      let match = -1;
+      for (let i = lyricsData.length - 1; i >= 0; i--) {
+        if (sec >= lyricsData[i].t) {
+          match = i;
+          break;
         }
+      }
 
-        function onPlayerStateChange(event) {
-            const vinyl = document.getElementById('vinyl-icon');
-            const playIcon = document.getElementById('audio-icon-status');
-            const lyricPlayIcon = document.getElementById('btn-lyric-play-icon');
-            const lyricPlayText = document.getElementById('btn-lyric-play-text');
-
-            if (event.data === YT.PlayerState.PLAYING) {
-                isPlayingAudio = true;
-                vinyl.classList.remove('spin-paused');
-                if (playIcon) playIcon.className = 'fa-solid fa-pause';
-                if (lyricPlayIcon) lyricPlayIcon.className = 'fa-solid fa-pause';
-                if (lyricPlayText) lyricPlayText.innerText = 'หยุดเพลงชั่วคราว';
-            } else {
-                isPlayingAudio = false;
-                vinyl.classList.add('spin-paused');
-                if (playIcon) playIcon.className = 'fa-solid fa-play';
-                if (lyricPlayIcon) lyricPlayIcon.className = 'fa-solid fa-play';
-                if (lyricPlayText) lyricPlayText.innerText = 'เล่นเพลง';
-            }
-        }
-
-        function playYouTubeTrack() {
-            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                try {
-                    ytPlayer.playVideo();
-                } catch(e) {
-                    console.log('Play triggered before ready');
-                }
-            }
-        }
-
-        function toggleAudioPlayback() {
-            if (!ytPlayer || typeof ytPlayer.getPlayerState !== 'function') return;
-            if (isPlayingAudio) {
-                ytPlayer.pauseVideo();
-            } else {
-                ytPlayer.playVideo();
-            }
-        }
-
-        function seekToTrackSeconds(seconds) {
-            if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
-                ytPlayer.seekTo(seconds, true);
-                ytPlayer.playVideo();
-            }
-        }
-
-        /* -------------------------------------------------------------
-           8. CODE TERMINAL TYPING & 1% TO 1000% LOVE COUNTER
-           ------------------------------------------------------------- */
-        let terminalStarted = false;
-
-        const terminalLines = [
-            `// Initializing Universe Core for ALEEN & NA...`,
-            `const loverA = "ALEEN";`,
-            `const loverB = "NA";`,
-            `const relationship = new EternalBond(loverA, loverB);`,
-            `relationship.setAnniversary("12 สิงหาคม 2569");`,
-            `console.log("3 Months Milestones: Completed & Overflowing with love ❤️");`,
-            `nowPlaying("รักให้เธอได้รู้ - PUN");`,
-            `while (true) {`,
-            `    relationship.loveScore += Infinity;`,
-            `    relationship.smileTogether();`,
-            `    relationship.protectEachOther();`,
-            `}`
-        ];
-
-        function startTerminalTyping() {
-            if (terminalStarted) return;
-            terminalStarted = true;
-
-            const container = document.getElementById('terminal-typed-content');
-            container.innerHTML = '';
-            let lineIdx = 0;
-            let charIdx = 0;
-
-            function typeNextChar() {
-                if (lineIdx < terminalLines.length) {
-                    const currentLine = terminalLines[lineIdx];
-                    if (charIdx < currentLine.length) {
-                        const char = currentLine.charAt(charIdx);
-                        container.innerHTML += char === '<' ? '&lt;' : (char === '>' ? '&gt;' : char);
-                        charIdx++;
-                        setTimeout(typeNextChar, 18);
-                    } else {
-                        container.innerHTML += '<br/>';
-                        lineIdx++;
-                        charIdx = 0;
-                        setTimeout(typeNextChar, 90);
-                    }
-                }
-            }
-            typeNextChar();
-
-            // Animate Love Score from 1% to 1000%
-            animateLovePercent();
-        }
-
-        function animateLovePercent() {
-            const label = document.getElementById('love-percent');
-            const bar = document.getElementById('love-progress-bar');
-            let current = 1;
-            const target = 1000;
-            const duration = 12000; // 12 seconds
-            const stepTime = 30;
-            const increment = target / (duration / stepTime);
-
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                const displayVal = Math.floor(current);
-                label.innerText = displayVal + '%';
-                bar.style.width = Math.min(100, (displayVal / 10)) + '%';
-            }, stepTime);
-        }
-
-        /* -------------------------------------------------------------
-           9. SYNCHRONIZED KARAOKE LYRICS FOR "รักให้เธอได้รู้ - PUN"
-           ------------------------------------------------------------- */
-        const PUN_LYRICS = [
-            { time: 0, text: "🎶 (ดนตรีบรรเลงเริ่มต้นบทเพลงรัก...)" },
-            { time: 10, text: "แค่อยากให้เธอได้รู้ว่าความรักมันเป็นยังไง (เอ้)" },
-            { time: 15, text: "ให้เธอมองทางนี้ baby, look into my eyes (eyes)" },
-            { time: 20, text: "Baby, come get your love ให้ฉัน get you the world" },
-            { time: 25, text: "โลกที่เหมือนฝันละเมอโลกที่เธอไม่คิดว่าจะได้เจอ (โอ้วเย๊)" },
-            { time: 30, text: "ถ้าเธอยังสงสัยว่า ความรักหน้าตาเป็นไง (เอ้)" },
-            { time: 35, text: "ก่อนที่เธอจะไป ขอให้มันเป็นฉันได้ไหม (ได้ไหม)" },
-            { time: 40, text: "คนที่รักเธอและคนที่เธอเปิดให้ฉันรักให้เธอได้รู้" },
-            { time: 47, text: "ให้ได้รู้ อู๊อูฮู้อู๊โฮโอ่โฮ้โอ๊โอ น้านานา (baby, I want you)" },
-            { time: 55, text: "❤️ ALEEN & NA: จะรักเธอแบบนี้ในทุกๆ วันตลอดไป ❤️" }
-        ];
-
-        let activeLyricIndex = -1;
-
-        function initLyricsKaraoke() {
-            const container = document.getElementById('lyrics-stream');
-            container.innerHTML = '';
-
-            PUN_LYRICS.forEach((line, index) => {
-                const div = document.createElement('div');
-                div.className = 'lyric-line';
-                div.id = `lyric-line-${index}`;
-                div.innerText = line.text;
-                div.onclick = () => {
-                    seekToTrackSeconds(line.time);
-                    createFloatingEmoji(window.innerWidth / 2, window.innerHeight * 0.7);
-                };
-                container.appendChild(div);
-            });
-
-            // Start synchronizing loop with YouTube playback
-            setInterval(syncLyricLoop, 300);
-        }
-
-        function syncLyricLoop() {
-            if (!ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return;
-
-            let currentTime = 0;
-            try {
-                currentTime = ytPlayer.getCurrentTime() || 0;
-            } catch(e) {
-                return;
-            }
-
-            // Update time display label
-            const mins = Math.floor(currentTime / 60);
-            const secs = Math.floor(currentTime % 60);
-            const timeLabel = document.getElementById('audio-time-display');
-            if (timeLabel) {
-                timeLabel.innerText = `${mins}:${String(secs).padStart(2, '0')}`;
-            }
-
-            // Find matching lyric
-            let foundIndex = -1;
-            for (let i = PUN_LYRICS.length - 1; i >= 0; i--) {
-                if (currentTime >= PUN_LYRICS[i].time) {
-                    foundIndex = i;
-                    break;
-                }
-            }
-
-            if (foundIndex !== activeLyricIndex && foundIndex !== -1) {
-                activeLyricIndex = foundIndex;
-
-                // Update styling
-                PUN_LYRICS.forEach((_, idx) => {
-                    const row = document.getElementById(`lyric-line-${idx}`);
-                    if (!row) return;
-                    if (idx === activeLyricIndex) {
-                        row.classList.add('active');
-                        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    } else {
-                        row.classList.remove('active');
-                    }
-                });
-            }
-        }
-    </script>
+      if (match !== curLyric && match !== -1) {
+        curLyric = match;
+        lyricsData.forEach((_, idx) => {
+          const row = document.getElementById('lyric-' + idx);
+          if (!row) return;
+          if (idx === curLyric) {
+            row.classList.add('active');
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            row.classList.remove('active');
+          }
+        });
+      }
+    }
+  </script>
 </body>
 </html>

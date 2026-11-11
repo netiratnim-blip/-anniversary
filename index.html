@@ -35,7 +35,7 @@
     .font-mono-code { font-family: 'Fira Code', monospace; }
     .font-hand { font-family: 'Caveat', cursive, 'Mitr', sans-serif; }
 
-    /* Soft Ambient Glow - แสงนุ่มนวล เรียบง่าย ไม่ฉูดฉาด */
+    /* Soft Ambient Glow */
     .projector-lens {
       position: fixed;
       top: -160px;
@@ -105,7 +105,7 @@
       text-align: center;
     }
 
-    /* Light Sign: ALEEN Letter Slide-in (Champagne Glow) */
+    /* Light Sign: ALEEN */
     .neon-board {
       display: flex;
       gap: 14px;
@@ -139,7 +139,6 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Shiny Text (Champagne & Rose Gold) */
     .shining-title {
       font-size: 2.3rem;
       font-weight: 600;
@@ -158,7 +157,6 @@
       to { background-position: 200% center; }
     }
 
-    /* CLEAN MODERN BUTTON (Minimal Romantic) */
     .clean-btn {
       position: relative;
       background: rgba(255, 255, 255, 0.04);
@@ -190,7 +188,6 @@
       font-weight: 400;
     }
 
-    /* Digital Glowing Clock (Warm Rose) */
     .digital-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(226, 185, 195, 0.25);
@@ -215,7 +212,6 @@
       color: #faedf0;
     }
 
-    /* Funny Spinning Watch Clock */
     .funny-clock-wrap {
       display: flex;
       flex-direction: column;
@@ -280,7 +276,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Glassmorphism Card (Soft & Warm) */
     .glass-card {
       background: rgba(22, 16, 24, 0.72);
       backdrop-filter: blur(18px);
@@ -290,7 +285,6 @@
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
     }
 
-    /* Keypad Button */
     .keypad-btn {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(226, 185, 195, 0.2);
@@ -307,7 +301,6 @@
       background: rgba(226, 185, 195, 0.25);
     }
 
-    /* Floating Popups */
     .float-emoji {
       position: fixed;
       pointer-events: none !important;
@@ -320,7 +313,6 @@
       100% { opacity: 0; transform: translate(var(--tx), -120px) scale(1.3) rotate(var(--rot)); }
     }
 
-    /* Vinyl Player */
     @keyframes spinVinyl {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -328,7 +320,6 @@
     .spin-vinyl { animation: spinVinyl 6s linear infinite; }
     .spin-paused { animation-play-state: paused; }
 
-    /* Equalizer */
     @keyframes eqWave {
       0%, 100% { height: 4px; }
       50% { height: 16px; }
@@ -342,7 +333,6 @@
     .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #eed0d7; }
     .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #f7e7ea; }
 
-    /* Photo Pop-in */
     .photo-fade-in {
       animation: photoPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -371,26 +361,21 @@
 </head>
 <body class="flex flex-col justify-between min-h-screen">
 
-  <!-- Atmospheric Lightings -->
   <div class="projector-lens"></div>
   <div class="film-grain"></div>
 
-  <!-- YouTube Audio Engines -->
   <div id="yt-hidden-wrap">
     <div id="yt-player-1"></div>
     <div id="yt-player-2"></div>
   </div>
 
-  <!-- Curtain System -->
   <div id="curtain-container">
     <div class="curtain-panel curtain-left"></div>
     <div class="curtain-panel curtain-right"></div>
   </div>
 
-  <!-- Screen 0: Projector Intro -->
+  <!-- Screen 0: Intro -->
   <div id="projector-intro-screen">
-    
-    <!-- Neon Letters ALEEN -->
     <div class="neon-board">
       <span class="neon-letter">A</span>
       <span class="neon-letter">L</span>
@@ -399,19 +384,16 @@
       <span class="neon-letter">N</span>
     </div>
 
-    <!-- Shining Title -->
     <h1 class="shining-title font-serif-title mb-10 px-2">
       Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
     </h1>
 
-    <!-- ปุ่มเปิดดูข้างในสิ -->
     <button onclick="startExperience(event)" class="clean-btn">
       <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
       <span class="text-xl">🎬</span>
     </button>
   </div>
 
-  <!-- Mini Floating Music Pill -->
   <header class="fixed top-4 right-4 z-40">
     <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 rounded-lg shadow-md cursor-pointer">
       <div id="vinyl-disc" class="w-6 h-6 rounded-full bg-[#20131e] border border-[#e2b9c3] flex items-center justify-center spin-vinyl spin-paused">
@@ -430,10 +412,9 @@
     </div>
   </header>
 
-  <!-- Main Containers -->
   <main class="flex-grow flex items-center justify-center px-4 py-16 z-20 w-full max-w-4xl mx-auto">
 
-    <!-- ================= SCENE 1: ANNIVERSARY TIMER ================= -->
+    <!-- SCENE 1: ANNIVERSARY TIMER -->
     <section id="scene-counter" class="w-full flex flex-col items-center text-center">
       <div class="mb-6">
         <div class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-white/[0.04] border border-[#e2b9c3]/30 text-[#f7e7ea] text-sm sm:text-base mb-5 shadow-sm">
@@ -454,7 +435,7 @@
         ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-[#e2b9c3] font-medium font-serif-title">12/08/69</span> ✨
       </div>
 
-      <!-- Modern Digital Clock Display -->
+      <!-- Realtime Digital Clock Display -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-6">
         <div class="digital-card flex flex-col items-center">
           <span id="c-days" class="text-3xl sm:text-5xl digital-num">00</span>
@@ -474,7 +455,6 @@
         </div>
       </div>
 
-      <!-- Funny Spinning Watch Clock -->
       <div class="funny-clock-wrap mb-8">
         <div class="funny-clock">
           <div class="clock-face">
@@ -492,7 +472,7 @@
       </button>
     </section>
 
-    <!-- ================= SCENE 2: PASSCODE ================= -->
+    <!-- SCENE 2: PASSCODE -->
     <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center">
       <div id="passcode-card" class="glass-card w-full p-6 sm:p-8">
         <div class="w-13 h-13 py-3 rounded-lg bg-white/[0.04] border border-[#e2b9c3]/30 flex items-center justify-center mx-auto mb-4 text-[#e2b9c3] text-xl">
@@ -507,7 +487,6 @@
         <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/40 border border-[#e2b9c3]/30 rounded-lg text-[#faedf0] mb-2 focus:outline-none">
         <div id="pass-error" class="text-xs text-[#e2b9c3] mb-4 hidden">รหัสผ่านยังไม่ถูกต้อง ลองใหม่อีกครั้งนะที่รัก ❤️</div>
 
-        <!-- Keypad -->
         <div class="grid grid-cols-3 gap-2.5 mb-4">
           <button onclick="tapKey('1', event)" class="keypad-btn">1</button>
           <button onclick="tapKey('2', event)" class="keypad-btn">2</button>
@@ -536,7 +515,7 @@
       </div>
     </section>
 
-    <!-- ================= SCENE 3: PHOTO GALLERY (5 รูป) ================= -->
+    <!-- SCENE 3: PHOTO GALLERY -->
     <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
       <div class="text-center mb-6">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
@@ -559,9 +538,7 @@
         <span class="text-[11px] text-gray-400">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
       </div>
 
-      <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10">
-        <!-- Render 5 Photos -->
-      </div>
+      <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10"></div>
 
       <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8">
         <span class="btn-glow-text text-base">เปิดอ่านดูซิเบ้บ</span>
@@ -569,7 +546,7 @@
       </button>
     </section>
 
-    <!-- ================= SCENE 4: CODE TERMINAL & SPECIAL LETTER ================= -->
+    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER -->
     <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
         <button onclick="gotoScene('scene-gallery', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
@@ -578,7 +555,6 @@
         <span class="text-xs text-[#e2b9c3] font-mono tracking-wide">ALEEN_NA_UNIVERSE // SYNCED</span>
       </div>
 
-      <!-- Code Terminal -->
       <div class="w-full glass-card overflow-hidden mb-8 border border-[#e2b9c3]/25">
         <div class="bg-black/50 px-4 py-2.5 border-b border-white/[0.08] flex justify-between items-center">
           <div class="flex items-center gap-2">
@@ -600,7 +576,6 @@
         </div>
       </div>
 
-      <!-- กล่องจดหมายพิเศษจาก NA TO ALEEN -->
       <div id="poster-area" class="w-full glass-card p-6 sm:p-8 text-left border border-[#e2b9c3]/30 relative overflow-hidden mb-6">
         <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-5">
           <div class="flex items-center gap-3">
@@ -635,7 +610,6 @@
         </div>
       </div>
 
-      <!-- ปุ่มบันทึกโปสเตอร์ -->
       <div class="flex flex-col items-center gap-3 mb-10 w-full">
         <button onclick="savePoster()" class="clean-btn !py-3.5 !px-8">
           <i class="fa-solid fa-download text-[#e2b9c3]"></i>
@@ -652,28 +626,42 @@
     Forever & Always ❤️ ALEEN & NA
   </footer>
 
-  <!-- SCRIPT ENGINE -->
   <script>
-    /* 1. Timer Logic */
-    const START_TIME = new Date('2026-08-12T00:00:00+07:00').getTime();
+    /* 1. Realtime Timer Logic */
+    const START_TIME = new Date(2026, 7, 12, 0, 0, 0).getTime();
+
     function runTimer() {
       const now = new Date().getTime();
       let diff = now - START_TIME;
-      if (diff < 0) diff = 92 * 24 * 3600 * 1000;
+      if (diff < 0) diff = Math.abs(diff);
 
       const d = Math.floor(diff / (1000 * 60 * 60 * 24));
       const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % 1000) / 1000);
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
 
       const pad = (n) => String(n).padStart(2, '0');
-      document.getElementById('c-days').innerText = pad(d);
-      document.getElementById('c-hours').innerText = pad(h);
-      document.getElementById('c-minutes').innerText = pad(m);
-      document.getElementById('c-seconds').innerText = pad(s);
+
+      const elD = document.getElementById('c-days');
+      const elH = document.getElementById('c-hours');
+      const elM = document.getElementById('c-minutes');
+      const elS = document.getElementById('c-seconds');
+
+      if (elD) elD.innerText = pad(d);
+      if (elH) elH.innerText = pad(h);
+      if (elM) elM.innerText = pad(m);
+      if (elS) elS.innerText = pad(s);
     }
-    setInterval(runTimer, 1000);
-    runTimer();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        runTimer();
+        setInterval(runTimer, 1000);
+      });
+    } else {
+      runTimer();
+      setInterval(runTimer, 1000);
+    }
 
     /* 2. Floating Popups */
     const emojis = ['🤍', '🌸', '✨', '🐱', '🌷', '💌'];
@@ -716,7 +704,6 @@
     document.body.appendChild(ytScript);
 
     window.onYouTubeIframeAPIReady = function() {
-      // เพลงที่ 1: 87-q2ng9wo0 (เริ่มที่นาทีที่ 1:23 หรือ 83 วินาที)
       player1 = new YT.Player('yt-player-1', {
         height: '10',
         width: '10',
@@ -732,7 +719,6 @@
         events: { 'onStateChange': onAudioStateChange }
       });
 
-      // เพลงที่ 2: 1OMZrYHIim8 (รักให้เธอได้รู้ PUN เริ่มที่ 48 วินาที)
       player2 = new YT.Player('yt-player-2', {
         height: '10',
         width: '10',
@@ -763,7 +749,6 @@
       }
     }
 
-    // ฟังก์ชันเล่นเพลงแรก เริ่มที่ 1:23 พร้อมค่อยๆ เร่งเสียงขึ้น (Fade In)
     function playTrack1WithFadeIn() {
       if (player1 && typeof player1.playVideo === 'function') {
         player1.seekTo(83, true);
@@ -784,7 +769,6 @@
       }
     }
 
-    // ฟังก์ชันสลับไปเพลงที่ 2 เมื่อเปิดหน้าจดหมาย
     function transitionToTrack2() {
       activePlayer = 2;
       document.getElementById('music-title-tag').innerText = 'รักให้เธอได้รู้';
@@ -959,7 +943,7 @@
       });
     }
 
-    /* 8. Terminal Typing & Slow 1-1000% */
+    /* 8. Terminal Typing */
     let terminalStarted = false;
     const pureCodeLines = [
       '// สุขสันต์วันครบรอบนะครับ อลีน',
@@ -1004,7 +988,6 @@
       }
       addCodeLine();
 
-      // เส้นวิ่งนับ 1 ถึง 1000%
       let val = 1;
       const target = 1000;
       const bar = document.getElementById('love-bar');

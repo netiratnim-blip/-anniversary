@@ -2,932 +2,1032 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Happy Anniversary ALEEN ❤️</title>
-
-  <!-- Typography -->
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&family=Mitr:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-
-  <!-- Core Icons & Utilities -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Mitr:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
-    :root {
-      --primary-rose: #ff2a70;
-      --secondary-pink: #ff65a3;
-      --aurora-coral: #ff7e67;
-      --glow-gold: #ffd166;
-      --bg-dark: #0d0614;
-      --surface-glass: rgba(36, 16, 44, 0.55);
-      --border-sheen: rgba(255, 126, 182, 0.35);
-      --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
     * {
-      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
       user-select: none;
     }
-
     body {
       font-family: 'Mitr', sans-serif;
-      background: radial-gradient(120% 120% at 50% 10%, #1e092b 0%, #12041c 45%, var(--bg-dark) 100%);
-      color: #fff;
+      background-color: #0b090d;
+      color: #ede9f0;
       min-height: 100vh;
       overflow-x: hidden;
-      perspective: 1000px;
+      position: relative;
+    }
+    .font-serif-title { font-family: 'Playfair Display', serif; }
+    .font-mono-code { font-family: 'Fira Code', monospace; }
+    .font-hand { font-family: 'Caveat', cursive, 'Mitr', sans-serif; }
+
+    /* Soft Ambient Glow */
+    .projector-lens {
+      position: fixed;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130vw;
+      height: 110vh;
+      background: radial-gradient(ellipse at 50% 0%, rgba(243, 214, 219, 0.12) 0%, rgba(186, 133, 147, 0.05) 35%, transparent 70%);
+      pointer-events: none !important;
+      z-index: 1;
+      filter: blur(28px);
+      animation: projectorGentle 8s infinite alternate ease-in-out;
+    }
+    @keyframes projectorGentle {
+      0% { opacity: 0.7; }
+      100% { opacity: 0.95; }
     }
 
-    .font-eng { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-digital { font-family: 'Space Grotesk', monospace; }
-    .font-hand { font-family: 'Caveat', cursive; }
-
-    /* Dynamic Luminous Ambient Orbs */
-    .ambient-mesh {
+    .film-grain {
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.6;
-      animation: floatOrb 14s infinite alternate ease-in-out;
-    }
-    .orb-1 { width: 450px; height: 450px; background: #ff2a70; top: -100px; left: -80px; animation-duration: 12s; }
-    .orb-2 { width: 500px; height: 500px; background: #7928ca; bottom: -120px; right: -100px; animation-duration: 16s; }
-    .orb-3 { width: 350px; height: 350px; background: #ff7e67; top: 40%; left: 30%; opacity: 0.35; animation-duration: 10s; }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.12); }
-      100% { transform: translate(-40px, 70px) scale(0.95); }
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+      background-size: 32px 32px;
+      opacity: 0.18;
+      pointer-events: none !important;
+      z-index: 2;
     }
 
-    /* Curtains System */
+    /* Soft Luxury Velvet Curtain */
     #curtain-container {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 80;
       display: flex;
       pointer-events: none;
-      transition: opacity 1.2s ease 1.2s;
+      transition: opacity 1s ease 1.5s;
     }
-    .curtain-blade {
+    .curtain-panel {
       flex: 1;
       height: 100%;
-      background: linear-gradient(135deg, #240722 0%, #460f38 50%, #160419 100%);
+      background: linear-gradient(135deg, #150d14 0%, #20131e 50%, #110b10 100%);
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.85);
       position: relative;
-      box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-      transition: transform 1.8s var(--ease-smooth);
+      transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
     }
-    .curtain-blade::before {
+    .curtain-panel::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255, 120, 180, 0.05) 30px, rgba(0,0,0,0.4) 60px);
+      background: repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255, 240, 245, 0.02) 30px, rgba(0, 0, 0, 0.25) 60px);
     }
     .curtain-open .curtain-left { transform: translateX(-100%); }
     .curtain-open .curtain-right { transform: translateX(100%); }
 
-    /* Scene Container Transitions */
-    .view-card {
-      position: absolute;
-      width: 100%;
+    /* Screen 0: Projector Intro */
+    #projector-intro-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: radial-gradient(circle at center, #171019 0%, #0a070c 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.9s ease;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Light Sign: ALEEN */
+    .neon-board {
+      display: flex;
+      gap: 14px;
+      padding: 12px 28px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(226, 185, 195, 0.25);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 28px;
+    }
+    .neon-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: #f7e7ea;
+      display: inline-block;
       opacity: 0;
-      transform: scale(0.94) translateY(24px);
-      pointer-events: none;
-      transition: opacity 0.5s var(--ease-smooth), transform 0.6s var(--ease-elastic);
+      transform: translateY(30px) scale(0.7);
+      animation: neonSlideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      text-shadow: 0 0 15px rgba(226, 185, 195, 0.5);
     }
-    .view-active {
-      position: relative;
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      pointer-events: auto;
+    .neon-letter:nth-child(1) { animation-delay: 0.2s; }
+    .neon-letter:nth-child(2) { animation-delay: 0.45s; }
+    .neon-letter:nth-child(3) { animation-delay: 0.7s; }
+    .neon-letter:nth-child(4) { animation-delay: 0.95s; }
+    .neon-letter:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes neonSlideUp {
+      0% { opacity: 0; transform: translateY(30px) scale(0.7); filter: blur(3px); }
+      70% { opacity: 1; transform: translateY(-4px) scale(1.1); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Professional Specular Glass Panel */
-    .pro-glass {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%), var(--surface-glass);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--border-sheen);
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-      position: relative;
-      overflow: hidden;
+    .shining-title {
+      font-size: 2.3rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, #fcecee 0%, #f7cad0 35%, #e0b0b8 65%, #fcecee 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shineGlow 5s linear infinite;
+      line-height: 1.3;
     }
-    .pro-glass::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-      pointer-events: none;
+    @media (min-width: 640px) {
+      .shining-title { font-size: 3.5rem; }
+    }
+    @keyframes shineGlow {
+      to { background-position: 200% center; }
     }
 
-    /* Kinetic Action Button */
-    .pro-btn {
+    .clean-btn {
       position: relative;
-      background: linear-gradient(135deg, #ff2a70 0%, #ff65a3 50%, #ff7e67 100%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 14px;
-      padding: 14px 34px;
-      font-weight: 500;
-      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(226, 185, 195, 0.35);
+      border-radius: 10px;
+      padding: 13px 30px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s ease;
       cursor: pointer;
-      overflow: hidden;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 25px -4px rgba(255, 42, 112, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.6);
-      transition: transform 0.2s var(--ease-elastic), box-shadow 0.2s ease;
+      color: #f7e7ea;
     }
-    .pro-btn::before {
+    .clean-btn:hover {
+      background: rgba(226, 185, 195, 0.12);
+      border-color: rgba(226, 185, 195, 0.6);
+      box-shadow: 0 0 20px rgba(226, 185, 195, 0.25);
+      transform: translateY(-2px);
+    }
+    .clean-btn:active {
+      transform: scale(0.97);
+    }
+    .btn-glow-text {
+      color: #fdf5f6;
+      font-weight: 400;
+    }
+
+    .digital-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(226, 185, 195, 0.25);
+      border-radius: 12px;
+      padding: 16px 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+    .digital-card::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .digital-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #faedf0;
+    }
+
+    .funny-clock-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+      gap: 6px;
+    }
+    .funny-clock {
+      width: 54px;
+      height: 54px;
+      position: relative;
+      animation: wobbleFunny 2.2s infinite ease-in-out;
+    }
+    @keyframes wobbleFunny {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-14deg) scale(1.05); }
+      75% { transform: rotate(14deg) scale(1.05); }
+    }
+    .clock-face {
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: 0.5s;
-    }
-    .pro-btn:hover::before { left: 100%; }
-    .pro-btn:active { transform: scale(0.96); box-shadow: 0 4px 12px rgba(255, 42, 112, 0.3); }
-
-    /* Neon Marquee Letters */
-    .neon-track {
-      display: inline-flex;
-      gap: 12px;
-      padding: 10px 24px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 101, 163, 0.4);
-      border-radius: 14px;
-      box-shadow: 0 0 30px rgba(255, 42, 112, 0.25);
-    }
-    .neon-glyph {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #fff;
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(24px) scale(0.8);
-      animation: glyphEnter 0.7s var(--ease-elastic) forwards;
-      text-shadow: 0 0 12px #ff2a70, 0 0 25px #ff65a3;
-    }
-    .neon-glyph:nth-child(1) { animation-delay: 0.15s; }
-    .neon-glyph:nth-child(2) { animation-delay: 0.35s; }
-    .neon-glyph:nth-child(3) { animation-delay: 0.55s; }
-    .neon-glyph:nth-child(4) { animation-delay: 0.75s; }
-    .neon-glyph:nth-child(5) { animation-delay: 0.95s; }
-
-    @keyframes glyphEnter {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* Keypad Grid */
-    .key-tile {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      color: #fff;
-      font-size: 1.45rem;
-      font-weight: 600;
-      font-family: 'Space Grotesk', sans-serif;
-      padding: 14px 0;
-      transition: all 0.12s var(--ease-elastic);
-    }
-    .key-tile:active {
-      transform: scale(0.9);
-      background: rgba(255, 42, 112, 0.3);
-      border-color: #ff65a3;
-    }
-
-    /* Kinetic Popup Emojis */
-    .kinetic-emoji {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      font-size: 32px;
-      animation: emojiPop 1.1s cubic-bezier(0.12, 0.82, 0.25, 1) forwards;
-    }
-    @keyframes emojiPop {
-      0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
-      50% { transform: translate(var(--tx), var(--ty)) scale(1.4) rotate(var(--rot)); }
-      100% { opacity: 0; transform: translate(var(--tx), calc(var(--ty) - 60px)) scale(0.8) rotate(calc(var(--rot) * 1.5)); }
-    }
-
-    /* Spinning Vinyl */
-    @keyframes vinylSpin { 100% { transform: rotate(360deg); } }
-    .spin-active { animation: vinylSpin 5s linear infinite; }
-    .spin-stopped { animation-play-state: paused; }
-
-    /* Equalizer Bar */
-    @keyframes waveBounce { 0%, 100% { height: 4px; } 50% { height: 18px; } }
-    .bar { width: 3px; background: #ff65a3; border-radius: 4px; animation: waveBounce 1s infinite ease-in-out; }
-    .bar:nth-child(2) { animation-delay: 0.2s; background: #ffd166; }
-    .bar:nth-child(3) { animation-delay: 0.4s; background: #ff2a70; }
-
-    /* Digital Time Blocks */
-    .chrono-tile {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 101, 163, 0.3);
-      border-radius: 16px;
-      padding: 18px 8px;
-      box-shadow: inset 0 0 20px rgba(255, 42, 112, 0.15);
-      position: relative;
-    }
-    .chrono-val {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 0 15px rgba(255, 101, 163, 0.7);
-    }
-
-    /* Interactive Clock */
-    .wobble-watch {
-      width: 58px;
-      height: 58px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #2b0b2e, #130317);
-      border: 2px solid #ff65a3;
-      box-shadow: 0 0 20px rgba(255, 42, 112, 0.5);
+      background: #19121c;
+      border: 2px solid #e2b9c3;
+      box-shadow: 0 0 15px rgba(226, 185, 195, 0.3);
       position: relative;
-      animation: clockWobble 2.5s infinite ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    @keyframes clockWobble {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      25% { transform: rotate(-12deg) scale(1.08); }
-      75% { transform: rotate(12deg) scale(1.08); }
+    .clock-center-dot {
+      width: 5px;
+      height: 5px;
+      background: #faedf0;
+      border-radius: 50%;
+      z-index: 5;
     }
-    .hand-sec {
+    .clock-hand-hour {
       position: absolute;
-      top: 6px; left: 26px;
-      width: 2px; height: 23px;
-      background: #ffd166;
+      top: 13px;
+      left: 24.5px;
+      width: 3px;
+      height: 15px;
+      background: #e2b9c3;
+      border-radius: 2px;
       transform-origin: bottom center;
-      animation: secSpin 1.5s linear infinite;
+      animation: spinClockHand 4s linear infinite;
     }
-    @keyframes secSpin { to { transform: rotate(360deg); } }
-
-    .shake { animation: shakeError 0.35s ease; }
-    @keyframes shakeError {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
+    .clock-hand-minute {
+      position: absolute;
+      top: 8px;
+      left: 25px;
+      width: 2px;
+      height: 20px;
+      background: #ffffff;
+      border-radius: 2px;
+      transform-origin: bottom center;
+      animation: spinClockHand 1.2s linear infinite;
+    }
+    @keyframes spinClockHand {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    #yt-hidden-node {
+    .glass-card {
+      background: rgba(22, 16, 24, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(226, 185, 195, 0.22);
+      border-radius: 14px;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .keypad-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(226, 185, 195, 0.2);
+      color: #f7e7ea;
+      font-size: 1.3rem;
+      font-weight: 400;
+      padding: 0.8rem 0;
+      border-radius: 10px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .keypad-btn:active {
+      transform: scale(0.93);
+      background: rgba(226, 185, 195, 0.25);
+    }
+
+    .float-emoji {
       position: fixed;
-      top: -300px;
-      left: -300px;
+      pointer-events: none !important;
+      z-index: 99999;
+      font-size: 28px;
+      animation: floatUp 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--tx), -120px) scale(1.3) rotate(var(--rot)); }
+    }
+
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-vinyl { animation: spinVinyl 6s linear infinite; }
+    .spin-paused { animation-play-state: paused; }
+
+    @keyframes eqWave {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+    .eq-bar {
+      width: 2.5px;
+      background: #e2b9c3;
+      border-radius: 2px;
+      animation: eqWave 1s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #eed0d7; }
+    .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #f7e7ea; }
+
+    .photo-fade-in {
+      animation: photoPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes photoPop {
+      0% { opacity: 0; transform: scale(0.88) translateY(16px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .shake-box { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    #yt-hidden-wrap {
+      position: fixed;
+      top: -200px;
+      left: -200px;
       width: 10px;
       height: 10px;
-      opacity: 0.001;
+      opacity: 0.01;
       pointer-events: none;
     }
   </style>
 </head>
 <body class="flex flex-col justify-between min-h-screen">
 
-  <!-- Ambient Light Orbs -->
-  <div class="ambient-mesh">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+  <div class="projector-lens"></div>
+  <div class="film-grain"></div>
+
+  <div id="yt-hidden-wrap">
+    <div id="yt-player-1"></div>
+    <div id="yt-player-2"></div>
   </div>
 
-  <!-- Audio Node Containers -->
-  <div id="yt-hidden-node">
-    <div id="player-track-a"></div>
-    <div id="player-track-b"></div>
-  </div>
-
-  <!-- Theater Velvet Curtains -->
   <div id="curtain-container">
-    <div class="curtain-blade curtain-left"></div>
-    <div class="curtain-blade curtain-right"></div>
+    <div class="curtain-panel curtain-left"></div>
+    <div class="curtain-panel curtain-right"></div>
   </div>
 
-  <!-- Scene 0: Projector Intro -->
-  <div id="stage-gate" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-black/80 backdrop-blur-xl transition-opacity duration-700">
-    <div class="neon-track mb-8">
-      <span class="neon-glyph">A</span>
-      <span class="neon-glyph">L</span>
-      <span class="neon-glyph">E</span>
-      <span class="neon-glyph">E</span>
-      <span class="neon-glyph">N</span>
+  <!-- Screen 0: Intro -->
+  <div id="projector-intro-screen">
+    <div class="neon-board">
+      <span class="neon-letter">A</span>
+      <span class="neon-letter">L</span>
+      <span class="neon-letter">E</span>
+      <span class="neon-letter">E</span>
+      <span class="neon-letter">N</span>
     </div>
 
-    <h1 class="font-eng text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-rose-300 to-amber-200 tracking-tight text-center leading-tight mb-8 drop-shadow-[0_0_35px_rgba(255,42,112,0.6)]">
-      Happy Anniversary<br><span class="text-white">ALEEN ❤️</span>
+    <h1 class="shining-title font-serif-title mb-10 px-2">
+      Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
     </h1>
 
-    <button onclick="Engine.openTheater(event)" class="pro-btn">
-      <span class="font-medium text-base sm:text-lg">เปิดดูข้างในสิ</span>
+    <button onclick="startExperience(event)" class="clean-btn">
+      <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
       <span class="text-xl">🎬</span>
     </button>
   </div>
 
-  <!-- Global Floating Audio Status -->
-  <aside class="fixed top-5 right-5 z-40">
-    <div id="audio-pill" onclick="Engine.togglePlayback(event)" class="flex items-center gap-3 px-4 py-2 pro-glass cursor-pointer rounded-full border border-pink-400/30">
-      <div id="vinyl-icon" class="w-7 h-7 rounded-full bg-neutral-900 border border-pink-400 flex items-center justify-center spin-active spin-stopped">
-        <div class="w-2.5 h-2.5 rounded-full bg-pink-300"></div>
+  <header class="fixed top-4 right-4 z-40">
+    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 rounded-lg shadow-md cursor-pointer">
+      <div id="vinyl-disc" class="w-6 h-6 rounded-full bg-[#20131e] border border-[#e2b9c3] flex items-center justify-center spin-vinyl spin-paused">
+        <div class="w-2 h-2 rounded-full bg-[#faedf0]"></div>
       </div>
       <div class="hidden sm:flex flex-col text-left">
-        <span class="text-xs font-semibold text-pink-200" id="audio-title">Special Melody</span>
-        <span class="text-[9px] text-pink-300/70">Anniversary Stream</span>
+        <span class="text-xs font-medium text-[#faedf0]" id="music-title-tag">Our Song</span>
+        <span class="text-[9px] text-gray-400">Special Memory</span>
       </div>
       <div class="flex items-center gap-1 h-3.5 px-1">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
       </div>
-      <i class="fa-solid fa-play text-pink-300 text-xs" id="audio-icon"></i>
+      <i class="fa-solid fa-play text-[#e2b9c3] text-xs ml-0.5" id="music-icon-state"></i>
     </div>
-  </aside>
+  </header>
 
-  <!-- Interactive Routing Viewport -->
-  <main class="relative z-10 flex-grow flex items-center justify-center p-4 max-w-4xl w-full mx-auto my-auto min-h-[520px]">
+  <main class="flex-grow flex items-center justify-center px-4 py-16 z-20 w-full max-w-4xl mx-auto">
 
-    <!-- SCENE 1: REALTIME CHRONO COUNTER -->
-    <section id="view-chrono" class="view-card view-active flex flex-col items-center text-center">
-      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full pro-glass text-pink-200 text-sm font-medium mb-6">
-        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-        <span>หวังว่าเบ้บคงชอบมันนะ🥹💕</span>
+    <!-- SCENE 1: ANNIVERSARY TIMER -->
+    <section id="scene-counter" class="w-full flex flex-col items-center text-center">
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-white/[0.04] border border-[#e2b9c3]/30 text-[#f7e7ea] text-sm sm:text-base mb-5 shadow-sm">
+          <span>หวังว่าเบ้บคงชอบมันนะ🥹💕</span>
+        </div>
+
+        <h1 class="font-serif-title text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#faedf0] leading-tight">
+          Happy Anniversary ❤️<br><span class="text-[#e2b9c3]">ALEEN & NA</span>
+        </h1>
+        <p class="text-gray-300 text-base sm:text-lg font-light mt-3 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-heart text-[#e2b9c3] text-xs"></i>
+          เราเดินข้างกันมานานแค่ไหนแล้วนะ
+          <i class="fa-solid fa-heart text-[#e2b9c3] text-xs"></i>
+        </p>
       </div>
 
-      <h2 class="font-eng text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-rose-300 to-amber-200 tracking-tight">
-        Happy Anniversary ❤️<br><span class="text-white">ALEEN & NA</span>
-      </h2>
-      <p class="text-pink-200/90 text-base sm:text-lg font-light mt-3 flex items-center gap-2">
-        <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
-        เราเดินข้างกันมานานแค่ไหนแล้วนะ
-        <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
-      </p>
-
-      <div class="my-6 px-6 py-2 rounded-xl pro-glass text-pink-200 text-sm sm:text-base border border-pink-500/30">
-        ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-amber-300 font-bold font-digital">12/08/69</span> ✨
+      <div class="mb-8 px-6 py-2 bg-white/[0.03] rounded-lg border border-[#e2b9c3]/25 text-[#f7e7ea] text-sm sm:text-base">
+        ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-[#e2b9c3] font-medium font-serif-title">12/08/69</span> ✨
       </div>
 
-      <!-- Live Digital Counter -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-2xl mb-6">
-        <div class="chrono-tile">
-          <div id="chrono-d" class="text-3xl sm:text-5xl chrono-val">00</div>
-          <div class="text-[10px] text-pink-300/70 font-digital tracking-widest mt-1">DAYS</div>
+      <!-- Realtime Digital Clock Display -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-6">
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-days" class="text-3xl sm:text-5xl digital-num">00</span>
+          <span class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">DAYS</span>
         </div>
-        <div class="chrono-tile">
-          <div id="chrono-h" class="text-3xl sm:text-5xl chrono-val">00</div>
-          <div class="text-[10px] text-pink-300/70 font-digital tracking-widest mt-1">HOURS</div>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-hours" class="text-3xl sm:text-5xl digital-num">00</span>
+          <span class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">HOURS</span>
         </div>
-        <div class="chrono-tile">
-          <div id="chrono-m" class="text-3xl sm:text-5xl chrono-val">00</div>
-          <div class="text-[10px] text-pink-300/70 font-digital tracking-widest mt-1">MINUTES</div>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-minutes" class="text-3xl sm:text-5xl digital-num">00</span>
+          <span class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">MINUTES</span>
         </div>
-        <div class="chrono-tile">
-          <div id="chrono-s" class="text-3xl sm:text-5xl chrono-val text-amber-300">00</div>
-          <div class="text-[10px] text-pink-300/70 font-digital tracking-widest mt-1">SECONDS</div>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-seconds" class="text-3xl sm:text-5xl digital-num text-[#e2b9c3]">00</span>
+          <span class="text-[10px] text-gray-400 mt-2 tracking-widest uppercase">SECONDS</span>
         </div>
       </div>
 
-      <!-- Funny Spinning Watch -->
-      <div class="flex flex-col items-center gap-2 mb-8">
-        <div class="wobble-watch">
-          <div class="hand-sec"></div>
-          <div class="w-1.5 h-1.5 rounded-full bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="funny-clock-wrap mb-8">
+        <div class="funny-clock">
+          <div class="clock-face">
+            <div class="clock-hand-hour"></div>
+            <div class="clock-hand-minute"></div>
+            <div class="clock-center-dot"></div>
+          </div>
         </div>
-        <span class="text-xs text-pink-200/70">เวลาหมุนเร็วมากเมื่อมีเธออยู่ข้างๆ ⏰🤍</span>
+        <span class="text-[11px] text-gray-400 font-light">เวลาหมุนเร็วมากเมื่อมีเธออยู่ข้างๆ ⏰🤍</span>
       </div>
 
-      <button onclick="Engine.navigate('view-security', event)" class="pro-btn">
-        <span>ถัดไป</span>
-        <i class="fa-solid fa-arrow-right text-sm"></i>
+      <button onclick="gotoScene('scene-passcode', event)" class="clean-btn">
+        <span class="btn-glow-text text-base">ถัดไป</span>
+        <i class="fa-solid fa-arrow-right text-[#e2b9c3] text-xs"></i>
       </button>
     </section>
 
-    <!-- SCENE 2: PASSCODE GATE -->
-    <section id="view-security" class="view-card flex flex-col items-center text-center max-w-md mx-auto">
-      <div id="security-box" class="pro-glass w-full p-6 sm:p-8 rounded-3xl">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-pink-500/20 to-rose-500/30 border border-pink-400/40 flex items-center justify-center mx-auto mb-4 text-pink-300 text-2xl shadow-lg">
+    <!-- SCENE 2: PASSCODE -->
+    <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center">
+      <div id="passcode-card" class="glass-card w-full p-6 sm:p-8">
+        <div class="w-13 h-13 py-3 rounded-lg bg-white/[0.04] border border-[#e2b9c3]/30 flex items-center justify-center mx-auto mb-4 text-[#e2b9c3] text-xl">
           <i class="fa-solid fa-lock"></i>
         </div>
 
-        <h3 class="text-2xl font-bold text-white mb-1">กรุณาใส่วันครบรอบจ๊ะ</h3>
-        <p class="text-xs sm:text-sm text-pink-200/70 mb-5">วันที่เรื่องราวของเราเริ่มต้นขึ้น ✨</p>
+        <h2 class="text-xl sm:text-2xl font-medium text-[#faedf0] mb-1">กรุณาใส่วันครบรอบจ๊ะ</h2>
+        <p class="text-xs sm:text-sm text-gray-400 mb-5 leading-relaxed">
+          วันที่เรื่องราวของเราเริ่มต้นขึ้น ✨
+        </p>
 
-        <input type="text" id="passcode-screen" readonly placeholder="• • • • • •" class="w-full text-center text-3xl tracking-[0.35em] font-digital py-3 px-4 bg-black/40 border border-pink-500/40 rounded-2xl text-pink-200 mb-2 focus:outline-none shadow-inner">
-        <div id="passcode-toast" class="text-xs text-rose-400 font-medium mb-4 hidden">รหัสผ่านยังไม่ถูกต้อง ลองใหม่อีกครั้งนะที่รัก ❤️</div>
+        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/40 border border-[#e2b9c3]/30 rounded-lg text-[#faedf0] mb-2 focus:outline-none">
+        <div id="pass-error" class="text-xs text-[#e2b9c3] mb-4 hidden">รหัสผ่านยังไม่ถูกต้อง ลองใหม่อีกครั้งนะที่รัก ❤️</div>
 
-        <!-- Custom Tactile Keypad -->
-        <div class="grid grid-cols-3 gap-2.5 mb-5">
-          <button onclick="Engine.handleKey('1', event)" class="key-tile">1</button>
-          <button onclick="Engine.handleKey('2', event)" class="key-tile">2</button>
-          <button onclick="Engine.handleKey('3', event)" class="key-tile">3</button>
-          <button onclick="Engine.handleKey('4', event)" class="key-tile">4</button>
-          <button onclick="Engine.handleKey('5', event)" class="key-tile">5</button>
-          <button onclick="Engine.handleKey('6', event)" class="key-tile">6</button>
-          <button onclick="Engine.handleKey('7', event)" class="key-tile">7</button>
-          <button onclick="Engine.handleKey('8', event)" class="key-tile">8</button>
-          <button onclick="Engine.handleKey('9', event)" class="key-tile">9</button>
-          <button onclick="Engine.clearPin(event)" class="key-tile text-sm font-sans text-pink-300">ลบ</button>
-          <button onclick="Engine.handleKey('0', event)" class="key-tile">0</button>
-          <button onclick="Engine.deletePin(event)" class="key-tile text-pink-300"><i class="fa-solid fa-delete-left"></i></button>
+        <div class="grid grid-cols-3 gap-2.5 mb-4">
+          <button onclick="tapKey('1', event)" class="keypad-btn">1</button>
+          <button onclick="tapKey('2', event)" class="keypad-btn">2</button>
+          <button onclick="tapKey('3', event)" class="keypad-btn">3</button>
+          <button onclick="tapKey('4', event)" class="keypad-btn">4</button>
+          <button onclick="tapKey('5', event)" class="keypad-btn">5</button>
+          <button onclick="tapKey('6', event)" class="keypad-btn">6</button>
+          <button onclick="tapKey('7', event)" class="keypad-btn">7</button>
+          <button onclick="tapKey('8', event)" class="keypad-btn">8</button>
+          <button onclick="tapKey('9', event)" class="keypad-btn">9</button>
+          <button onclick="clearKey(event)" class="keypad-btn text-[#e2b9c3] text-xs">ลบ</button>
+          <button onclick="tapKey('0', event)" class="keypad-btn">0</button>
+          <button onclick="backKey(event)" class="keypad-btn text-[#e2b9c3] text-sm"><i class="fa-solid fa-delete-left"></i></button>
         </div>
 
-        <div class="flex items-center justify-between text-xs text-pink-300/80 pt-3 border-t border-white/10">
-          <button onclick="Engine.navigate('view-chrono', event)" class="hover:text-white flex items-center gap-1.5 transition-colors">
+        <div class="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-white/[0.08]">
+          <button onclick="gotoScene('scene-counter', event)" class="hover:text-[#e2b9c3] flex items-center gap-1 transition-colors">
             <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
           </button>
-          <button onclick="Engine.verifyPasscode(event)" class="pro-btn !py-2 !px-5 !rounded-xl text-xs">
-            <span>ปลดล็อก</span>
-            <i class="fa-solid fa-heart text-sm"></i>
+          
+          <button onclick="checkPasscode(event)" class="clean-btn !py-2 !px-4">
+            <span class="btn-glow-text text-xs sm:text-sm">ปลดล็อก</span>
+            <i class="fa-solid fa-heart text-[#e2b9c3]"></i>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- SCENE 3: INTERACTIVE GALLERY -->
-    <section id="view-vault" class="view-card flex flex-col items-center text-center">
-      <span class="px-3.5 py-1 rounded-full pro-glass text-xs font-semibold tracking-wider text-pink-300 uppercase mb-2">
-        OUR CHERISHED MOMENTS
-      </span>
-      <h3 class="text-3xl sm:text-4xl font-bold text-white mb-2">เธอใส่รูปลงไป สิ แล้ว ✨</h3>
-      <p class="text-pink-200/70 text-xs sm:text-sm mb-6">ภาพความทรงจำจะถูกบันทึกไว้ในความทรงจำนี้ตลอดไป</p>
-
-      <div class="flex flex-col items-center gap-2 mb-8">
-        <label class="pro-btn cursor-pointer">
-          <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
-          <span class="text-sm sm:text-base">เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
-          <input type="file" id="multi-photo-input" accept="image/*" multiple class="hidden" onchange="Engine.storePhotos(event)">
-        </label>
-        <span class="text-[11px] text-pink-300/70">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
+    <!-- SCENE 3: PHOTO GALLERY -->
+    <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
+      <div class="text-center mb-6">
+        <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
+          OUR MEMORIES
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-serif-title font-medium text-[#faedf0] mt-2">
+          เธอใส่รูปลงไป สิ แล้ว ✨
+        </h2>
+        <p class="text-gray-400 text-xs sm:text-sm mt-1">
+          ภาพความทรงจำจะถูกบันทึกไว้ในความทรงจำนี้ตลอดไป
+        </p>
       </div>
 
-      <div id="gallery-rack" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10"></div>
+      <div class="flex flex-col items-center gap-2 mb-8">
+        <label class="clean-btn cursor-pointer">
+          <i class="fa-solid fa-images text-[#e2b9c3]"></i>
+          <span class="btn-glow-text text-sm">เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
+          <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
+        </label>
+        <span class="text-[11px] text-gray-400">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
+      </div>
 
-      <button onclick="Engine.toLetterScene(event)" class="pro-btn !py-4 !px-10 text-lg">
-        <span>เปิดอ่านดูซิเบ้บ</span>
-        <span class="text-xl">💌</span>
+      <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10"></div>
+
+      <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8">
+        <span class="btn-glow-text text-base">เปิดอ่านดูซิเบ้บ</span>
+        <span>💌</span>
       </button>
     </section>
 
-    <!-- SCENE 4: DEV TERMINAL & SPECIAL LETTER -->
-    <section id="view-letter" class="view-card flex flex-col items-center text-center max-w-3xl mx-auto">
+    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER -->
+    <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
-        <button onclick="Engine.navigate('view-vault', event)" class="text-pink-300 text-xs hover:text-white flex items-center gap-1.5 transition-colors">
+        <button onclick="gotoScene('scene-gallery', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
           <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรูป
         </button>
-        <span class="text-xs text-pink-300/80 font-digital tracking-wide">ALEEN_NA_CORE // SYNCED</span>
+        <span class="text-xs text-[#e2b9c3] font-mono tracking-wide">ALEEN_NA_UNIVERSE // SYNCED</span>
       </div>
 
-      <!-- Algorithmic Terminal -->
-      <div class="w-full pro-glass rounded-2xl overflow-hidden mb-8 border border-pink-500/30 shadow-2xl">
-        <div class="bg-black/60 px-4 py-2.5 border-b border-white/10 flex justify-between items-center">
+      <div class="w-full glass-card overflow-hidden mb-8 border border-[#e2b9c3]/25">
+        <div class="bg-black/50 px-4 py-2.5 border-b border-white/[0.08] flex justify-between items-center">
           <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-            <span class="text-[11px] text-pink-200/70 font-digital ml-2">Anniversary_Kernel.ts</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-400/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+            <span class="text-[11px] text-gray-400 font-mono ml-2">Anniversary_Aleen_Na.ts</span>
           </div>
-          <div class="flex items-center gap-2 text-xs font-digital text-pink-200">
-            <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i>
-            <span>Love Index: <strong id="progress-val" class="text-amber-300 font-bold">1</strong>% / 1000%</span>
+          <div class="flex items-center gap-1.5 text-xs font-mono text-gray-300">
+            <i class="fa-solid fa-heart text-[#e2b9c3]"></i>
+            <span>Love Index: <strong id="love-val" class="text-[#faedf0] font-medium">1</strong>% / 1000%</span>
           </div>
         </div>
 
-        <div id="ide-stream" class="p-5 font-mono text-left text-xs sm:text-sm bg-black/50 text-pink-100 min-h-[170px] leading-relaxed overflow-x-auto"></div>
+        <div class="p-4 sm:p-5 font-mono-code text-xs sm:text-sm bg-black/40 text-gray-300 min-h-[170px] text-left leading-relaxed overflow-x-auto" id="terminal-content"></div>
 
-        <div class="w-full bg-black/80 h-2 relative">
-          <div id="progress-indicator" class="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-amber-300 transition-all duration-300" style="width: 1%;"></div>
+        <div class="w-full bg-black/60 h-1.5 relative overflow-hidden">
+          <div id="love-bar" class="h-full bg-gradient-to-r from-[#b38892] to-[#e2b9c3] transition-all duration-300" style="width: 1%;"></div>
         </div>
       </div>
 
-      <!-- Special Letter Card for Poster -->
-      <div id="poster-canvas" class="w-full pro-glass p-6 sm:p-8 text-left border border-pink-400/40 relative overflow-hidden mb-6">
-        <div class="flex items-center justify-between border-b border-pink-500/20 pb-4 mb-5">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-pink-600 to-rose-500 flex items-center justify-center text-white font-bold text-base shadow-md">
+      <div id="poster-area" class="w-full glass-card p-6 sm:p-8 text-left border border-[#e2b9c3]/30 relative overflow-hidden mb-6">
+        <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-[#20131e] border border-[#e2b9c3]/40 flex items-center justify-center text-[#faedf0] text-sm font-medium">
               NA
             </div>
             <div>
-              <h4 class="text-lg font-bold text-white tracking-wide">จาก NA TO ALEEN</h4>
-              <p class="text-xs text-pink-300 font-digital">12 พฤศจิกายน 69</p>
+              <h3 class="text-base sm:text-lg font-medium text-[#faedf0] tracking-wide">จาก NA TO ALEEN</h3>
+              <p class="text-xs text-[#e2b9c3]/80 font-mono mt-0.5">12 พฤศจิกายน 69</p>
             </div>
           </div>
-          <span class="text-3xl animate-bounce">💌</span>
+          <span class="text-2xl">💌</span>
         </div>
 
-        <div class="text-pink-100/90 text-sm sm:text-base leading-relaxed space-y-3.5 font-light text-justify">
-          <p>เบ้บครับ ตอนนี้เราครบรอบ3เดือนแล้วนะ และมัน ก็จะเกิดขึ้น 4เดือน 5เดือน 6เดือน และทุกๆปีนับจากนี้ไปนะ</p>
-          <p>เราต่างเข้ามารู้ จักกัน ได้เรียนรู้กันหลายอย่างนะ ถึงแม้อายุ เราต่างกันไม่กี่ปี แต่มันก็ไม่ใช่อุปสรรคอะไรเลยเราสามารถเรียนรู้ด้วยกันได้ และ จับมือผ่านไปด้วยกันทุกอย่างลองย้อนคิดความหลังที่ผ่านมาสิ เราผ่านมันมาได้ เยอะมากๆ ทั้งสุขทุกข์ ร้องให้ด้วยกัน ยิ้มด้วยกัน</p>
-          <p>ต่อไปนี้ เราจะคอยช่วยเติมเต็ม สร้างอนาคตเราสองคนเดินไปด้วยกัน อย่าเพิ่ง เบื่อกันก่อน เรายังมีอะไรอีกเยอะที่ยังไม่ได้ทำด้วยกันนะ เค้าก็ขอโทษเบ้บ บางทีเค้าก็ เหวี่ยงหงุดหงิดใส่เบ้บ บ่อยๆ เค้าจะปรับปรุงนิสัย นะอิอิ</p>
-          <p>ส่วนเธอก็ตั้งใจเรียน จบมาเธอจะมีเค้าในเฟรมภาพด้วย อย่าลืม ^^ วันครบรอบก็ไม่ได้มีอะไรเยอะ เดี่ยวไว้เราไปทานข้าวทำกิจกรรมด้วยกันย้อนหลังนะ</p>
-          <p class="text-right pt-4 font-semibold text-pink-300 text-lg font-hand">
+        <div class="text-gray-200 text-sm sm:text-base leading-relaxed space-y-3.5 font-light text-justify">
+          <p>
+            เบ้บครับ ตอนนี้เราครบรอบ3เดือนแล้วนะ และมัน ก็จะเกิดขึ้น 4เดือน 5เดือน 6เดือน และทุกๆปีนับจากนี้ไปนะ
+          </p>
+          <p>
+            เราต่างเข้ามารู้ จักกัน ได้เรียนรู้กันหลายอย่างนะ ถึงแม้อายุ เราต่างกันไม่กี่ปี แต่มันก็ไม่ใช่อุปสรรคอะไรเลยเราสามารถเรียนรู้ด้วยกันได้ และ จับมือผ่านไปด้วยกันทุกอย่างลองย้อนคิดความหลังที่ผ่านมาสิ เราผ่านมันมาได้ เยอะมากๆ ทั้งสุขทุกข์ ร้องให้ด้วยกัน ยิ้มด้วยกัน
+          </p>
+          <p>
+            ต่อไปนี้ เราจะคอยช่วยเติมเต็ม สร้างอนาคตเราสองคนเดินไปด้วยกัน อย่าเพิ่ง เบื่อกันก่อน เรายังมีอะไรอีกเยอะที่ยังไม่ได้ทำด้วยกันนะ เค้าก็ขอโทษเบ้บ บางทีเค้าก็ เหวี่ยงหงุดหงิดใส่เบ้บ บ่อยๆ เค้าจะปรับปรุงนิสัย นะอิอิ
+          </p>
+          <p>
+            ส่วนเธอก็ตั้งใจเรียน จบมาเธอจะมีเค้าในเฟรมภาพด้วย อย่าลืม ^^ วันครบรอบก็ไม่ได้มีอะไรเยอะ เดี่ยวไว้เราไปทานข้าวทำกิจกรรมด้วยกันย้อนหลังนะ
+          </p>
+          <p class="text-right pt-4 font-normal text-[#e2b9c3] text-base sm:text-lg font-hand">
             สุขสันต์วันครบรอบครับเบ้บ รักอลีนนะ<br>
-            <span class="text-white text-2xl">จาก NA. ❤️</span>
+            <span class="text-[#faedf0] text-xl">จาก NA. ❤️</span>
           </p>
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-2 mb-10 w-full">
-        <button onclick="Engine.generatePoster()" class="pro-btn !py-3.5 !px-8">
-          <i class="fa-solid fa-download text-sm"></i>
-          <span>บันทึกการ์ดความทรงจำเป็นโปสเตอร์ 🖼️</span>
+      <div class="flex flex-col items-center gap-3 mb-10 w-full">
+        <button onclick="savePoster()" class="clean-btn !py-3.5 !px-8">
+          <i class="fa-solid fa-download text-[#e2b9c3]"></i>
+          <span class="btn-glow-text text-sm sm:text-base">บันทึกการ์ดความทรงจำเป็นโปสเตอร์ 🖼️</span>
         </button>
-        <span id="export-msg" class="text-xs text-pink-300 hidden">กำลังประมวลผลโปสเตอร์ความคมชัดสูง... ✨</span>
+        <span id="save-status" class="text-xs text-[#e2b9c3] hidden">กำลังสร้างรูปภาพโปสเตอร์ความทรงจำ... ✨</span>
       </div>
+
     </section>
 
   </main>
 
-  <footer class="relative z-10 py-5 text-center text-xs text-pink-300/40 border-t border-white/5">
+  <footer class="w-full py-4 text-center text-xs text-gray-500 z-20 border-t border-white/[0.05]">
     Forever & Always ❤️ ALEEN & NA
   </footer>
 
-  <!-- ================= MASTER ENGINE SCRIPT ================= -->
   <script>
-    const Engine = (() => {
-      // Internal State
-      const state = {
-        activeRoute: 'view-chrono',
-        inputPin: '',
-        validPins: ['120869', '12/08/69', '12082569'],
-        isPlaying: false,
-        activeChannel: 1,
-        players: { a: null, b: null },
-        terminalStarted: false,
-        emojis: ['❤️', '💖', '🌸', '🐱', '✨', '🐾', '💐', '💌', '🤍', '🌷']
-      };
+    /* 1. Realtime Timer Logic */
+    const START_TIME = new Date(2026, 7, 12, 0, 0, 0).getTime();
 
-      // 1. High-Precision Realtime Clock
-      const START_EPOCH = new Date(2026, 7, 12, 0, 0, 0).getTime();
+    function runTimer() {
+      const now = new Date().getTime();
+      let diff = now - START_TIME;
+      if (diff < 0) diff = Math.abs(diff);
 
-      function updateChrono() {
-        const delta = Math.abs(Date.now() - START_EPOCH);
-        const d = Math.floor(delta / 86400000);
-        const h = Math.floor((delta % 86400000) / 3600000);
-        const m = Math.floor((delta % 3600000) / 60000);
-        const s = Math.floor((delta % 60000) / 1000);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        const pad = (n) => String(n).padStart(2, '0');
-        const nodeD = document.getElementById('chrono-d');
-        const nodeH = document.getElementById('chrono-h');
-        const nodeM = document.getElementById('chrono-m');
-        const nodeS = document.getElementById('chrono-s');
+      const pad = (n) => String(n).padStart(2, '0');
 
-        if (nodeD) nodeD.innerText = pad(d);
-        if (nodeH) nodeH.innerText = pad(h);
-        if (nodeM) nodeM.innerText = pad(m);
-        if (nodeS) nodeS.innerText = pad(s);
+      const elD = document.getElementById('c-days');
+      const elH = document.getElementById('c-hours');
+      const elM = document.getElementById('c-minutes');
+      const elS = document.getElementById('c-seconds');
 
-        requestAnimationFrame(() => setTimeout(updateChrono, 1000));
-      }
+      if (elD) elD.innerText = pad(d);
+      if (elH) elH.innerText = pad(h);
+      if (elM) elM.innerText = pad(m);
+      if (elS) elS.innerText = pad(s);
+    }
 
-      // 2. Spatial Navigation Router
-      function navigate(targetId, e) {
-        if (e && e.clientX) spawnParticles(e.clientX, e.clientY);
-        const views = document.querySelectorAll('.view-card');
-        views.forEach(v => {
-          if (v.id === targetId) {
-            v.classList.add('view-active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            v.classList.remove('view-active');
-          }
-        });
-        state.activeRoute = targetId;
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        runTimer();
+        setInterval(runTimer, 1000);
+      });
+    } else {
+      runTimer();
+      setInterval(runTimer, 1000);
+    }
 
-        if (targetId === 'view-vault') loadVaultGallery();
-        if (targetId === 'view-letter') bootTerminalEngine();
-      }
+    /* 2. Floating Popups */
+    const emojis = ['🤍', '🌸', '✨', '🐱', '🌷', '💌'];
+    function popEmoji(x, y) {
+      const el = document.createElement('div');
+      el.className = 'float-emoji';
+      el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (x - 14) + 'px';
+      el.style.top = (y - 14) + 'px';
+      el.style.setProperty('--tx', (Math.random() * 80 - 40) + 'px');
+      el.style.setProperty('--rot', (Math.random() * 40 - 20) + 'deg');
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
 
-      // 3. Tactile Particle System
-      function spawnParticles(x, y) {
-        const el = document.createElement('div');
-        el.className = 'kinetic-emoji';
-        el.innerText = state.emojis[Math.floor(Math.random() * state.emojis.length)];
-        el.style.left = (x - 16) + 'px';
-        el.style.top = (y - 16) + 'px';
-        el.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
-        el.style.setProperty('--ty', (-40 - Math.random() * 60) + 'px');
-        el.style.setProperty('--rot', (Math.random() * 50 - 25) + 'deg');
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1100);
-      }
+    /* 3. Curtain & Start */
+    function startExperience(e) {
+      const screen = document.getElementById('projector-intro-screen');
+      screen.style.opacity = '0';
+      setTimeout(() => screen.remove(), 900);
 
-      // 4. Theater Opening
-      function openTheater(e) {
-        const gate = document.getElementById('stage-gate');
-        gate.style.opacity = '0';
-        setTimeout(() => gate.remove(), 700);
+      document.getElementById('curtain-container').classList.add('curtain-open');
+      playTrack1WithFadeIn();
 
-        document.getElementById('curtain-container').classList.add('curtain-open');
-        playTrackA();
-
-        for (let i = 0; i < 18; i++) {
-          setTimeout(() => {
-            spawnParticles(
-              window.innerWidth * 0.2 + Math.random() * (window.innerWidth * 0.6),
-              window.innerHeight * 0.45
-            );
-          }, i * 45);
-        }
-      }
-
-      // 5. Dual Channel YouTube Soundscape
-      function initAudioNodes() {
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
-
-        window.onYouTubeIframeAPIReady = () => {
-          state.players.a = new YT.Player('player-track-a', {
-            videoId: '87-q2ng9wo0',
-            playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: '87-q2ng9wo0', playsinline: 1, start: 83 },
-            events: { onStateChange: onPlaybackStateChange }
-          });
-          state.players.b = new YT.Player('player-track-b', {
-            videoId: '1OMZrYHIim8',
-            playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: '1OMZrYHIim8', playsinline: 1, start: 48 },
-            events: { onStateChange: onPlaybackStateChange }
-          });
-        };
-      }
-
-      function onPlaybackStateChange(evt) {
-        const disc = document.getElementById('vinyl-icon');
-        const icon = document.getElementById('audio-icon');
-        if (evt.data === YT.PlayerState.PLAYING) {
-          state.isPlaying = true;
-          disc.classList.remove('spin-stopped');
-          icon.className = 'fa-solid fa-pause';
-        } else {
-          state.isPlaying = false;
-          disc.classList.add('spin-stopped');
-          icon.className = 'fa-solid fa-play';
-        }
-      }
-
-      function playTrackA() {
-        if (!state.players.a || typeof state.players.a.playVideo !== 'function') return;
-        state.players.a.seekTo(83, true);
-        state.players.a.setVolume(0);
-        state.players.a.playVideo();
-        state.activeChannel = 1;
-
-        let v = 0;
-        const fadeIn = setInterval(() => {
-          v += 10;
-          if (v >= 100) { clearInterval(fadeIn); state.players.a.setVolume(100); }
-          else state.players.a.setVolume(v);
-        }, 120);
-      }
-
-      function transitionCrossfade() {
-        state.activeChannel = 2;
-        document.getElementById('audio-title').innerText = 'รักให้เธอได้รู้ - PUN';
-
-        let v = 100;
-        const fadeOut = setInterval(() => {
-          v -= 15;
-          if (v <= 0) {
-            clearInterval(fadeOut);
-            if (state.players.a) state.players.a.pauseVideo();
-          } else if (state.players.a) state.players.a.setVolume(v);
-        }, 80);
-
+      for (let i = 0; i < 15; i++) {
         setTimeout(() => {
-          if (state.players.b) {
-            state.players.b.seekTo(48, true);
-            state.players.b.setVolume(0);
-            state.players.b.playVideo();
-            let inV = 0;
-            const fadeIn = setInterval(() => {
-              inV += 15;
-              if (inV >= 100) { clearInterval(fadeIn); state.players.b.setVolume(100); }
-              else state.players.b.setVolume(inV);
-            }, 90);
-          }
-        }, 350);
+          popEmoji(window.innerWidth * 0.25 + Math.random() * (window.innerWidth * 0.5), window.innerHeight * 0.45);
+        }, i * 60);
       }
+    }
 
-      function togglePlayback(e) {
-        const active = state.activeChannel === 1 ? state.players.a : state.players.b;
-        if (!active || typeof active.getPlayerState !== 'function') return;
-        if (state.isPlaying) active.pauseVideo();
-        else active.playVideo();
-        if (e && e.clientX) spawnParticles(e.clientX, e.clientY);
-      }
+    /* 4. Dual YouTube Audio Engine */
+    let player1 = null;
+    let player2 = null;
+    let activePlayer = 1;
+    let isPlaying = false;
 
-      // 6. Security Pin Handler
-      function handleKey(digit, e) {
-        if (state.inputPin.length < 8) state.inputPin += digit;
-        renderPin();
-        if (e && e.clientX) spawnParticles(e.clientX, e.clientY);
-        if (state.inputPin.length === 6) setTimeout(() => verifyPasscode(e), 220);
+    const ytScript = document.createElement('script');
+    ytScript.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(ytScript);
+
+    window.onYouTubeIframeAPIReady = function() {
+      player1 = new YT.Player('yt-player-1', {
+        height: '10',
+        width: '10',
+        videoId: '87-q2ng9wo0',
+        playerVars: { 
+          'autoplay': 0, 
+          'controls': 0, 
+          'loop': 1, 
+          'playlist': '87-q2ng9wo0', 
+          'playsinline': 1,
+          'start': 83 
+        },
+        events: { 'onStateChange': onAudioStateChange }
+      });
+
+      player2 = new YT.Player('yt-player-2', {
+        height: '10',
+        width: '10',
+        videoId: '1OMZrYHIim8',
+        playerVars: { 
+          'autoplay': 0, 
+          'controls': 0, 
+          'loop': 1, 
+          'playlist': '1OMZrYHIim8', 
+          'playsinline': 1, 
+          'start': 48 
+        },
+        events: { 'onStateChange': onAudioStateChange }
+      });
+    };
+
+    function onAudioStateChange(evt) {
+      const vinyl = document.getElementById('vinyl-disc');
+      const icon = document.getElementById('music-icon-state');
+      if (evt.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        vinyl.classList.remove('spin-paused');
+        icon.className = 'fa-solid fa-pause';
+      } else {
+        isPlaying = false;
+        vinyl.classList.add('spin-paused');
+        icon.className = 'fa-solid fa-play';
       }
-      function clearPin(e) {
-        state.inputPin = '';
-        renderPin();
-        document.getElementById('passcode-toast').classList.add('hidden');
-        if (e && e.clientX) spawnParticles(e.clientX, e.clientY);
-      }
-      function deletePin(e) {
-        state.inputPin = state.inputPin.slice(0, -1);
-        renderPin();
-        if (e && e.clientX) spawnParticles(e.clientX, e.clientY);
-      }
-      function renderPin() {
-        document.getElementById('passcode-screen').value = state.inputPin.replace(/./g, '• ');
-      }
-      function verifyPasscode(e) {
-        const clean = state.inputPin.replace(/\D/g, '');
-        if (state.validPins.includes(clean) || state.validPins.includes(state.inputPin)) {
-          document.getElementById('passcode-toast').classList.add('hidden');
-          for (let i = 0; i < 20; i++) {
-            setTimeout(() => spawnParticles(window.innerWidth / 2, window.innerHeight / 2), i * 35);
+    }
+
+    function playTrack1WithFadeIn() {
+      if (player1 && typeof player1.playVideo === 'function') {
+        player1.seekTo(83, true);
+        player1.setVolume(0);
+        player1.playVideo();
+        activePlayer = 1;
+
+        let curVol = 0;
+        const fadeIn = setInterval(() => {
+          curVol += 10;
+          if (curVol >= 100) {
+            clearInterval(fadeIn);
+            player1.setVolume(100);
+          } else {
+            player1.setVolume(curVol);
           }
-          setTimeout(() => navigate('view-vault', e), 350);
+        }, 150);
+      }
+    }
+
+    function transitionToTrack2() {
+      activePlayer = 2;
+      document.getElementById('music-title-tag').innerText = 'รักให้เธอได้รู้';
+
+      let vol = 100;
+      const fadeOut = setInterval(() => {
+        vol -= 15;
+        if (vol <= 0) {
+          clearInterval(fadeOut);
+          if (player1 && typeof player1.pauseVideo === 'function') player1.pauseVideo();
         } else {
-          const box = document.getElementById('security-box');
-          box.classList.remove('shake');
-          void box.offsetWidth;
-          box.classList.add('shake');
-          document.getElementById('passcode-toast').classList.remove('hidden');
+          if (player1 && typeof player1.setVolume === 'function') player1.setVolume(vol);
         }
-      }
+      }, 90);
 
-      // 7. Persistent Gallery Rack (5 Photos)
-      const DEFAULT_MEDIA = [
-        'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
-        'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'
-      ];
-
-      function loadVaultGallery() {
-        const rack = document.getElementById('gallery-rack');
-        rack.innerHTML = '';
-        let media = DEFAULT_MEDIA;
-        const stored = localStorage.getItem('pro_anniv_media');
-        if (stored) { try { media = JSON.parse(stored); } catch(err){} }
-
-        media.slice(0, 5).forEach((url, idx) => {
-          const card = document.createElement('div');
-          card.className = 'pro-glass p-3.5 rounded-2xl flex flex-col items-center transform transition-all duration-300 hover:-translate-y-1';
-          card.innerHTML = `
-            <div class="w-full aspect-square rounded-xl overflow-hidden mb-2.5 bg-black/40 border border-white/10">
-              <img src="${url}" class="w-full h-full object-cover">
-            </div>
-            <div class="w-full flex justify-between items-center px-1">
-              <span class="text-xs text-pink-200 font-medium">Moment #${idx+1} ❤️</span>
-              <i class="fa-solid fa-heart text-pink-400 text-xs"></i>
-            </div>
-          `;
-          rack.appendChild(card);
-        });
-      }
-
-      function storePhotos(e) {
-        const files = Array.from(e.target.files).slice(0, 5);
-        if (!files.length) return;
-        let pool = [];
-        const stored = localStorage.getItem('pro_anniv_media');
-        if (stored) { try { pool = JSON.parse(stored); } catch(err){} }
-
-        let finished = 0;
-        files.forEach(f => {
-          const reader = new FileReader();
-          reader.onload = (evt) => {
-            pool.unshift(evt.target.result);
-            finished++;
-            if (finished === files.length) {
-              pool = pool.slice(0, 5);
-              localStorage.setItem('pro_anniv_media', JSON.stringify(pool));
-              loadVaultGallery();
-              for (let i = 0; i < 15; i++) {
-                setTimeout(() => spawnParticles(window.innerWidth / 2, 280), i * 35);
-              }
+      setTimeout(() => {
+        if (player2 && typeof player2.seekTo === 'function') {
+          player2.seekTo(48, true);
+          player2.setVolume(0);
+          player2.playVideo();
+          let inVol = 0;
+          const fadeIn = setInterval(() => {
+            inVol += 15;
+            if (inVol >= 100) {
+              clearInterval(fadeIn);
+              player2.setVolume(100);
+            } else {
+              player2.setVolume(inVol);
             }
-          };
-          reader.readAsDataURL(f);
-        });
-      }
-
-      function toLetterScene(e) {
-        transitionCrossfade();
-        navigate('view-letter', e);
-      }
-
-      // 8. Algorithmic Terminal & Slow 1-1000%
-      const DEV_CODE_BUFFER = [
-        '// สุขสันต์วันครบรอบนะครับ อลีน',
-        'import { Universe, Entanglement } from "@cosmic/devotion";',
-        '',
-        'const soulmates = new Map<string, string>([',
-        '    ["ALEEN", "Eternal Harmony"],',
-        '    ["NA", "Unconditional Devotion"]',
-        ']);',
-        '',
-        'async function executeAnniversaryLoop(): Promise<never> {',
-        '    const bond = await Entanglement.forge("12/08/69");',
-        '    while (bond.isUnbreakable) {',
-        '        bond.syncHeartbeats();',
-        '        bond.cherishForever();',
-        '    }',
-        '}'
-      ];
-
-      function bootTerminalEngine() {
-        if (state.terminalStarted) return;
-        state.terminalStarted = true;
-
-        const consoleBox = document.getElementById('ide-stream');
-        consoleBox.innerHTML = '';
-        let ptr = 0;
-
-        function streamLine() {
-          if (ptr < DEV_CODE_BUFFER.length) {
-            const p = document.createElement('div');
-            p.textContent = DEV_CODE_BUFFER[ptr];
-            p.className = ptr === 0 ? 'text-amber-300 font-bold py-0.5' : 'text-pink-100/80 py-0.5';
-            consoleBox.appendChild(p);
-            ptr++;
-            setTimeout(streamLine, 200);
-          }
+          }, 100);
         }
-        streamLine();
+      }, 400);
+    }
 
-        let count = 1;
-        const bar = document.getElementById('progress-indicator');
-        const text = document.getElementById('progress-val');
-        const ticker = setInterval(() => {
-          count++;
-          if (count >= 1000) { count = 1000; clearInterval(ticker); }
-          text.innerText = count;
-          bar.style.width = (count / 10) + '%';
-        }, 36);
+    function toggleMusic(e) {
+      const p = activePlayer === 1 ? player1 : player2;
+      if (!p || typeof p.getPlayerState !== 'function') return;
+      if (isPlaying) p.pauseVideo();
+      else p.playVideo();
+      popEmoji(e.clientX || window.innerWidth / 2, e.clientY || 50);
+    }
+
+    /* 5. Scene Management */
+    function gotoScene(sceneId, e) {
+      const scenes = ['scene-counter', 'scene-passcode', 'scene-gallery', 'scene-lyrics'];
+      scenes.forEach(id => {
+        const el = document.getElementById(id);
+        if (id === sceneId) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          el.classList.remove('flex');
+          el.classList.add('hidden');
+        }
+      });
+
+      if (sceneId === 'scene-gallery') loadGallery();
+      if (sceneId === 'scene-lyrics') {
+        runTerminal();
+      }
+      if (e && e.clientX) popEmoji(e.clientX, e.clientY);
+    }
+
+    function handleTransitionToLetter(e) {
+      popEmoji(e.clientX || window.innerWidth / 2, e.clientY || 500);
+      transitionToTrack2();
+      gotoScene('scene-lyrics', e);
+    }
+
+    /* 6. Passcode Logic */
+    let inputPass = '';
+    const correctCodes = ['120869', '12/08/69', '12082569'];
+
+    function tapKey(k, e) {
+      if (inputPass.length < 8) inputPass += k;
+      document.getElementById('pass-display').value = inputPass.replace(/./g, '• ');
+      popEmoji(e.clientX, e.clientY);
+      if (inputPass.length === 6) setTimeout(() => checkPasscode(e), 250);
+    }
+    function clearKey(e) {
+      inputPass = '';
+      document.getElementById('pass-display').value = '';
+      document.getElementById('pass-error').classList.add('hidden');
+      popEmoji(e.clientX, e.clientY);
+    }
+    function backKey(e) {
+      inputPass = inputPass.slice(0, -1);
+      document.getElementById('pass-display').value = inputPass.replace(/./g, '• ');
+      popEmoji(e.clientX, e.clientY);
+    }
+    function checkPasscode(e) {
+      const clean = inputPass.replace(/\D/g, '');
+      if (correctCodes.includes(clean) || correctCodes.includes(inputPass)) {
+        document.getElementById('pass-error').classList.add('hidden');
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight / 2), i * 35);
+        }
+        setTimeout(() => gotoScene('scene-gallery', e), 400);
+      } else {
+        const card = document.getElementById('passcode-card');
+        card.classList.remove('shake-box');
+        void card.offsetWidth;
+        card.classList.add('shake-box');
+        document.getElementById('pass-error').classList.remove('hidden');
+      }
+    }
+
+    /* 7. Gallery 5 Photos System */
+    const DEFAULT_5_PHOTOS = [
+      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'
+    ];
+
+    function loadGallery() {
+      const container = document.getElementById('photos-container');
+      container.innerHTML = '';
+      let photos = DEFAULT_5_PHOTOS;
+      const saved = localStorage.getItem('anniv_5_photos');
+      if (saved) {
+        try { photos = JSON.parse(saved); } catch(err){}
       }
 
-      // 9. High-Definition Poster Renderer
-      function generatePoster() {
-        const node = document.getElementById('poster-canvas');
-        const note = document.getElementById('export-msg');
-        note.classList.remove('hidden');
+      photos.slice(0, 5).forEach((url, i) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-4 flex flex-col items-center photo-fade-in group hover:-translate-y-1 transition-all duration-300';
+        card.style.animationDelay = (i * 120) + 'ms';
+        card.innerHTML = `
+          <div class="w-full aspect-square rounded-lg overflow-hidden mb-3 border border-white/[0.08] bg-black/40">
+            <img src="${url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="w-full flex justify-between items-center px-1">
+            <span class="text-xs text-gray-300">รูปภาพความทรงจำที่ ${i+1} ❤️</span>
+            <i class="fa-solid fa-heart text-[#e2b9c3]/70 text-xs"></i>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-        html2canvas(node, {
-          backgroundColor: '#12041c',
-          scale: 3,
-          useCORS: true
-        }).then(canvas => {
-          note.classList.add('hidden');
-          const a = document.createElement('a');
-          a.download = 'NA-TO-ALEEN-Anniversary.png';
-          a.href = canvas.toDataURL('image/png');
-          a.click();
-          for (let i = 0; i < 22; i++) {
-            setTimeout(() => spawnParticles(window.innerWidth / 2, window.innerHeight * 0.7), i * 30);
+    function uploadMultiImages(e) {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+
+      let currentPhotos = [];
+      const saved = localStorage.getItem('anniv_5_photos');
+      if (saved) {
+        try { currentPhotos = JSON.parse(saved); } catch(err){}
+      }
+
+      const fileList = Array.from(files).slice(0, 5);
+      let loadedCount = 0;
+
+      fileList.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          currentPhotos.unshift(evt.target.result);
+          loadedCount++;
+          if (loadedCount === fileList.length) {
+            currentPhotos = currentPhotos.slice(0, 5);
+            localStorage.setItem('anniv_5_photos', JSON.stringify(currentPhotos));
+            loadGallery();
+            for (let i = 0; i < 15; i++) {
+              setTimeout(() => popEmoji(window.innerWidth / 2, 250), i * 40);
+            }
           }
-        });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    /* 8. Terminal Typing */
+    let terminalStarted = false;
+    const pureCodeLines = [
+      '// สุขสันต์วันครบรอบนะครับ อลีน',
+      'import { QuantumEntanglement, InfinityScore } from "@universe/aleen_na";',
+      '',
+      'interface LoveContinuum<T, U> {',
+      '    soulmateA: T;',
+      '    soulmateB: U;',
+      '    entropy: 0;',
+      '    constellationBound: Promise<EternalDevotion>;',
+      '}',
+      '',
+      'async function synthesizeEternalBond(): Promise<void> {',
+      '    const connection = new QuantumEntanglement("ALEEN", "NA");',
+      '    while (connection.status === "ACTIVE") {',
+      '        await connection.synchronizeHeartbeats();',
+      '        yield* connection.radiateUnconditionalAffection();',
+      '    }',
+      '}'
+    ];
+
+    function runTerminal() {
+      if (terminalStarted) return;
+      terminalStarted = true;
+      const box = document.getElementById('terminal-content');
+      box.innerHTML = '';
+      let l = 0;
+
+      function addCodeLine() {
+        if (l < pureCodeLines.length) {
+          const div = document.createElement('div');
+          div.textContent = pureCodeLines[l];
+          if (l === 0) {
+            div.className = 'text-[#e2b9c3] font-medium py-0.5 text-sm';
+          } else {
+            div.className = 'text-gray-300 py-0.5';
+          }
+          box.appendChild(div);
+          l++;
+          setTimeout(addCodeLine, 220);
+        }
       }
+      addCodeLine();
 
-      // Bootstrap Engine
-      function init() {
-        updateChrono();
-        initAudioNodes();
-      }
+      let val = 1;
+      const target = 1000;
+      const bar = document.getElementById('love-bar');
+      const valText = document.getElementById('love-val');
+      
+      const counter = setInterval(() => {
+        val += 1;
+        if (val >= target) {
+          val = target;
+          clearInterval(counter);
+        }
+        valText.innerText = val;
+        bar.style.width = (val / 10) + '%';
+      }, 40);
+    }
 
-      return {
-        init,
-        openTheater,
-        navigate,
-        togglePlayback,
-        handleKey,
-        clearPin,
-        deletePin,
-        verifyPasscode,
-        storePhotos,
-        toLetterScene,
-        generatePoster
-      };
-    })();
+    /* 9. Poster Generation */
+    function savePoster() {
+      const target = document.getElementById('poster-area');
+      const status = document.getElementById('save-status');
+      status.classList.remove('hidden');
 
-    document.addEventListener('DOMContentLoaded', Engine.init);
+      html2canvas(target, {
+        backgroundColor: '#0d0910',
+        scale: 2,
+        useCORS: true
+      }).then(canvas => {
+        status.classList.add('hidden');
+        const link = document.createElement('a');
+        link.download = 'NA-TO-ALEEN-Anniversary.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.7), i * 35);
+        }
+      }).catch(err => {
+        status.innerText = 'เกิดข้อผิดพลาดในการบันทึกรูป';
+      });
+    }
   </script>
 </body>
 </html>

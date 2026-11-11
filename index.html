@@ -8,13 +8,13 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Mitr:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Mitr:wght@300;400;500;600&family=Orbitron:wght@500;700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Caveat:wght@700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- html2canvas สำหรับเซฟโปสเตอร์ภาพ -->
+  <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -33,9 +33,10 @@
     }
     .font-serif-title { font-family: 'Playfair Display', serif; }
     .font-mono-code { font-family: 'Fira Code', monospace; }
+    .font-digital { font-family: 'Orbitron', monospace; }
     .font-hand { font-family: 'Caveat', cursive, 'Mitr', sans-serif; }
 
-    /* Projector Light Beam Effect */
+    /* Projector Light Beam */
     .projector-lens {
       position: fixed;
       top: -160px;
@@ -55,7 +56,6 @@
       100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
     }
 
-    /* Dust particles on film */
     .film-grain {
       position: fixed;
       inset: 0;
@@ -92,7 +92,7 @@
     .curtain-open .curtain-left { transform: translateX(-100%); }
     .curtain-open .curtain-right { transform: translateX(100%); }
 
-    /* Screen 0: Projector Opening Screen */
+    /* Screen 0: Projector Intro */
     #projector-intro-screen {
       position: fixed;
       inset: 0;
@@ -107,9 +107,43 @@
       text-align: center;
     }
 
-    /* Shiny Projector Text Animation */
-    .shining-title {
+    /* Light Sign: ALEEN Letter Slide-in Effect */
+    .neon-board {
+      display: flex;
+      gap: 12px;
+      padding: 12px 28px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(244, 63, 94, 0.35), inset 0 0 15px rgba(244, 63, 94, 0.2);
+      margin-bottom: 28px;
+    }
+    .neon-letter {
+      font-family: 'Orbitron', sans-serif;
       font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(35px) scale(0.6);
+      animation: neonSlideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      text-shadow: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d, 0 0 40px #ff2a6d;
+    }
+    .neon-letter:nth-child(1) { animation-delay: 0.2s; }
+    .neon-letter:nth-child(2) { animation-delay: 0.5s; }
+    .neon-letter:nth-child(3) { animation-delay: 0.8s; }
+    .neon-letter:nth-child(4) { animation-delay: 1.1s; }
+    .neon-letter:nth-child(5) { animation-delay: 1.4s; }
+
+    @keyframes neonSlideUp {
+      0% { opacity: 0; transform: translateY(35px) scale(0.6); filter: blur(4px); }
+      70% { opacity: 1; transform: translateY(-6px) scale(1.15); filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Shiny Text */
+    .shining-title {
+      font-size: 2.3rem;
       font-weight: 800;
       letter-spacing: 2px;
       background: linear-gradient(90deg, #fff 0%, #fbcfe8 25%, #f43f5e 50%, #fbcfe8 75%, #fff 100%);
@@ -130,41 +164,154 @@
       100% { text-shadow: 0 0 45px rgba(251, 113, 133, 0.9), 0 0 70px rgba(244, 63, 94, 0.6); }
     }
 
-    .projector-lens-ring {
-      width: 90px;
-      height: 90px;
+    /* CLEAN MODERN BUTTON (สี่เหลี่ยมขอบมนคลีนๆ เล่นแสงประกาย) */
+    .clean-btn {
+      position: relative;
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(20, 10, 25, 0.85) 100%);
+      border: 1px solid rgba(244, 114, 182, 0.5);
+      border-radius: 10px; /* ไม่โค้งมนจนเกินไป คลีนตา */
+      padding: 14px 32px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(244, 63, 94, 0.2);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .clean-btn:hover {
+      border-color: rgba(251, 113, 133, 0.9);
+      box-shadow: 0 0 25px rgba(244, 63, 94, 0.5), inset 0 0 15px rgba(244, 63, 94, 0.35);
+      transform: translateY(-2px);
+    }
+    .clean-btn:active {
+      transform: scale(0.96);
+    }
+    /* ข้อความเล่นแสงในปุ่ม */
+    .btn-glow-text {
+      background: linear-gradient(90deg, #ffffff 0%, #fecdd3 30%, #fb7185 50%, #ffffff 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: btnShimmer 3s linear infinite;
+    }
+    @keyframes btnShimmer {
+      to { background-position: 200% center; }
+    }
+
+    /* Digital Glowing Clock Style */
+    .digital-card {
+      background: rgba(12, 8, 18, 0.85);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: 12px;
+      padding: 16px 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(244, 63, 94, 0.15);
+      position: relative;
+    }
+    .digital-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .digital-num {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(244, 63, 94, 0.8), 0 0 25px rgba(244, 63, 94, 0.5);
+    }
+
+    /* Funny Spinning Watch Clock Animation */
+    .funny-clock-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+      gap: 6px;
+    }
+    .funny-clock {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      animation: wobbleFunny 2.2s infinite ease-in-out;
+    }
+    @keyframes wobbleFunny {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-18deg) scale(1.08); }
+      75% { transform: rotate(18deg) scale(1.08); }
+    }
+    .clock-face {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      border: 3px solid rgba(251, 113, 133, 0.6);
-      box-shadow: 0 0 30px rgba(244, 63, 94, 0.7), inset 0 0 25px rgba(244, 63, 94, 0.5);
+      background: radial-gradient(circle, #2d0a1b 0%, #120309 100%);
+      border: 3px solid #fb7185;
+      box-shadow: 0 0 18px rgba(244, 63, 94, 0.6);
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
-      animation: spinLens 12s linear infinite;
     }
-    @keyframes spinLens {
+    .clock-center-dot {
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      z-index: 5;
+    }
+    .clock-hand-hour {
+      position: absolute;
+      top: 14px;
+      left: 27px;
+      width: 4px;
+      height: 17px;
+      background: #fb7185;
+      border-radius: 2px;
+      transform-origin: bottom center;
+      animation: spinClockHand 4s linear infinite;
+    }
+    .clock-hand-minute {
+      position: absolute;
+      top: 9px;
+      left: 28px;
+      width: 2.5px;
+      height: 22px;
+      background: #ffffff;
+      border-radius: 2px;
+      transform-origin: bottom center;
+      animation: spinClockHand 1.2s linear infinite;
+    }
+    @keyframes spinClockHand {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Glassmorphism Cards */
+    /* Glassmorphism Card */
     .glass-card {
-      background: rgba(20, 14, 26, 0.78);
+      background: rgba(18, 12, 24, 0.8);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(244, 114, 182, 0.22);
+      border: 1px solid rgba(244, 114, 182, 0.25);
+      border-radius: 16px;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(244, 63, 94, 0.12);
     }
 
-    /* Keypad */
+    /* Keypad Button */
     .keypad-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(244, 114, 182, 0.22);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(244, 114, 182, 0.25);
       color: #fce7f3;
       font-size: 1.35rem;
       font-weight: 500;
       padding: 0.85rem 0;
-      border-radius: 1.1rem;
+      border-radius: 10px;
       transition: all 0.15s ease;
       cursor: pointer;
     }
@@ -194,7 +341,6 @@
     .spin-vinyl { animation: spinVinyl 6s linear infinite; }
     .spin-paused { animation-play-state: paused; }
 
-    /* Equalizer */
     @keyframes eqWave {
       0%, 100% { height: 4px; }
       50% { height: 18px; }
@@ -208,7 +354,7 @@
     .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #fb7185; }
     .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #fda4af; }
 
-    /* Photo Pop-in Animation */
+    /* Photo Pop-in */
     .photo-fade-in {
       animation: photoPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -253,36 +399,33 @@
     <div class="curtain-panel curtain-right"></div>
   </div>
 
-  <!-- Screen 0: Projector Intro Overlay -->
+  <!-- Screen 0: Projector Intro (แก้ไข: ป้ายไฟนีออน ALEEN ลากขึ้นทีละตัว & ไม่มีข้อความเกะกะ) -->
   <div id="projector-intro-screen">
-    <div class="projector-lens-ring">
-      <i class="fa-solid fa-compact-disc text-3xl text-rose-300 animate-spin"></i>
-    </div>
     
-    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(244,63,94,0.3)]">
-      <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-      PROJECTOR INITIALIZING
+    <!-- ป้ายไฟนีออน ALEEN ค่อยๆ สไลด์ขึ้นทีละตัวอักษร -->
+    <div class="neon-board">
+      <span class="neon-letter">A</span>
+      <span class="neon-letter">L</span>
+      <span class="neon-letter">E</span>
+      <span class="neon-letter">E</span>
+      <span class="neon-letter">N</span>
     </div>
 
-    <!-- ข้อความเรืองแสงตามบรีฟ -->
-    <h1 class="shining-title font-serif-title mb-6 px-2">
+    <!-- ข้อความเรืองแสง -->
+    <h1 class="shining-title font-serif-title mb-10 px-2">
       Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
     </h1>
 
-    <p class="text-rose-200/80 text-sm sm:text-base font-light mb-8 max-w-md">
-      แสงจากโปรเจกเตอร์กำลังฉายเรื่องราวที่งดงามที่สุดของเรา...
-    </p>
-
-    <!-- ปุ่มเปิดดูข้างในสิ -->
-    <button onclick="startExperience(event)" class="px-9 py-4 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white rounded-full font-semibold text-lg tracking-wider shadow-[0_0_40px_rgba(244,63,94,0.8)] transform active:scale-95 transition-all flex items-center gap-3 border border-rose-300/50">
-      <span>เปิดดูข้างในสิ</span>
-      <span class="text-xl animate-bounce">🎬</span>
+    <!-- ปุ่มเปิดดูข้างในสิ ดีไซน์คลีนโมเดิร์น ตัวหนังสือเล่นแสง -->
+    <button onclick="startExperience(event)" class="clean-btn">
+      <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
+      <span class="text-xl">🎬</span>
     </button>
   </div>
 
   <!-- Mini Floating Music Pill -->
   <header class="fixed top-4 right-4 z-40">
-    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/75 backdrop-blur-md border border-rose-500/30 rounded-full shadow-lg cursor-pointer">
+    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/75 backdrop-blur-md border border-rose-500/30 rounded-xl shadow-lg cursor-pointer">
       <div id="vinyl-disc" class="w-7 h-7 rounded-full bg-rose-950 border border-rose-400 flex items-center justify-center spin-vinyl spin-paused">
         <div class="w-2 h-2 rounded-full bg-rose-300"></div>
       </div>
@@ -302,11 +445,10 @@
   <!-- Main Containers -->
   <main class="flex-grow flex items-center justify-center px-4 py-16 z-20 w-full max-w-4xl mx-auto">
 
-    <!-- ================= SCENE 1: ANNIVERSARY TIMER ================= -->
+    <!-- ================= SCENE 1: ANNIVERSARY TIMER (DIGITAL GLOW & FUNNY CLOCK) ================= -->
     <section id="scene-counter" class="w-full flex flex-col items-center text-center">
       <div class="mb-6">
-        <!-- เปลี่ยนตามสั่ง: หวังว่าเบ้บคงชอบมันนะ🥹💕 -->
-        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-rose-950/60 border border-rose-500/40 text-rose-200 text-sm sm:text-base font-medium mb-5 shadow-[0_0_20px_rgba(244,63,94,0.3)]">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-200 text-sm sm:text-base font-medium mb-5 shadow-[0_0_20px_rgba(244,63,94,0.3)]">
           <span>หวังว่าเบ้บคงชอบมันนะ🥹💕</span>
         </div>
 
@@ -320,51 +462,62 @@
         </p>
       </div>
 
-      <!-- เปลี่ยนตามสั่ง: 3 เดือนแล้วนะ เบ้บ 12/08/69 -->
-      <div class="mb-8 px-6 py-2.5 bg-gradient-to-r from-rose-950/70 via-pink-950/60 to-rose-950/70 rounded-2xl border border-rose-400/30 text-rose-200 text-sm sm:text-base font-medium shadow-inner">
+      <div class="mb-8 px-6 py-2.5 bg-gradient-to-r from-rose-950/70 via-pink-950/60 to-rose-950/70 rounded-xl border border-rose-400/30 text-rose-200 text-sm sm:text-base font-medium">
         ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-rose-300 font-bold text-lg font-mono">12/08/69</span> ✨
       </div>
 
-      <!-- Glass Timer -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-10">
-        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
-          <span id="c-days" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
-          <span class="text-xs text-rose-300/80 mt-1">วัน (Days)</span>
+      <!-- Modern Digital Glowing Clock Display (แบบดิจิทัลเล่นแสง) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-6">
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-days" class="text-3xl sm:text-5xl font-digital digital-num">00</span>
+          <span class="text-[11px] text-rose-300/80 font-digital mt-2 tracking-widest uppercase">DAYS</span>
         </div>
-        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
-          <span id="c-hours" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
-          <span class="text-xs text-rose-300/80 mt-1">ชั่วโมง (Hours)</span>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-hours" class="text-3xl sm:text-5xl font-digital digital-num">00</span>
+          <span class="text-[11px] text-rose-300/80 font-digital mt-2 tracking-widest uppercase">HOURS</span>
         </div>
-        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
-          <span id="c-minutes" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
-          <span class="text-xs text-rose-300/80 mt-1">นาที (Minutes)</span>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-minutes" class="text-3xl sm:text-5xl font-digital digital-num">00</span>
+          <span class="text-[11px] text-rose-300/80 font-digital mt-2 tracking-widest uppercase">MINUTES</span>
         </div>
-        <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
-          <span id="c-seconds" class="text-3xl sm:text-5xl font-bold text-rose-400 font-serif-title">00</span>
-          <span class="text-xs text-rose-300/80 mt-1">วินาที (Seconds)</span>
+        <div class="digital-card flex flex-col items-center">
+          <span id="c-seconds" class="text-3xl sm:text-5xl font-digital digital-num text-rose-400">00</span>
+          <span class="text-[11px] text-rose-300/80 font-digital mt-2 tracking-widest uppercase">SECONDS</span>
         </div>
       </div>
 
-      <button onclick="gotoScene('scene-passcode', event)" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium text-lg shadow-[0_4px_25px_rgba(244,63,94,0.4)] active:scale-95 transition-all flex items-center gap-3 border border-rose-300/30">
-        <span>ถัดไป</span>
-        <i class="fa-solid fa-arrow-right text-sm"></i>
+      <!-- นาฬิกาตลกหมุนติ้ว (Funny Spinning Watch Clock) -->
+      <div class="funny-clock-wrap mb-8">
+        <div class="funny-clock">
+          <div class="clock-face">
+            <div class="clock-hand-hour"></div>
+            <div class="clock-hand-minute"></div>
+            <div class="clock-center-dot"></div>
+          </div>
+        </div>
+        <span class="text-[11px] text-rose-300/70 font-mono tracking-wide">เวลาหมุนเร็วมากเมื่อมีเธออยู่ข้างๆ ⏰🤪</span>
+      </div>
+
+      <!-- ปุ่มถัดไปแบบคลีนโมเดิร์น -->
+      <button onclick="gotoScene('scene-passcode', event)" class="clean-btn">
+        <span class="btn-glow-text text-base">ถัดไป</span>
+        <i class="fa-solid fa-arrow-right text-rose-300 text-sm"></i>
       </button>
     </section>
 
-    <!-- ================= SCENE 2: PASSCODE (120869) ================= -->
+    <!-- ================= SCENE 2: PASSCODE ================= -->
     <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center">
-      <div id="passcode-card" class="glass-card w-full p-6 sm:p-8 rounded-3xl">
-        <div class="w-14 h-14 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)]">
+      <div id="passcode-card" class="glass-card w-full p-6 sm:p-8">
+        <div class="w-14 h-14 rounded-xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)]">
           <i class="fa-solid fa-lock"></i>
         </div>
 
-        <!-- เปลี่ยนข้อความตามสั่ง และไม่โชว์รหัสบนหน้าต่าง -->
         <h2 class="text-2xl font-semibold text-rose-100 mb-1">กรุณาใส่วันครบรอบจ๊ะ</h2>
         <p class="text-xs sm:text-sm text-rose-200/80 mb-5 leading-relaxed">
           วันที่เรื่องราวของเราเริ่มต้นขึ้น ✨
         </p>
 
-        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/60 border-2 border-rose-500/40 rounded-2xl text-rose-200 mb-2 focus:outline-none shadow-inner">
+        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/60 border border-rose-500/40 rounded-xl text-rose-200 mb-2 focus:outline-none shadow-inner">
         <div id="pass-error" class="text-xs text-rose-400 mb-4 hidden">รหัสผ่านยังไม่ถูกต้อง ลองใหม่อีกครั้งนะที่รัก ❤️</div>
 
         <!-- Keypad -->
@@ -388,10 +541,10 @@
             <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
           </button>
           
-          <!-- เปลี่ยนปุ่มปลดล็อกเป็นรูปหัวใจ ❤️ -->
-          <button onclick="checkPasscode(event)" class="px-5 py-2 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 text-white text-base shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border border-rose-300/40">
-            <span>ปลดล็อก</span>
-            <i class="fa-solid fa-heart text-white animate-pulse"></i>
+          <!-- ปุ่มปลดล็อกรูปหัวใจ คลีนโมเดิร์น -->
+          <button onclick="checkPasscode(event)" class="clean-btn !py-2 !px-4">
+            <span class="btn-glow-text text-sm">ปลดล็อก</span>
+            <i class="fa-solid fa-heart text-rose-400 animate-pulse"></i>
           </button>
         </div>
       </div>
@@ -400,10 +553,9 @@
     <!-- ================= SCENE 3: PHOTO GALLERY (5 รูป) ================= -->
     <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
       <div class="text-center mb-6">
-        <span class="px-3 py-1 rounded-full bg-rose-950/60 border border-rose-400/30 text-rose-300 text-xs tracking-wider">
+        <span class="px-3 py-1 rounded-xl bg-rose-950/60 border border-rose-400/30 text-rose-300 text-xs tracking-wider">
           OUR PRECIOUS MOMENTS
         </span>
-        <!-- เปลี่ยนข้อความตามสั่ง -->
         <h2 class="text-2xl sm:text-4xl font-serif-title font-bold text-white mt-2">
           เธอใส่รูปลงไป สิ แล้ว ✨
         </h2>
@@ -412,25 +564,24 @@
         </p>
       </div>
 
-      <!-- ปุ่มอัปโหลดรูปภาพ 5 รูป -->
+      <!-- ปุ่มอัปโหลดรูปภาพ 5 รูป ดีไซน์คลีนโมเดิร์น -->
       <div class="flex flex-col items-center gap-2 mb-8">
-        <label class="cursor-pointer px-6 py-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-sm sm:text-base font-medium shadow-[0_0_20px_rgba(244,63,94,0.4)] flex items-center gap-2.5 border border-rose-300/40 active:scale-95 transition-all">
-          <i class="fa-solid fa-images text-rose-200"></i>
-          <span>เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
+        <label class="clean-btn cursor-pointer">
+          <i class="fa-solid fa-images text-rose-300"></i>
+          <span class="btn-glow-text text-sm sm:text-base">เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
           <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
         </label>
         <span class="text-[11px] text-rose-300/70">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
       </div>
 
-      <!-- คอนเทนเนอร์ 5 รูป เด้งขึ้นมาทีละรูป -->
       <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10">
-        <!-- Render 5 Photos here -->
+        <!-- Render 5 Photos -->
       </div>
 
-      <!-- ปุ่ม: เปิดอ่านดูซิเบ้บ 💌 -->
-      <button onclick="handleTransitionToLetter(event)" class="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold text-lg shadow-[0_0_35px_rgba(244,63,94,0.6)] active:scale-95 transition-all flex items-center gap-3 border border-pink-300/50">
-        <span>เปิดอ่านดูซิเบ้บ</span>
-        <span class="text-xl animate-bounce">💌</span>
+      <!-- ปุ่ม: เปิดอ่านดูซิเบ้บ ดีไซน์คลีนโมเดิร์น -->
+      <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8">
+        <span class="btn-glow-text text-base sm:text-lg">เปิดอ่านดูซิเบ้บ</span>
+        <span class="text-xl">💌</span>
       </button>
     </section>
 
@@ -443,8 +594,8 @@
         <span class="text-xs text-rose-300 font-mono tracking-wide">ALEEN_NA_UNIVERSE // SYNCED</span>
       </div>
 
-      <!-- Code Terminal: นับ 1-1000% แบบหน่วงเวลานานๆ และพิมพ์โค้ด Pure Algorithm -->
-      <div class="w-full glass-card rounded-2xl overflow-hidden mb-8 border border-rose-500/35 shadow-2xl">
+      <!-- Code Terminal: นับ 1-1000% หน่วงเวลานานๆ -->
+      <div class="w-full glass-card overflow-hidden mb-8 border border-rose-500/35 shadow-2xl">
         <div class="bg-black/85 px-4 py-2.5 border-b border-rose-900/40 flex justify-between items-center">
           <div class="flex items-center gap-2">
             <span class="w-3 h-3 rounded-full bg-rose-500"></span>
@@ -452,44 +603,36 @@
             <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
             <span class="text-[11px] text-gray-400 font-mono ml-2">Anniversary_Aleen_Na.ts</span>
           </div>
-          <!-- เส้นวิ่งนับ 1-1000% หน่วงเวลานานๆ -->
           <div class="flex items-center gap-1.5 text-xs font-mono text-rose-300">
             <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i>
-            <span>Love Index: <strong id="love-val" class="text-rose-400 font-bold">1</strong>% / 1000%</span>
+            <span>Love Index: <strong id="love-val" class="text-rose-400 font-bold font-digital">1</strong>% / 1000%</span>
           </div>
         </div>
 
-        <div class="p-4 sm:p-5 font-mono-code text-xs sm:text-sm bg-black/70 text-gray-300 min-h-[170px] text-left leading-relaxed overflow-x-auto" id="terminal-content">
-          <!-- โค้ดพิมพ์อัตโนมัติ -->
-        </div>
+        <div class="p-4 sm:p-5 font-mono-code text-xs sm:text-sm bg-black/70 text-gray-300 min-h-[170px] text-left leading-relaxed overflow-x-auto" id="terminal-content"></div>
 
-        <!-- เส้นวิ่งความรัก -->
-        <div class="w-full bg-black/90 h-2.5 relative overflow-hidden">
+        <div class="w-full bg-black/90 h-2 relative overflow-hidden">
           <div id="love-bar" class="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-amber-300 transition-all duration-300" style="width: 1%;"></div>
         </div>
       </div>
 
-      <!-- กล่องจดหมายข้อความพิเศษจาก NA (สำหรับบันทึกโปสเตอร์) -->
-      <div id="poster-area" class="w-full glass-card rounded-3xl p-6 sm:p-8 text-left border border-rose-400/40 relative overflow-hidden shadow-2xl mb-6">
+      <!-- กล่องจดหมายพิเศษจาก NA TO ALEEN -->
+      <div id="poster-area" class="w-full glass-card p-6 sm:p-8 text-left border border-rose-400/40 relative overflow-hidden shadow-2xl mb-6">
         <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-rose-500/10 rounded-full blur-2xl pointer-events-none"></div>
         
-        <!-- ส่วนหัวจดหมาย ปรับตามสั่ง -->
         <div class="flex items-center justify-between border-b border-rose-900/40 pb-4 mb-5">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white text-base font-bold shadow-md">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white text-base font-bold shadow-md">
               NA
             </div>
             <div>
-              <!-- จาก NA TO ALEEN -->
               <h3 class="text-lg font-bold text-rose-100 tracking-wide">จาก NA TO ALEEN</h3>
-              <!-- 12 พฤศจิกายน 69 -->
               <p class="text-xs text-rose-300/80 font-mono mt-0.5">12 พฤศจิกายน 69</p>
             </div>
           </div>
           <span class="text-3xl animate-pulse">💌</span>
         </div>
 
-        <!-- เนื้อหาจดหมายครบถ้วน -->
         <div class="text-rose-100/90 text-sm sm:text-base leading-relaxed space-y-3.5 font-light text-justify">
           <p>
             เบ้บครับ ตอนนี้เราครบรอบ3เดือนแล้วนะ และมัน ก็จะเกิดขึ้น 4เดือน 5เดือน 6เดือน และทุกๆปีนับจากนี้ไปนะ
@@ -510,11 +653,11 @@
         </div>
       </div>
 
-      <!-- ปุ่มบันทึกโปสเตอร์ -->
+      <!-- ปุ่มบันทึกโปสเตอร์ ดีไซน์คลีนโมเดิร์น -->
       <div class="flex flex-col items-center gap-3 mb-10 w-full">
-        <button onclick="savePoster()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-pink-600 hover:from-amber-400 hover:to-rose-400 text-white font-medium text-sm sm:text-base shadow-[0_0_25px_rgba(251,113,133,0.5)] active:scale-95 transition-all flex items-center gap-2.5 border border-amber-300/30">
-          <i class="fa-solid fa-download"></i>
-          <span>บันทึกการ์ดความทรงจำเป็นโปสเตอร์ 🖼️</span>
+        <button onclick="savePoster()" class="clean-btn !py-3.5 !px-8">
+          <i class="fa-solid fa-download text-rose-300"></i>
+          <span class="btn-glow-text text-sm sm:text-base">บันทึกการ์ดความทรงจำเป็นโปสเตอร์ 🖼️</span>
         </button>
         <span id="save-status" class="text-xs text-rose-300 hidden">กำลังสร้างรูปภาพโปสเตอร์ความทรงจำ... ✨</span>
       </div>
@@ -529,7 +672,7 @@
 
   <!-- SCRIPT ENGINE -->
   <script>
-    /* 1. Timer Logic (12 สิงหาคม 2569 / 2026-08-12) */
+    /* 1. Timer Logic */
     const START_TIME = new Date('2026-08-12T00:00:00+07:00').getTime();
     function runTimer() {
       const now = new Date().getTime();
@@ -591,7 +734,6 @@
     document.body.appendChild(ytScript);
 
     window.onYouTubeIframeAPIReady = function() {
-      // เพลงที่ 1: เพลงเปิดตัว
       player1 = new YT.Player('yt-player-1', {
         height: '10',
         width: '10',
@@ -600,7 +742,6 @@
         events: { 'onStateChange': onAudioStateChange }
       });
 
-      // เพลงที่ 2: รักให้เธอได้รู้ PUN (1OMZrYHIim8) เริ่มที่ 48 วินาที
       player2 = new YT.Player('yt-player-2', {
         height: '10',
         width: '10',
@@ -700,7 +841,7 @@
       gotoScene('scene-lyrics', e);
     }
 
-    /* 6. Passcode Logic (รหัส 120869) */
+    /* 6. Passcode Logic */
     let inputPass = '';
     const correctCodes = ['120869', '12/08/69', '12082569'];
 
@@ -758,7 +899,7 @@
 
       photos.slice(0, 5).forEach((url, i) => {
         const card = document.createElement('div');
-        card.className = 'glass-card p-4 rounded-2xl flex flex-col items-center photo-fade-in group hover:-translate-y-1 transition-all duration-300';
+        card.className = 'glass-card p-4 flex flex-col items-center photo-fade-in group hover:-translate-y-1 transition-all duration-300';
         card.style.animationDelay = (i * 120) + 'ms';
         card.innerHTML = `
           <div class="w-full aspect-square rounded-xl overflow-hidden mb-3 border border-rose-500/20 bg-black/60">
@@ -804,7 +945,7 @@
       });
     }
 
-    /* 8. Terminal Typing: "สุขสันต์วันครบรอบนะครับ อลีน" + Pure Algorithmic Code */
+    /* 8. Terminal Typing & Slow 1-1000% */
     let terminalStarted = false;
     const pureCodeLines = [
       '// สุขสันต์วันครบรอบนะครับ อลีน',
@@ -849,7 +990,7 @@
       }
       addCodeLine();
 
-      // เส้นวิ่งนับ 1 ถึง 1000% หน่วงเวลานานๆ (ประมาณ 30 วินาที)
+      // เส้นวิ่งนับ 1 ถึง 1000% หน่วงเวลานานๆ
       let val = 1;
       const target = 1000;
       const bar = document.getElementById('love-bar');
@@ -863,10 +1004,10 @@
         }
         valText.innerText = val;
         bar.style.width = (val / 10) + '%';
-      }, 35); // หน่วงเวลา 35ms ต่อนับ 1 หน่วย
+      }, 40);
     }
 
-    /* 9. Poster Generation Logic */
+    /* 9. Poster Generation */
     function savePoster() {
       const target = document.getElementById('poster-area');
       const status = document.getElementById('save-status');

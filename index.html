@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Happy Anniversary ❤️ ALEEN & NA</title>
-  <!-- Google Fonts -->
+  <title>Happy Anniversary ALEEN ❤️</title>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Mitr:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- html2canvas สำหรับเซฟการ์ดเป็นภาพโปสเตอร์ -->
+  
+  <!-- html2canvas สำหรับเซฟโปสเตอร์ภาพ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -21,7 +25,7 @@
     }
     body {
       font-family: 'Mitr', sans-serif;
-      background-color: #07070d;
+      background-color: #06050a;
       color: #f1f5f9;
       min-height: 100vh;
       overflow-x: hidden;
@@ -31,30 +35,42 @@
     .font-mono-code { font-family: 'Fira Code', monospace; }
     .font-hand { font-family: 'Caveat', cursive, 'Mitr', sans-serif; }
 
-    /* Projector Light Beam */
-    .projector-beam {
+    /* Projector Light Beam Effect */
+    .projector-lens {
       position: fixed;
-      top: -150px;
+      top: -160px;
       left: 50%;
       transform: translateX(-50%);
       width: 140vw;
       height: 120vh;
-      background: radial-gradient(ellipse at 50% 0%, rgba(254, 205, 211, 0.16) 0%, rgba(244, 63, 94, 0.08) 35%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(254, 205, 211, 0.22) 0%, rgba(244, 63, 94, 0.1) 32%, transparent 70%);
       pointer-events: none !important;
       z-index: 1;
-      filter: blur(20px);
-      animation: beamPulse 5s ease-in-out infinite alternate;
+      filter: blur(22px);
+      animation: projectorFlicker 6s infinite alternate ease-in-out;
     }
-    @keyframes beamPulse {
-      0% { opacity: 0.7; transform: translateX(-50%) scale(0.98); }
-      100% { opacity: 1; transform: translateX(-50%) scale(1.02); }
+    @keyframes projectorFlicker {
+      0% { opacity: 0.75; transform: translateX(-50%) scale(0.98); }
+      50% { opacity: 0.95; transform: translateX(-50%) scale(1.02); }
+      100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
     }
 
-    /* Curtain System */
+    /* Dust particles on film */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 0);
+      background-size: 28px 28px;
+      opacity: 0.22;
+      pointer-events: none !important;
+      z-index: 2;
+    }
+
+    /* Electronic Curtain */
     #curtain-container {
       position: fixed;
       inset: 0;
-      z-index: 90;
+      z-index: 80;
       display: flex;
       pointer-events: none;
       transition: opacity 1s ease 1.5s;
@@ -62,8 +78,8 @@
     .curtain-panel {
       flex: 1;
       height: 100%;
-      background: linear-gradient(135deg, #180509 0%, #3f0914 40%, #150307 100%);
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+      background: linear-gradient(135deg, #130408 0%, #360712 40%, #100205 100%);
+      box-shadow: inset 0 0 70px rgba(0,0,0,0.95);
       position: relative;
       transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
     }
@@ -71,40 +87,84 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(255, 180, 200, 0.04) 25px, rgba(0, 0, 0, 0.3) 50px);
+      background: repeating-linear-gradient(90deg, transparent, transparent 25px, rgba(255, 180, 200, 0.04) 25px, rgba(0, 0, 0, 0.35) 50px);
     }
     .curtain-open .curtain-left { transform: translateX(-100%); }
     .curtain-open .curtain-right { transform: translateX(100%); }
 
-    #curtain-launch-screen {
+    /* Screen 0: Projector Opening Screen */
+    #projector-intro-screen {
       position: fixed;
       inset: 0;
       z-index: 95;
-      background: rgba(7, 7, 13, 0.85);
-      backdrop-filter: blur(8px);
+      background: radial-gradient(circle at center, #1b0712 0%, #080308 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.9s ease;
+      padding: 20px;
+      text-align: center;
     }
 
+    /* Shiny Projector Text Animation */
+    .shining-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #fff 0%, #fbcfe8 25%, #f43f5e 50%, #fbcfe8 75%, #fff 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shineGlow 3.5s linear infinite, glowPulse 2s ease-in-out infinite alternate;
+      line-height: 1.3;
+    }
+    @media (min-width: 640px) {
+      .shining-title { font-size: 3.8rem; }
+    }
+    @keyframes shineGlow {
+      to { background-position: 200% center; }
+    }
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 20px rgba(244, 63, 94, 0.5); }
+      100% { text-shadow: 0 0 45px rgba(251, 113, 133, 0.9), 0 0 70px rgba(244, 63, 94, 0.6); }
+    }
+
+    .projector-lens-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid rgba(251, 113, 133, 0.6);
+      box-shadow: 0 0 30px rgba(244, 63, 94, 0.7), inset 0 0 25px rgba(244, 63, 94, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: spinLens 12s linear infinite;
+    }
+    @keyframes spinLens {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Glassmorphism Cards */
     .glass-card {
-      background: rgba(22, 16, 29, 0.82);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(244, 114, 182, 0.25);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(244, 63, 94, 0.15);
+      background: rgba(20, 14, 26, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(244, 114, 182, 0.22);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(244, 63, 94, 0.12);
     }
 
+    /* Keypad */
     .keypad-btn {
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(244, 114, 182, 0.25);
+      border: 1px solid rgba(244, 114, 182, 0.22);
       color: #fce7f3;
       font-size: 1.35rem;
       font-weight: 500;
       padding: 0.85rem 0;
-      border-radius: 1rem;
+      border-radius: 1.1rem;
       transition: all 0.15s ease;
       cursor: pointer;
     }
@@ -113,18 +173,20 @@
       background: rgba(244, 63, 94, 0.4);
     }
 
+    /* Floating Popups */
     .float-emoji {
       position: fixed;
       pointer-events: none !important;
-      z-index: 9999;
-      font-size: 30px;
+      z-index: 99999;
+      font-size: 32px;
       animation: floatUp 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
     @keyframes floatUp {
       0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
-      100% { opacity: 0; transform: translate(var(--tx), -120px) scale(1.4) rotate(var(--rot)); }
+      100% { opacity: 0; transform: translate(var(--tx), -130px) scale(1.4) rotate(var(--rot)); }
     }
 
+    /* Vinyl Player */
     @keyframes spinVinyl {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -132,9 +194,10 @@
     .spin-vinyl { animation: spinVinyl 6s linear infinite; }
     .spin-paused { animation-play-state: paused; }
 
+    /* Equalizer */
     @keyframes eqWave {
       0%, 100% { height: 4px; }
-      50% { height: 20px; }
+      50% { height: 18px; }
     }
     .eq-bar {
       width: 3px;
@@ -145,29 +208,20 @@
     .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #fb7185; }
     .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #fda4af; }
 
+    /* Photo Pop-in Animation */
+    .photo-fade-in {
+      animation: photoPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes photoPop {
+      0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
     .shake-box { animation: shake 0.4s ease-in-out; }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-8px); }
       40%, 80% { transform: translateX(8px); }
-    }
-
-    .lyric-line {
-      padding: 0.6rem 0.9rem;
-      border-radius: 0.9rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      color: rgba(253, 226, 236, 0.4);
-    }
-    .lyric-line.active {
-      color: #ffffff;
-      font-weight: 600;
-      background: rgba(244, 63, 94, 0.32);
-      border: 1px solid rgba(244, 114, 182, 0.6);
-      transform: scale(1.02);
-      text-shadow: 0 0 15px rgba(244, 63, 94, 0.8);
     }
 
     #yt-hidden-wrap {
@@ -183,35 +237,52 @@
 </head>
 <body class="flex flex-col justify-between min-h-screen">
 
-  <div class="projector-beam"></div>
+  <!-- Atmospheric Lightings -->
+  <div class="projector-lens"></div>
+  <div class="film-grain"></div>
 
-  <!-- Hidden YouTube Audio Engines -->
+  <!-- YouTube Audio Engines -->
   <div id="yt-hidden-wrap">
     <div id="yt-player-1"></div>
     <div id="yt-player-2"></div>
   </div>
 
-  <!-- Theater Curtains -->
+  <!-- Curtain System -->
   <div id="curtain-container">
     <div class="curtain-panel curtain-left"></div>
     <div class="curtain-panel curtain-right"></div>
   </div>
 
-  <!-- Open Curtains Launch Screen -->
-  <div id="curtain-launch-screen">
-    <button onclick="startExperience(event)" class="px-8 py-4 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white rounded-full font-medium text-lg tracking-wider shadow-[0_0_35px_rgba(244,63,94,0.7)] transform active:scale-95 transition-all flex items-center gap-3 border border-rose-300/40">
-      <i class="fa-solid fa-film text-xl text-rose-200"></i>
-      <span>เปิดม่านฉายความทรงจำ</span>
-      <span class="animate-ping text-sm">✨</span>
-    </button>
-    <p class="text-rose-200/70 text-sm mt-4 tracking-wider flex items-center gap-2">
-      <i class="fa-solid fa-volume-high"></i> แตะเพื่อเปิดเสียงเพลง & รับชมบรรยากาศ
+  <!-- Screen 0: Projector Intro Overlay -->
+  <div id="projector-intro-screen">
+    <div class="projector-lens-ring">
+      <i class="fa-solid fa-compact-disc text-3xl text-rose-300 animate-spin"></i>
+    </div>
+    
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs tracking-widest uppercase mb-4 shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+      <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+      PROJECTOR INITIALIZING
+    </div>
+
+    <!-- ข้อความเรืองแสงตามบรีฟ -->
+    <h1 class="shining-title font-serif-title mb-6 px-2">
+      Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
+    </h1>
+
+    <p class="text-rose-200/80 text-sm sm:text-base font-light mb-8 max-w-md">
+      แสงจากโปรเจกเตอร์กำลังฉายเรื่องราวที่งดงามที่สุดของเรา...
     </p>
+
+    <!-- ปุ่มเปิดดูข้างในสิ -->
+    <button onclick="startExperience(event)" class="px-9 py-4 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white rounded-full font-semibold text-lg tracking-wider shadow-[0_0_40px_rgba(244,63,94,0.8)] transform active:scale-95 transition-all flex items-center gap-3 border border-rose-300/50">
+      <span>เปิดดูข้างในสิ</span>
+      <span class="text-xl animate-bounce">🎬</span>
+    </button>
   </div>
 
-  <!-- Floating Music Pill -->
+  <!-- Mini Floating Music Pill -->
   <header class="fixed top-4 right-4 z-40">
-    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/70 backdrop-blur-md border border-rose-500/30 rounded-full shadow-lg cursor-pointer">
+    <div id="music-pill" onclick="toggleMusic(event)" class="flex items-center gap-2.5 px-4 py-2 bg-black/75 backdrop-blur-md border border-rose-500/30 rounded-full shadow-lg cursor-pointer">
       <div id="vinyl-disc" class="w-7 h-7 rounded-full bg-rose-950 border border-rose-400 flex items-center justify-center spin-vinyl spin-paused">
         <div class="w-2 h-2 rounded-full bg-rose-300"></div>
       </div>
@@ -228,17 +299,18 @@
     </div>
   </header>
 
-  <!-- Main Views Container -->
+  <!-- Main Containers -->
   <main class="flex-grow flex items-center justify-center px-4 py-16 z-20 w-full max-w-4xl mx-auto">
 
-    <!-- SCENE 1: ANNIVERSARY TIMER -->
+    <!-- ================= SCENE 1: ANNIVERSARY TIMER ================= -->
     <section id="scene-counter" class="w-full flex flex-col items-center text-center">
       <div class="mb-6">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/40 border border-rose-500/30 text-rose-300 text-xs tracking-widest uppercase mb-4">
-          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-          Now Projecting Our Love Story
+        <!-- เปลี่ยนตามสั่ง: หวังว่าเบ้บคงชอบมันนะ🥹💕 -->
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-rose-950/60 border border-rose-500/40 text-rose-200 text-sm sm:text-base font-medium mb-5 shadow-[0_0_20px_rgba(244,63,94,0.3)]">
+          <span>หวังว่าเบ้บคงชอบมันนะ🥹💕</span>
         </div>
-        <h1 class="font-serif-title text-3xl sm:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-200 via-rose-300 to-rose-400 leading-tight">
+
+        <h1 class="font-serif-title text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-200 via-rose-300 to-rose-400 leading-tight">
           Happy Anniversary ❤️<br>ALEEN & NA
         </h1>
         <p class="text-rose-200/90 text-base sm:text-lg font-light mt-3 flex items-center justify-center gap-2">
@@ -248,11 +320,12 @@
         </p>
       </div>
 
-      <div class="mb-8 px-5 py-2 bg-gradient-to-r from-rose-950/60 via-pink-950/50 to-rose-950/60 rounded-2xl border border-rose-400/20 text-rose-200 text-sm sm:text-base">
-        ✨ ครบรอบ <span class="text-rose-300 font-bold text-lg">3 เดือนเต็ม</span> แห่งความสุข (12 พฤศจิกายน) ✨
+      <!-- เปลี่ยนตามสั่ง: 3 เดือนแล้วนะ เบ้บ 12/08/69 -->
+      <div class="mb-8 px-6 py-2.5 bg-gradient-to-r from-rose-950/70 via-pink-950/60 to-rose-950/70 rounded-2xl border border-rose-400/30 text-rose-200 text-sm sm:text-base font-medium shadow-inner">
+        ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-rose-300 font-bold text-lg font-mono">12/08/69</span> ✨
       </div>
 
-      <!-- Modern Glass Timer -->
+      <!-- Glass Timer -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-10">
         <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col items-center">
           <span id="c-days" class="text-3xl sm:text-5xl font-bold text-white font-serif-title">00</span>
@@ -272,26 +345,27 @@
         </div>
       </div>
 
-      <button onclick="gotoScene('scene-passcode', event)" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium text-lg shadow-[0_4px_25px_rgba(244,63,94,0.4)] active:scale-95 transition-all flex items-center gap-3">
+      <button onclick="gotoScene('scene-passcode', event)" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium text-lg shadow-[0_4px_25px_rgba(244,63,94,0.4)] active:scale-95 transition-all flex items-center gap-3 border border-rose-300/30">
         <span>ถัดไป</span>
         <i class="fa-solid fa-arrow-right text-sm"></i>
       </button>
     </section>
 
-    <!-- SCENE 2: PASSCODE -->
+    <!-- ================= SCENE 2: PASSCODE (120869) ================= -->
     <section id="scene-passcode" class="w-full max-w-md hidden flex-col items-center text-center">
       <div id="passcode-card" class="glass-card w-full p-6 sm:p-8 rounded-3xl">
-        <div class="w-14 h-14 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl">
+        <div class="w-14 h-14 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center mx-auto mb-4 text-rose-400 text-2xl shadow-[0_0_20px_rgba(244,63,94,0.3)]">
           <i class="fa-solid fa-lock"></i>
         </div>
-        <h2 class="text-2xl font-semibold text-rose-100 mb-1">ใส่รหัสผ่านความทรงจำ</h2>
+
+        <!-- เปลี่ยนข้อความตามสั่ง และไม่โชว์รหัสบนหน้าต่าง -->
+        <h2 class="text-2xl font-semibold text-rose-100 mb-1">กรุณาใส่วันครบรอบจ๊ะ</h2>
         <p class="text-xs sm:text-sm text-rose-200/80 mb-5 leading-relaxed">
-          วันที่เรื่องราวของเราเริ่มต้นขึ้น... ✨<br>
-          <span class="text-rose-300 font-mono text-xs">Hint: วันที่คบกัน เช่น 12/09/68 หรือ 120968</span>
+          วันที่เรื่องราวของเราเริ่มต้นขึ้น ✨
         </p>
 
-        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/60 border-2 border-rose-500/40 rounded-2xl text-rose-200 mb-2 focus:outline-none">
-        <div id="pass-error" class="text-xs text-rose-400 mb-4 hidden">รหัสไม่ถูกต้อง ลองนึกถึงวันที่ 12/09/68 อีกทีนะ ❤️</div>
+        <input type="text" id="pass-display" readonly placeholder="• • • • • •" class="w-full text-center text-2xl tracking-[0.3em] font-mono py-3 px-4 bg-black/60 border-2 border-rose-500/40 rounded-2xl text-rose-200 mb-2 focus:outline-none shadow-inner">
+        <div id="pass-error" class="text-xs text-rose-400 mb-4 hidden">รหัสผ่านยังไม่ถูกต้อง ลองใหม่อีกครั้งนะที่รัก ❤️</div>
 
         <!-- Keypad -->
         <div class="grid grid-cols-3 gap-2.5 mb-4">
@@ -309,128 +383,136 @@
           <button onclick="backKey(event)" class="keypad-btn text-rose-400"><i class="fa-solid fa-delete-left"></i></button>
         </div>
 
-        <div class="flex items-center justify-between text-xs text-gray-400 pt-2 border-t border-rose-900/30">
+        <div class="flex items-center justify-between text-xs text-gray-400 pt-3 border-t border-rose-900/40">
           <button onclick="gotoScene('scene-counter', event)" class="hover:text-rose-300 flex items-center gap-1">
             <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
           </button>
-          <button onclick="checkPasscode(event)" class="text-rose-200 bg-rose-600 px-4 py-1.5 rounded-full font-medium">
-            ปลดล็อก <i class="fa-solid fa-key"></i>
+          
+          <!-- เปลี่ยนปุ่มปลดล็อกเป็นรูปหัวใจ ❤️ -->
+          <button onclick="checkPasscode(event)" class="px-5 py-2 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 text-white text-base shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border border-rose-300/40">
+            <span>ปลดล็อก</span>
+            <i class="fa-solid fa-heart text-white animate-pulse"></i>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- SCENE 3: PHOTO GALLERY -->
+    <!-- ================= SCENE 3: PHOTO GALLERY (5 รูป) ================= -->
     <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
       <div class="text-center mb-6">
-        <span class="px-3 py-1 rounded-full bg-rose-950/50 border border-rose-400/30 text-rose-300 text-xs">OUR MEMORIES</span>
-        <h2 class="text-2xl sm:text-4xl font-serif-title font-bold text-white mt-2">กล่องเก็บภาพความทรงจำของเรา 📸</h2>
-        <p class="text-rose-200/70 text-xs sm:text-sm mt-1">รูปที่ใส่ไว้จะถูกบันทึกไว้ในเครื่องนี้อย่างถาวร!</p>
+        <span class="px-3 py-1 rounded-full bg-rose-950/60 border border-rose-400/30 text-rose-300 text-xs tracking-wider">
+          OUR PRECIOUS MOMENTS
+        </span>
+        <!-- เปลี่ยนข้อความตามสั่ง -->
+        <h2 class="text-2xl sm:text-4xl font-serif-title font-bold text-white mt-2">
+          เธอใส่รูปลงไป สิ แล้ว ✨
+        </h2>
+        <p class="text-rose-200/70 text-xs sm:text-sm mt-1">
+          ภาพความทรงจำจะถูกบันทึกไว้ในความทรงจำนี้ตลอดไป
+        </p>
       </div>
 
-      <div class="flex items-center gap-3 mb-8">
-        <label class="cursor-pointer px-5 py-2.5 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-sm font-medium shadow-md flex items-center gap-2">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-          <span>เพิ่มรูปภาพคู่ของเรา</span>
-          <input type="file" id="photo-upload" accept="image/*" class="hidden" onchange="uploadImage(event)">
+      <!-- ปุ่มอัปโหลดรูปภาพ 5 รูป -->
+      <div class="flex flex-col items-center gap-2 mb-8">
+        <label class="cursor-pointer px-6 py-3 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-sm sm:text-base font-medium shadow-[0_0_20px_rgba(244,63,94,0.4)] flex items-center gap-2.5 border border-rose-300/40 active:scale-95 transition-all">
+          <i class="fa-solid fa-images text-rose-200"></i>
+          <span>เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
+          <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
         </label>
+        <span class="text-[11px] text-rose-300/70">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
       </div>
 
+      <!-- คอนเทนเนอร์ 5 รูป เด้งขึ้นมาทีละรูป -->
       <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10">
-        <!-- Photo Cards -->
+        <!-- Render 5 Photos here -->
       </div>
 
-      <!-- ปุ่มเปลี่ยนชื่อตามบรีฟ: เปิดอ่านดูซิเบ้บ -->
-      <button onclick="handleTransitionToLetter(event)" class="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold text-lg shadow-[0_0_30px_rgba(244,63,94,0.6)] active:scale-95 transition-all flex items-center gap-3 border border-pink-300/40">
+      <!-- ปุ่ม: เปิดอ่านดูซิเบ้บ 💌 -->
+      <button onclick="handleTransitionToLetter(event)" class="px-10 py-4 rounded-full bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold text-lg shadow-[0_0_35px_rgba(244,63,94,0.6)] active:scale-95 transition-all flex items-center gap-3 border border-pink-300/50">
         <span>เปิดอ่านดูซิเบ้บ</span>
-        <span class="animate-bounce">💌</span>
+        <span class="text-xl animate-bounce">💌</span>
       </button>
     </section>
 
-    <!-- SCENE 4: CODE TERMINAL, SYNC LYRICS & SPECIAL LETTER FROM NA -->
+    <!-- ================= SCENE 4: CODE TERMINAL & SPECIAL LETTER ================= -->
     <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
         <button onclick="gotoScene('scene-gallery', event)" class="text-rose-300 text-xs hover:text-white flex items-center gap-1.5">
           <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรูป
         </button>
-        <span class="text-xs text-rose-300 font-mono">ALEEN_NA_CORE // CONNECTED</span>
+        <span class="text-xs text-rose-300 font-mono tracking-wide">ALEEN_NA_UNIVERSE // SYNCED</span>
       </div>
 
-      <!-- Code Terminal of Love -->
-      <div class="w-full glass-card rounded-2xl overflow-hidden mb-6">
-        <div class="bg-black/80 px-4 py-2 border-b border-rose-900/40 flex justify-between items-center">
-          <div class="flex gap-1.5">
+      <!-- Code Terminal: นับ 1-1000% แบบหน่วงเวลานานๆ และพิมพ์โค้ด Pure Algorithm -->
+      <div class="w-full glass-card rounded-2xl overflow-hidden mb-8 border border-rose-500/35 shadow-2xl">
+        <div class="bg-black/85 px-4 py-2.5 border-b border-rose-900/40 flex justify-between items-center">
+          <div class="flex items-center gap-2">
             <span class="w-3 h-3 rounded-full bg-rose-500"></span>
             <span class="w-3 h-3 rounded-full bg-amber-500"></span>
             <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span class="text-[11px] text-gray-400 font-mono ml-2">รักให้เธอได้รู้_PUN.cpp</span>
+            <span class="text-[11px] text-gray-400 font-mono ml-2">Anniversary_Aleen_Na.ts</span>
           </div>
-          <span class="text-xs font-mono text-rose-300">Love Index: <strong id="love-val" class="text-rose-400">1%</strong></span>
+          <!-- เส้นวิ่งนับ 1-1000% หน่วงเวลานานๆ -->
+          <div class="flex items-center gap-1.5 text-xs font-mono text-rose-300">
+            <i class="fa-solid fa-heart text-rose-500 animate-pulse"></i>
+            <span>Love Index: <strong id="love-val" class="text-rose-400 font-bold">1</strong>% / 1000%</span>
+          </div>
         </div>
-        <div class="p-4 font-mono-code text-xs sm:text-sm bg-black/60 text-gray-300 min-h-[130px] text-left" id="terminal-content"></div>
-        <div class="w-full bg-black h-2">
-          <div id="love-bar" class="h-full bg-gradient-to-r from-rose-600 to-amber-400" style="width: 1%;"></div>
+
+        <div class="p-4 sm:p-5 font-mono-code text-xs sm:text-sm bg-black/70 text-gray-300 min-h-[170px] text-left leading-relaxed overflow-x-auto" id="terminal-content">
+          <!-- โค้ดพิมพ์อัตโนมัติ -->
+        </div>
+
+        <!-- เส้นวิ่งความรัก -->
+        <div class="w-full bg-black/90 h-2.5 relative overflow-hidden">
+          <div id="love-bar" class="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-amber-300 transition-all duration-300" style="width: 1%;"></div>
         </div>
       </div>
 
-      <!-- Synchronized Karaoke Lyrics (ขยับขึ้นด้านบน) -->
-      <div class="w-full glass-card rounded-3xl p-5 sm:p-6 text-center border border-rose-500/40 mb-8">
-        <div class="text-rose-300 text-xs uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
-          <i class="fa-solid fa-music"></i>
-          <span>ท่อนฮุกซิงค์เสียงร้อง // รักให้เธอได้รู้ - PUN</span>
-          <i class="fa-solid fa-music"></i>
-        </div>
-
-        <div id="lyrics-wrap" class="flex flex-col gap-2.5 my-1 max-h-[220px] overflow-y-auto px-1">
-          <!-- Lyrics lines -->
-        </div>
-
-        <div class="mt-3 pt-2 border-t border-rose-900/30 flex justify-between items-center text-xs text-gray-400">
-          <span id="player-time-tag" class="font-mono text-rose-300">0:48</span>
-          <span class="text-[11px] text-rose-300/70">✨ ท่อนฮุกที่คุณเลือก</span>
-        </div>
-      </div>
-
-      <!-- กล่องจดหมายข้อความพิเศษจาก NA (สำหรับเซฟเป็นโปสเตอร์) -->
+      <!-- กล่องจดหมายข้อความพิเศษจาก NA (สำหรับบันทึกโปสเตอร์) -->
       <div id="poster-area" class="w-full glass-card rounded-3xl p-6 sm:p-8 text-left border border-rose-400/40 relative overflow-hidden shadow-2xl mb-6">
-        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-rose-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-rose-500/10 rounded-full blur-2xl pointer-events-none"></div>
         
+        <!-- ส่วนหัวจดหมาย ปรับตามสั่ง -->
         <div class="flex items-center justify-between border-b border-rose-900/40 pb-4 mb-5">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white text-lg font-bold shadow-md">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 flex items-center justify-center text-white text-base font-bold shadow-md">
               NA
             </div>
             <div>
-              <h3 class="text-base sm:text-lg font-semibold text-rose-100">ข้อความจาก NA ถึง อลีน ❤️</h3>
-              <p class="text-[11px] text-rose-300/70 font-mono">12 พฤศจิกายน ครบรอบ 3 เดือนเต็ม</p>
+              <!-- จาก NA TO ALEEN -->
+              <h3 class="text-lg font-bold text-rose-100 tracking-wide">จาก NA TO ALEEN</h3>
+              <!-- 12 พฤศจิกายน 69 -->
+              <p class="text-xs text-rose-300/80 font-mono mt-0.5">12 พฤศจิกายน 69</p>
             </div>
           </div>
-          <span class="text-2xl animate-pulse">💌</span>
+          <span class="text-3xl animate-pulse">💌</span>
         </div>
 
-        <div class="text-rose-100/90 text-sm sm:text-base leading-relaxed space-y-3 font-light text-justify">
+        <!-- เนื้อหาจดหมายครบถ้วน -->
+        <div class="text-rose-100/90 text-sm sm:text-base leading-relaxed space-y-3.5 font-light text-justify">
           <p>
-            เบ้บครับ ตอนนี้เราครบรอบ 3 เดือนแล้วนะ และมันก็จะเกิดขึ้น 4 เดือน 5 เดือน 6 เดือน และทุกๆ ปีนับจากนี้ไปนะ
+            เบ้บครับ ตอนนี้เราครบรอบ3เดือนแล้วนะ และมัน ก็จะเกิดขึ้น 4เดือน 5เดือน 6เดือน และทุกๆปีนับจากนี้ไปนะ
           </p>
           <p>
-            เราต่างเข้ามารู้จักกัน ได้เรียนรู้กันหลายอย่างนะ ถึงแม้อายุเราต่างกันไม่กี่ปี แต่มันก็ไม่ใช่อุปสรรคอะไรเลย เราสามารถเรียนรู้ด้วยกันได้ และจับมือผ่านไปด้วยกันทุกอย่าง ลองย้อนคิดความหลังที่ผ่านมาสิ เราผ่านมันมาได้เยอะมากๆ ทั้งสุขทุกข์ ร้องไห้ด้วยกัน ยิ้มด้วยกัน
+            เราต่างเข้ามารู้ จักกัน ได้เรียนรู้กันหลายอย่างนะ ถึงแม้อายุ เราต่างกันไม่กี่ปี แต่มันก็ไม่ใช่อุปสรรคอะไรเลยเราสามารถเรียนรู้ด้วยกันได้ และ จับมือผ่านไปด้วยกันทุกอย่างลองย้อนคิดความหลังที่ผ่านมาสิ เราผ่านมันมาได้ เยอะมากๆ ทั้งสุขทุกข์ ร้องให้ด้วยกัน ยิ้มด้วยกัน
           </p>
           <p>
-            ต่อไปนี้ เราจะคอยช่วยเติมเต็ม สร้างอนาคตเราสองคนเดินไปด้วยกัน อย่าเพิ่งเบื่อกันก่อน เรายังมีอะไรอีกเยอะที่ยังไม่ได้ทำด้วยกันนะ เค้าก็ขอโทษเบ้บ บางทีเค้าก็เหวี่ยงหงุดหงิดใส่เบ้บบ่อยๆ เค้าจะปรับปรุงนิสัยนะ อิอิ
+            ต่อไปนี้ เราจะคอยช่วยเติมเต็ม สร้างอนาคตเราสองคนเดินไปด้วยกัน อย่าเพิ่ง เบื่อกันก่อน เรายังมีอะไรอีกเยอะที่ยังไม่ได้ทำด้วยกันนะ เค้าก็ขอโทษเบ้บ บางทีเค้าก็ เหวี่ยงหงุดหงิดใส่เบ้บ บ่อยๆ เค้าจะปรับปรุงนิสัย นะอิอิ
           </p>
           <p>
-            ส่วนเธอก็ตั้งใจเรียน จบมาเธอจะมีเค้าในเฟรมภาพด้วย อย่าลืม ^^ วันครบรอบก็ไม่ได้มีอะไรเยอะ เดี๋ยวไว้เราไปทานข้าวทำกิจกรรมด้วยกันย้อนหลังนะ
+            ส่วนเธอก็ตั้งใจเรียน จบมาเธอจะมีเค้าในเฟรมภาพด้วย อย่าลืม ^^ วันครบรอบก็ไม่ได้มีอะไรเยอะ เดี่ยวไว้เราไปทานข้าวทำกิจกรรมด้วยกันย้อนหลังนะ
           </p>
-          <p class="text-right pt-3 font-semibold text-rose-300 text-base sm:text-lg font-hand">
+          <p class="text-right pt-4 font-semibold text-rose-300 text-base sm:text-lg font-hand">
             สุขสันต์วันครบรอบครับเบ้บ รักอลีนนะ<br>
             <span class="text-white text-xl">จาก NA. ❤️</span>
           </p>
         </div>
       </div>
 
-      <!-- ปุ่มเซฟบันทึกโปสเตอร์ -->
+      <!-- ปุ่มบันทึกโปสเตอร์ -->
       <div class="flex flex-col items-center gap-3 mb-10 w-full">
-        <button onclick="savePoster()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-pink-600 hover:from-amber-400 hover:to-rose-400 text-white font-medium text-sm sm:text-base shadow-[0_0_25px_rgba(251,113,133,0.5)] active:scale-95 transition-all flex items-center gap-2.5">
+        <button onclick="savePoster()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-pink-600 hover:from-amber-400 hover:to-rose-400 text-white font-medium text-sm sm:text-base shadow-[0_0_25px_rgba(251,113,133,0.5)] active:scale-95 transition-all flex items-center gap-2.5 border border-amber-300/30">
           <i class="fa-solid fa-download"></i>
           <span>บันทึกการ์ดความทรงจำเป็นโปสเตอร์ 🖼️</span>
         </button>
@@ -447,7 +529,7 @@
 
   <!-- SCRIPT ENGINE -->
   <script>
-    /* 1. Timer Logic */
+    /* 1. Timer Logic (12 สิงหาคม 2569 / 2026-08-12) */
     const START_TIME = new Date('2026-08-12T00:00:00+07:00').getTime();
     function runTimer() {
       const now = new Date().getTime();
@@ -456,8 +538,8 @@
 
       const d = Math.floor(diff / (1000 * 60 * 60 * 24));
       const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
+      const m = Math.floor((diff % (1000 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % 1000) / 1000);
 
       const pad = (n) => String(n).padStart(2, '0');
       document.getElementById('c-days').innerText = pad(d);
@@ -468,15 +550,15 @@
     setInterval(runTimer, 1000);
     runTimer();
 
-    /* 2. Floating Emojis */
+    /* 2. Floating Popups */
     const emojis = ['❤️', '💖', '🌸', '🐱', '✨', '🐾', '💐', '💌'];
     function popEmoji(x, y) {
       const el = document.createElement('div');
       el.className = 'float-emoji';
       el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.left = (x - 15) + 'px';
-      el.style.top = (y - 15) + 'px';
-      el.style.setProperty('--tx', (Math.random() * 80 - 40) + 'px');
+      el.style.left = (x - 16) + 'px';
+      el.style.top = (y - 16) + 'px';
+      el.style.setProperty('--tx', (Math.random() * 90 - 45) + 'px');
       el.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1200);
@@ -484,21 +566,21 @@
 
     /* 3. Curtain & Start */
     function startExperience(e) {
-      const screen = document.getElementById('curtain-launch-screen');
+      const screen = document.getElementById('projector-intro-screen');
       screen.style.opacity = '0';
-      setTimeout(() => screen.remove(), 800);
+      setTimeout(() => screen.remove(), 900);
 
       document.getElementById('curtain-container').classList.add('curtain-open');
       playTrack1();
 
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 20; i++) {
         setTimeout(() => {
-          popEmoji(window.innerWidth * 0.2 + Math.random() * (window.innerWidth * 0.6), window.innerHeight * 0.5);
-        }, i * 60);
+          popEmoji(window.innerWidth * 0.2 + Math.random() * (window.innerWidth * 0.6), window.innerHeight * 0.45);
+        }, i * 50);
       }
     }
 
-    /* 4. Dual YouTube Audio Engine with Crossfade */
+    /* 4. Dual YouTube Audio Engine with Smooth Crossfade */
     let player1 = null;
     let player2 = null;
     let activePlayer = 1;
@@ -509,7 +591,7 @@
     document.body.appendChild(ytScript);
 
     window.onYouTubeIframeAPIReady = function() {
-      // เพลงที่ 1: OYPiXBIgvJ8 (เพลงเปิดม่าน)
+      // เพลงที่ 1: เพลงเปิดตัว
       player1 = new YT.Player('yt-player-1', {
         height: '10',
         width: '10',
@@ -518,7 +600,7 @@
         events: { 'onStateChange': onAudioStateChange }
       });
 
-      // เพลงที่ 2: 1OMZrYHIim8 (รักให้เธอได้รู้ - ท่อนฮุก เริ่มที่ 48 วินาที)
+      // เพลงที่ 2: รักให้เธอได้รู้ PUN (1OMZrYHIim8) เริ่มที่ 48 วินาที
       player2 = new YT.Player('yt-player-2', {
         height: '10',
         width: '10',
@@ -550,23 +632,22 @@
       }
     }
 
-    // ฟังก์ชัน Crossfade สลับเพลงอย่างนุ่มนวล
     function transitionToTrack2() {
       activePlayer = 2;
       let vol = 100;
       const fadeOut = setInterval(() => {
-        vol -= 15;
+        vol -= 12;
         if (vol <= 0) {
           clearInterval(fadeOut);
           if (player1 && typeof player1.pauseVideo === 'function') player1.pauseVideo();
         } else {
           if (player1 && typeof player1.setVolume === 'function') player1.setVolume(vol);
         }
-      }, 100);
+      }, 90);
 
       setTimeout(() => {
         if (player2 && typeof player2.seekTo === 'function') {
-          player2.seekTo(48, true); // กระโดดเข้าท่อนฮุก 48 วินาที
+          player2.seekTo(48, true);
           player2.setVolume(0);
           player2.playVideo();
           let inVol = 0;
@@ -578,7 +659,7 @@
             } else {
               player2.setVolume(inVol);
             }
-          }, 120);
+          }, 100);
         }
       }, 400);
     }
@@ -609,7 +690,6 @@
       if (sceneId === 'scene-gallery') loadGallery();
       if (sceneId === 'scene-lyrics') {
         runTerminal();
-        renderLyrics();
       }
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
@@ -620,9 +700,9 @@
       gotoScene('scene-lyrics', e);
     }
 
-    /* 6. Passcode Keypad */
+    /* 6. Passcode Logic (รหัส 120869) */
     let inputPass = '';
-    const correctCodes = ['120968', '12/09/68', '12092568'];
+    const correctCodes = ['120869', '12/08/69', '12082569'];
 
     function tapKey(k, e) {
       if (inputPass.length < 8) inputPass += k;
@@ -645,7 +725,7 @@
       const clean = inputPass.replace(/\D/g, '');
       if (correctCodes.includes(clean) || correctCodes.includes(inputPass)) {
         document.getElementById('pass-error').classList.add('hidden');
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
           setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight / 2), i * 35);
         }
         setTimeout(() => gotoScene('scene-gallery', e), 400);
@@ -658,66 +738,92 @@
       }
     }
 
-    /* 7. Gallery System */
-    const DEFAULT_IMGS = [
+    /* 7. Gallery 5 Photos System */
+    const DEFAULT_5_PHOTOS = [
       'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80'
+      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'
     ];
 
     function loadGallery() {
       const container = document.getElementById('photos-container');
       container.innerHTML = '';
-      let photos = DEFAULT_IMGS;
-      const saved = localStorage.getItem('anniv_photos');
+      let photos = DEFAULT_5_PHOTOS;
+      const saved = localStorage.getItem('anniv_5_photos');
       if (saved) {
         try { photos = JSON.parse(saved); } catch(err){}
       }
 
-      photos.forEach((url, i) => {
+      photos.slice(0, 5).forEach((url, i) => {
         const card = document.createElement('div');
-        card.className = 'glass-card p-4 rounded-2xl flex flex-col items-center';
+        card.className = 'glass-card p-4 rounded-2xl flex flex-col items-center photo-fade-in group hover:-translate-y-1 transition-all duration-300';
+        card.style.animationDelay = (i * 120) + 'ms';
         card.innerHTML = `
-          <div class="w-full aspect-square rounded-xl overflow-hidden mb-3">
-            <img src="${url}" class="w-full h-full object-cover">
+          <div class="w-full aspect-square rounded-xl overflow-hidden mb-3 border border-rose-500/20 bg-black/60">
+            <img src="${url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           </div>
-          <p class="text-xs text-rose-200">ความทรงจำพิเศษของเรา ❤️</p>
+          <div class="w-full flex justify-between items-center px-1">
+            <span class="text-xs text-rose-200">รูปภาพความทรงจำที่ ${i+1} ❤️</span>
+            <i class="fa-solid fa-heart text-rose-500/80 text-xs"></i>
+          </div>
         `;
         container.appendChild(card);
       });
     }
 
-    function uploadImage(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        let photos = DEFAULT_IMGS;
-        const saved = localStorage.getItem('anniv_photos');
-        if (saved) {
-          try { photos = JSON.parse(saved); } catch(err){}
-        }
-        photos.unshift(evt.target.result);
-        if (photos.length > 6) photos = photos.slice(0, 6);
-        localStorage.setItem('anniv_photos', JSON.stringify(photos));
-        loadGallery();
-        popEmoji(window.innerWidth / 2, 250);
-      };
-      reader.readAsDataURL(file);
+    function uploadMultiImages(e) {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+
+      let currentPhotos = [];
+      const saved = localStorage.getItem('anniv_5_photos');
+      if (saved) {
+        try { currentPhotos = JSON.parse(saved); } catch(err){}
+      }
+
+      const fileList = Array.from(files).slice(0, 5);
+      let loadedCount = 0;
+
+      fileList.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          currentPhotos.unshift(evt.target.result);
+          loadedCount++;
+          if (loadedCount === fileList.length) {
+            currentPhotos = currentPhotos.slice(0, 5);
+            localStorage.setItem('anniv_5_photos', JSON.stringify(currentPhotos));
+            loadGallery();
+            for (let i = 0; i < 15; i++) {
+              setTimeout(() => popEmoji(window.innerWidth / 2, 250), i * 40);
+            }
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     }
 
-    /* 8. Terminal Typing & 1000% */
+    /* 8. Terminal Typing: "สุขสันต์วันครบรอบนะครับ อลีน" + Pure Algorithmic Code */
     let terminalStarted = false;
-    const lines = [
-      '// Executing ALEEN_NA_Love_Protocol...',
-      'Relationship story("ALEEN", "NA");',
-      'story.setStart("12 สิงหาคม 2569");',
-      'NowPlaying("รักให้เธอได้รู้ - PUN");',
-      'while (story.isAlive()) {',
-      '    story.love += Infinity;',
-      '    story.protectEachOther();',
+    const pureCodeLines = [
+      '// สุขสันต์วันครบรอบนะครับ อลีน',
+      'import { QuantumEntanglement, InfinityScore } from "@universe/aleen_na";',
+      '',
+      'interface LoveContinuum<T, U> {',
+      '    soulmateA: T;',
+      '    soulmateB: U;',
+      '    entropy: 0;',
+      '    constellationBound: Promise<EternalDevotion>;',
       '}',
-      '// Forever and Always ❤️'
+      '',
+      'async function synthesizeEternalBond(): Promise<void> {',
+      '    const connection = new QuantumEntanglement("ALEEN", "NA");',
+      '    while (connection.status === "ACTIVE") {',
+      '        await connection.synchronizeHeartbeats();',
+      '        yield* connection.radiateUnconditionalAffection();',
+      '    }',
+      '}'
     ];
 
     function runTerminal() {
@@ -726,118 +832,59 @@
       const box = document.getElementById('terminal-content');
       box.innerHTML = '';
       let l = 0;
-      function addLine() {
-        if (l < lines.length) {
+
+      function addCodeLine() {
+        if (l < pureCodeLines.length) {
           const div = document.createElement('div');
-          div.textContent = lines[l];
-          div.className = 'text-rose-300 py-0.5';
+          div.textContent = pureCodeLines[l];
+          if (l === 0) {
+            div.className = 'text-rose-400 font-bold py-0.5 text-sm';
+          } else {
+            div.className = 'text-gray-300 py-0.5';
+          }
           box.appendChild(div);
           l++;
-          setTimeout(addLine, 220);
+          setTimeout(addCodeLine, 220);
         }
       }
-      addLine();
+      addCodeLine();
 
+      // เส้นวิ่งนับ 1 ถึง 1000% หน่วงเวลานานๆ (ประมาณ 30 วินาที)
       let val = 1;
+      const target = 1000;
       const bar = document.getElementById('love-bar');
       const valText = document.getElementById('love-val');
+      
       const counter = setInterval(() => {
-        val += 6;
-        if (val >= 1000) {
-          val = 1000;
+        val += 1;
+        if (val >= target) {
+          val = target;
           clearInterval(counter);
         }
-        valText.innerText = val + '%';
-        bar.style.width = Math.min(100, val / 10) + '%';
-      }, 40);
+        valText.innerText = val;
+        bar.style.width = (val / 10) + '%';
+      }, 35); // หน่วงเวลา 35ms ต่อนับ 1 หน่วย
     }
 
-    /* 9. Sync Hook Lyrics for 1OMZrYHIim8 (เริ่ม 48s) */
-    const lyricsData = [
-      { t: 48, text: "แค่อยากให้เธอได้รู้ว่าความรักมันเป็นยังไง (เอ้)" },
-      { t: 53, text: "ให้เธอมองทางนี้ baby, look into my eyes (eyes)" },
-      { t: 58, text: "Baby, come get your love ให้ฉัน get you the world" },
-      { t: 63, text: "โลกที่เหมือนฝันละเมอโลกที่เธอไม่คิดว่าจะได้เจอ (โอ้วเย๊)" },
-      { t: 68, text: "ถ้าเธอยังสงสัยว่า ความรักหน้าตาเป็นไง (เอ้)" },
-      { t: 73, text: "ก่อนที่เธอจะไป ขอให้มันเป็นฉันได้ไหม (ได้ไหม)" },
-      { t: 78, text: "คนที่รักเธอและคนที่เธอเปิดให้ฉันรักให้เธอได้รู้" },
-      { t: 85, text: "ให้ได้รู้ อู๊อูฮู้อู๊โฮโอ่โฮ้โอ๊โอ น้านานา (baby, I want you)" }
-    ];
-
-    function renderLyrics() {
-      const wrap = document.getElementById('lyrics-wrap');
-      wrap.innerHTML = '';
-      lyricsData.forEach((row, idx) => {
-        const div = document.createElement('div');
-        div.className = 'lyric-line';
-        div.id = 'lyric-' + idx;
-        div.innerText = row.text;
-        div.onclick = (e) => {
-          if (player2 && typeof player2.seekTo === 'function') {
-            player2.seekTo(row.t, true);
-            player2.playVideo();
-          }
-          popEmoji(e.clientX, e.clientY);
-        };
-        wrap.appendChild(div);
-      });
-
-      setInterval(syncCurrentTime, 300);
-    }
-
-    let curLyric = -1;
-    function syncCurrentTime() {
-      if (!player2 || typeof player2.getCurrentTime !== 'function') return;
-      let sec = 0;
-      try { sec = player2.getCurrentTime() || 0; } catch(e){ return; }
-
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      const tag = document.getElementById('player-time-tag');
-      if (tag) tag.innerText = `${m}:${String(s).padStart(2, '0')}`;
-
-      let match = -1;
-      for (let i = lyricsData.length - 1; i >= 0; i--) {
-        if (sec >= lyricsData[i].t) {
-          match = i;
-          break;
-        }
-      }
-
-      if (match !== curLyric && match !== -1) {
-        curLyric = match;
-        lyricsData.forEach((_, idx) => {
-          const row = document.getElementById('lyric-' + idx);
-          if (!row) return;
-          if (idx === curLyric) {
-            row.classList.add('active');
-            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          } else {
-            row.classList.remove('active');
-          }
-        });
-      }
-    }
-
-    /* 10. Poster Generation Logic */
+    /* 9. Poster Generation Logic */
     function savePoster() {
       const target = document.getElementById('poster-area');
       const status = document.getElementById('save-status');
       status.classList.remove('hidden');
 
       html2canvas(target, {
-        backgroundColor: '#0d0a14',
+        backgroundColor: '#07050d',
         scale: 2,
         useCORS: true
       }).then(canvas => {
         status.classList.add('hidden');
         const link = document.createElement('a');
-        link.download = 'Anniversary-Aleen-and-NA.png';
+        link.download = 'NA-TO-ALEEN-Anniversary.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
-        
+
         for (let i = 0; i < 20; i++) {
-          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.7), i * 40);
+          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.7), i * 35);
         }
       }).catch(err => {
         status.innerText = 'เกิดข้อผิดพลาดในการบันทึกรูป';

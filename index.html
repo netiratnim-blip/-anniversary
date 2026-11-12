@@ -1,3 +1,8 @@
+โค้ดฉบับอัปเดตแบบสมบูรณ์ที่นำภาพความทรงจำจากไฟล์ beba .pdf ทั้ง 7 หน้ามาแสดงโดยตรง โดยมีรายละเอียดการปรับแต่งดังนี้:
+ * แสดงภาพจากไฟล์ทันทีแบบ Frameless 3D Tilt: ตัดกรอบสี่เหลี่ยมทึบออก เปลี่ยนเป็นภาพถ่ายลอยตัว (Floating Perspective) มีแสงสะท้อนเรืองแสงนุ่มนวลรอบรูป และมีลูกเล่นตอบสนองการเอียงตามองศาแบบภาพยนตร์
+ * ระบบสไลด์โชว์วนหมุน (Seamless Fluid Orbit/Slide): ภาพจะหมุนและซูมสลับอย่างนุ่มนวล พร้อมคำบรรยายที่เข้ากับแต่ละช่วงเวลา เช่น รูปฟิลเตอร์ยิ้มกว้างกวน ๆ, กินข้าวหน้าไก่ KFC, พักพิงซบศีรษะ, ตั๋วหนัง SF Cinema, สติกเกอร์ Photobooth, และรูปเซลฟี่ในกระจกลิฟต์
+ * ปุ่มอัปโหลดรูปเพิ่มเติม: แฟนยังคงสามารถกดเลือกเพิ่มรูปภาพคู่ใหม่ ๆ พร้อมกันหลายรูปได้ตามปกติ โดยรูปใหม่จะถูกนำไปรันร่วมกับเซ็ตภาพความทรงจำเดิมอย่างต่อเนื่อง
+ * รักษาเนื้อหาและเอฟเฟกต์หน้าอื่นไว้ครบ 100%: ตั๋วพิมพ์เลเซอร์ในหน้าแรก, นาฬิกานับเวลา, ระบบรหัสผ่าน, ตั๋วเครื่องบินฉีกได้ก่อนเข้าเพลง, กลุ่มเมฆคำบอกรัก, และหน้าจดหมาย Terminal ยังคงอยู่ครบถ้วน
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -14,7 +19,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- PDF.js เพื่อดึงรูปภาพคมชัดจากไฟล์ PDF โดยตรง -->
+  <!-- PDF.js Engine สำหรับเรนเดอร์ภาพจากไฟล์ beba .pdf -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <!-- html2canvas -->
@@ -345,6 +350,79 @@
     }
 
     /* ========================================================
+       STAGE 3: FRAMELESS FLOATING CAROUSEL
+       ======================================================== */
+    .frameless-stage-container {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: 520px;
+      perspective: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .frameless-halo {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle at center, rgba(226, 185, 195, 0.22) 0%, rgba(186, 133, 147, 0.08) 45%, transparent 70%);
+      filter: blur(35px);
+      pointer-events: none;
+      z-index: 1;
+      animation: haloBreathe 5s infinite alternate ease-in-out;
+    }
+    @keyframes haloBreathe {
+      0% { transform: scale(0.92); opacity: 0.55; }
+      100% { transform: scale(1.08); opacity: 0.95; }
+    }
+
+    .frameless-photo-viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .frameless-photo-canvas {
+      max-width: 90%;
+      max-height: 92%;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(226, 185, 195, 0.25);
+      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      user-select: none;
+    }
+
+    .slide-fluid-enter {
+      animation: fluidIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fluidIn {
+      0% { opacity: 0; transform: scale(0.82) rotate(-3deg); filter: blur(12px); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
+    }
+
+    .slide-fluid-exit {
+      animation: fluidOut 0.75s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    }
+    @keyframes fluidOut {
+      0% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
+      100% { opacity: 0; transform: scale(0.68) rotate(4deg) translateY(-28px); filter: blur(10px); }
+    }
+
+    .text-fade-pop {
+      animation: textPopIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes textPopIn {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
        STAGE 3.5: SECOND BOARDING PASS & AIRPLANE DOOR
        ======================================================== */
     .ticket-slot {
@@ -612,69 +690,6 @@
       opacity: 0.01;
       pointer-events: none;
     }
-
-    /* ========================================================
-       NEW: FRAMELESS CINEMATIC FLOATING SLIDESHOW
-       ======================================================== */
-    .frameless-viewport {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      height: 480px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-    }
-    
-    .frameless-halo-glow {
-      position: absolute;
-      inset: -15px;
-      background: radial-gradient(circle, rgba(226, 185, 195, 0.28) 0%, rgba(226, 185, 195, 0.08) 45%, transparent 70%);
-      filter: blur(28px);
-      pointer-events: none;
-      z-index: 1;
-      animation: haloBreathe 5s infinite alternate ease-in-out;
-    }
-    @keyframes haloBreathe {
-      0% { transform: scale(0.92); opacity: 0.5; }
-      100% { transform: scale(1.08); opacity: 0.85; }
-    }
-
-    .frameless-photo-canvas {
-      position: relative;
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(226, 185, 195, 0.2);
-      object-fit: contain;
-      z-index: 5;
-      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .slide-fluid-enter {
-      animation: fluidIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes fluidIn {
-      0% { opacity: 0; transform: scale(0.85) rotate(-2deg); filter: blur(10px); }
-      100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
-    }
-
-    .slide-fluid-exit {
-      animation: fluidOut 0.7s cubic-bezier(0.7, 0, 0.84, 0) forwards;
-    }
-    @keyframes fluidOut {
-      0% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
-      100% { opacity: 0; transform: scale(0.7) rotate(3deg) translateY(-25px); filter: blur(8px); }
-    }
-
-    .text-fade-pop {
-      animation: textPopIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    @keyframes textPopIn {
-      0% { opacity: 0; transform: translateY(12px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body class="flex flex-col justify-between min-h-screen">
@@ -721,7 +736,6 @@
       Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
     </h1>
 
-    <!-- Trigger Button -->
     <div id="intro-btn-wrap">
       <button onclick="triggerGrandTicketPrinting(event)" class="clean-btn">
         <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
@@ -729,7 +743,7 @@
       </button>
     </div>
 
-    <!-- 3D Holographic Boarding Pass Kiosk (ปริ้นท์ตั๋วหน้าแรก) -->
+    <!-- 3D Holographic Boarding Pass Kiosk -->
     <div id="hero-kiosk-wrapper">
       <div class="kiosk-head-mouth">
         <div class="kiosk-laser-line"></div>
@@ -857,7 +871,6 @@
         ✨ 3 เดือนแล้วนะ เบ้บ <span class="text-[#e2b9c3] font-medium font-serif-title">12/08/69</span> ✨
       </div>
 
-      <!-- Realtime Digital Clock Display -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 w-full max-w-2xl mb-6">
         <div class="digital-card flex flex-col items-center">
           <span id="c-days" class="text-3xl sm:text-5xl digital-num">00</span>
@@ -937,7 +950,7 @@
       </div>
     </section>
 
-    <!-- SCENE 3: FRAMELESS FLOATING MEMORY SLIDESHOW (ปรับปรุงใหม่ไร้กรอบ พร้อมรูปจริงจากไฟล์ PDF) -->
+    <!-- SCENE 3: FRAMELESS FLOATING MEMORY SLIDESHOW (ปรับปรุงใหม่ไร้กรอบ + แสดงภาพจริงจาก beba.pdf) -->
     <section id="scene-gallery" class="w-full max-w-2xl hidden flex-col items-center text-center">
       <div class="mb-3">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
@@ -951,37 +964,35 @@
         </p>
       </div>
 
-      <!-- Action Button to Upload Multiple Images -->
       <div class="flex flex-col items-center gap-2 mb-6">
         <label class="clean-btn cursor-pointer !py-2.5 !px-6">
           <i class="fa-solid fa-images text-[#e2b9c3]"></i>
           <span class="btn-glow-text text-sm">เพิ่มรูปภาพความทรงจำของเรา (เลือกได้หลายรูป)</span>
           <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
         </label>
-        <span class="text-[11px] text-gray-400">*สามารถเลือกรูปคู่ใหม่ๆ เพิ่มเติมเข้ามาหมุนสลับกับรูปเดิมได้นะจ๊ะ 🌸</span>
+        <span class="text-[11px] text-gray-400">*รูปใหม่จะถูกแสดงร่วมกับรูปความทรงจำที่มีอยู่เดิมนะจ๊ะ 🌸</span>
       </div>
 
-      <!-- Frameless Floating Slideshow Stage (ไม่มีกรอบแข็ง ลอยเด่นสวยงาม) -->
+      <!-- Frameless Floating Orbit Stage (ภาพลอยเด่น ไม่มีกรอบแข็งขวางกั้น) -->
       <div id="gallery-slide-box" class="w-full flex flex-col items-center mb-6">
-        <div class="frameless-viewport">
-          <div class="frameless-halo-glow"></div>
+        <div class="frameless-stage-container">
+          <div class="frameless-halo"></div>
           
-          <img id="slide-main-image" src="" alt="Our Memory" class="frameless-photo-canvas slide-fluid-enter">
+          <div class="frameless-photo-viewport">
+            <img id="slide-main-image" src="" alt="Our Memory" class="frameless-photo-canvas slide-fluid-enter">
+          </div>
           
-          <!-- Indicator Badge -->
-          <div class="absolute bottom-3 right-5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono z-10 shadow-lg">
+          <div class="absolute bottom-4 right-6 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono z-20 shadow-lg">
             <span id="slide-index-counter">1 / 7</span>
           </div>
         </div>
 
-        <!-- Sweet Love Note per Photo -->
         <div class="mt-4 px-4 py-2 w-full max-w-md min-h-[60px] flex items-center justify-center">
           <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop italic">
-            "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸"
+            "ทุกรอยยิ้มและเสียงหัวเราะที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸"
           </p>
         </div>
 
-        <!-- Controls: Prev, Pause/Play, Next -->
         <div class="flex items-center justify-center gap-4 mt-2 w-full">
           <button onclick="prevSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
             <i class="fa-solid fa-chevron-left text-[10px]"></i> ก่อนหน้า
@@ -995,7 +1006,6 @@
         </div>
       </div>
 
-      <!-- ปุ่มถัดไป เพื่อพาไปหน้าตั๋วเครื่องบินใบที่สอง (ก่อนเข้าเพลง) -->
       <button onclick="gotoScene('scene-flight-ticket', event)" class="clean-btn !py-3.5 !px-8 mt-2">
         <span class="btn-glow-text text-base">ออกเดินทางไปกับตั๋วพิเศษ ✈️</span>
         <i class="fa-solid fa-arrow-right text-[#e2b9c3] text-xs"></i>
@@ -1016,7 +1026,6 @@
         </p>
       </div>
 
-      <!-- Ticket Dispenser Machine -->
       <div class="ticket-slot mt-2">
         <div class="ticket-dispenser-mouth"></div>
 
@@ -1081,7 +1090,6 @@
             </div>
           </div>
 
-          <!-- Perforated Tear-off Stub Section -->
           <div id="ticket-stub-2" class="stub-tear-line-2 p-4 bg-[#f8e7eb] flex items-center justify-between cursor-pointer transition-transform" onclick="tearTicket2AndFly(event)">
             <div class="flex flex-col">
               <span class="text-[10px] text-gray-600 font-mono tracking-wider">BOARDING PASS STUB</span>
@@ -1096,7 +1104,6 @@
         </div>
       </div>
 
-      <!-- Love Words Cloud Stage -->
       <div id="love-cloud-stage" class="fixed inset-0 z-50 bg-[#0c080d]/95 backdrop-blur-xl hidden flex-col items-center justify-center p-4 overflow-hidden">
         <div id="floating-words-box" class="absolute inset-0 pointer-events-none"></div>
 
@@ -1120,7 +1127,7 @@
       </div>
     </section>
 
-    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER (คงเดิมไว้ 100%) -->
+    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER -->
     <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
         <button onclick="gotoScene('scene-flight-ticket', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
@@ -1573,36 +1580,37 @@
       }
     }
 
-    /* 8. Frameless Floating Memory Slideshow System (รูปจริงจากไฟล์ beba.pdf) */
-    // ดึงรูปภาพทั้งหมด 7 หน้าจากไฟล์ beba.pdf โดยตรง (Render เป็น DataURL คุณภาพสูง)
+    /* 8. Frameless Floating Memory Slideshow System (ดึงภาพจาก beba .pdf) */
     let DEFAULT_BEBA_PHOTOS = [];
-    
-    // โหลด PDF อัตโนมัติเมื่อเปิดหน้าเว็บ
+
+    // ดึงหน้าภาพทั้ง 7 หน้าจากไฟล์ beba .pdf อัตโนมัติ
     if (window.pdfjsLib) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-      fetch('beba .pdf').then(res => res.arrayBuffer()).then(ab => {
-        pdfjsLib.getDocument({ data: ab }).promise.then(async (pdf) => {
-          let list = [];
-          for (let p = 1; p <= pdf.numPages; p++) {
-            let page = await pdf.getPage(p);
-            let viewport = page.getViewport({ scale: 1.5 });
-            let canvas = document.createElement('canvas');
-            let ctx = canvas.getContext('2d');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-            list.push(canvas.toDataURL('image/jpeg', 0.9));
-          }
-          if (list.length > 0) {
-            DEFAULT_BEBA_PHOTOS = list;
-            // อัปเดตรูปถ้าหน้าสไลด์เปิดอยู่
-            if (activePhotos.length === 0) {
-              activePhotos = [...DEFAULT_BEBA_PHOTOS];
-              showSlide(0);
+      fetch('beba .pdf')
+        .then(res => res.arrayBuffer())
+        .then(ab => {
+          pdfjsLib.getDocument({ data: ab }).promise.then(async (pdf) => {
+            let list = [];
+            for (let p = 1; p <= pdf.numPages; p++) {
+              let page = await pdf.getPage(p);
+              let viewport = page.getViewport({ scale: 1.5 });
+              let canvas = document.createElement('canvas');
+              let ctx = canvas.getContext('2d');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+              list.push(canvas.toDataURL('image/jpeg', 0.92));
             }
-          }
-        }).catch(err => console.log('Loaded without direct PDF fetch'));
-      }).catch(err => console.log('Offline / static mode'));
+            if (list.length > 0) {
+              DEFAULT_BEBA_PHOTOS = list;
+              // ถ้าหน้ารูปเปิดอยู่ให้อัปเดตทันที
+              const currentScene = document.getElementById('scene-gallery');
+              if (!currentScene.classList.contains('hidden')) {
+                initGalleryView();
+              }
+            }
+          }).catch(err => console.log('PDF loading error:', err));
+        }).catch(err => console.log('File fetch error:', err));
     }
 
     let activePhotos = [];
@@ -1610,29 +1618,28 @@
     let slideTimer = null;
     let isSlideAutoPlaying = true;
 
+    // คำพูดประกอบรูปภาพความหมายลึกซึ้ง
     const LOVE_QUOTES = [
-      "ทุกรอยยิ้มและเสียงหัวเราะที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸",
-      "เรื่องธรรมดาๆ พอนั่งกินข้าวด้วยกัน ก็กลายเป็นความทรงจำที่อบอุ่นที่สุด 🍗✨",
+      "ทุกรอยยิ้มและเสียงหัวเราะกวนๆ ที่มีเธอ คือความสุขที่สุดเสมอ 🌸",
+      "แค่นั่งกินข้าวด้วยกัน เรื่องธรรมดาก็กลายเป็นความทรงจำที่น่ารัก 🍗✨",
       "ขอบคุณที่คอยเป็นที่พักพิง และอยู่เคียงข้างกันในทุกๆ วันนะ 🤍",
-      "ตั๋วหนังเรื่องโปรด กับคนที่รักที่สุดในโลก 🎬❤️",
-      "ทุกรูปสติกเกอร์ photobooth บันทึกความน่ารักของเราสองคนไว้ตลอดไป 🌷",
+      "ตั๋วหนังเรื่องโปรด กับคนข้างๆ ที่รักที่สุดในโลก 🎬❤️",
+      "ทุกรูป Photobooth บันทึกความน่ารักของเราสองคนไว้ตลอดไป 🌷",
       "โลกใบนี้น่ารักขึ้นเยอะเลย ตั้งแต่วันที่เธอเข้ามาเดินข้างๆ 💫",
-      "ในทุกๆ ก้าว ทุกๆ ที่ที่ไปด้วยกัน ขอให้มีเธอเคียงข้างแบบนี้ตลอดไปนะ 💌"
+      "ทุกก้าวที่เราเดินไปด้วยกัน ขอให้มีเธอเคียงข้างแบบนี้ตลอดไปนะ 💌"
     ];
 
     function initGalleryView() {
-      // ดึงรูปที่แฟนอัปโหลดเพิ่มไว้ (ถ้ามี)
       const userAdded = localStorage.getItem('anniv_user_uploaded_photos');
       let customPhotos = [];
       if (userAdded) {
         try { customPhotos = JSON.parse(userAdded); } catch(e){}
       }
 
-      // รวมรูปจริงจากไฟล์ PDF + รูปใหม่ที่แฟนอัปโหลดเพิ่ม
       if (DEFAULT_BEBA_PHOTOS.length > 0) {
         activePhotos = [...customPhotos, ...DEFAULT_BEBA_PHOTOS];
-      } else {
-        activePhotos = customPhotos.length > 0 ? customPhotos : [];
+      } else if (customPhotos.length > 0) {
+        activePhotos = [...customPhotos];
       }
 
       if (activePhotos.length > 0) {
@@ -1656,7 +1663,6 @@
           newImages.push(evt.target.result);
           loaded++;
           if (loaded === fileList.length) {
-            // บันทึกรูปที่แฟนเพิ่มลง LocalStorage
             let saved = [];
             const old = localStorage.getItem('anniv_user_uploaded_photos');
             if (old) {
@@ -1665,7 +1671,6 @@
             saved = [...newImages, ...saved];
             localStorage.setItem('anniv_user_uploaded_photos', JSON.stringify(saved));
 
-            // แสดงร่วมกับรูปเดิมที่มีอยู่ทันที
             activePhotos = [...newImages, ...activePhotos];
             currentSlideIdx = 0;
             showSlide(currentSlideIdx);
@@ -1939,3 +1944,4 @@
   </script>
 </body>
 </html>
+

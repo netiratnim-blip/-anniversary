@@ -333,14 +333,6 @@
     .eq-bar:nth-child(2) { animation-delay: 0.2s; background: #eed0d7; }
     .eq-bar:nth-child(3) { animation-delay: 0.4s; background: #f7e7ea; }
 
-    .photo-fade-in {
-      animation: photoPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    @keyframes photoPop {
-      0% { opacity: 0; transform: scale(0.88) translateY(16px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
     .shake-box { animation: shake 0.4s ease-in-out; }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
@@ -356,6 +348,47 @@
       height: 10px;
       opacity: 0.01;
       pointer-events: none;
+    }
+
+    /* Cinematic Slideshow Transitions */
+    .slide-enter-large {
+      animation: slideInZoom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes slideInZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.75) rotate(-3deg);
+        filter: blur(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1.02) rotate(0deg);
+        filter: blur(0px);
+      }
+    }
+
+    .slide-exit-shrink {
+      animation: slideOutShrink 0.8s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    }
+    @keyframes slideOutShrink {
+      0% {
+        opacity: 1;
+        transform: scale(1.02) rotate(0deg);
+        filter: blur(0px);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.65) rotate(5deg) translateY(-20px);
+        filter: blur(6px);
+      }
+    }
+
+    .text-fade-pop {
+      animation: textPopIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes textPopIn {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -515,32 +548,77 @@
       </div>
     </section>
 
-    <!-- SCENE 3: PHOTO GALLERY -->
-    <section id="scene-gallery" class="w-full max-w-4xl hidden flex-col items-center">
-      <div class="text-center mb-6">
+    <!-- SCENE 3: PHOTO CINEMATIC SLIDESHOW -->
+    <section id="scene-gallery" class="w-full max-w-2xl hidden flex-col items-center text-center">
+      <div class="mb-5">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
           OUR MEMORIES
         </span>
         <h2 class="text-2xl sm:text-3xl font-serif-title font-medium text-[#faedf0] mt-2">
-          เธอใส่รูปลงไป สิ แล้ว ✨
+          เธอใส่รูปลงไปสิ แล้ว ✨
         </h2>
         <p class="text-gray-400 text-xs sm:text-sm mt-1">
           ภาพความทรงจำจะถูกบันทึกไว้ในความทรงจำนี้ตลอดไป
         </p>
       </div>
 
+      <!-- Action Button to Upload Multiple Images -->
       <div class="flex flex-col items-center gap-2 mb-8">
         <label class="clean-btn cursor-pointer">
           <i class="fa-solid fa-images text-[#e2b9c3]"></i>
-          <span class="btn-glow-text text-sm">เพิ่มรูปภาพคู่ของเรา (สามารถเพิ่มได้ 5 รูป)</span>
+          <span class="btn-glow-text text-sm">เพิ่มรูปภาพความทรงจำของเรา (เลือกได้หลายรูป)</span>
           <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
         </label>
-        <span class="text-[11px] text-gray-400">*เลือกได้พร้อมกันสูงสุด 5 รูป หรือทยอยใส่ได้จ้ะ</span>
+        <span class="text-[11px] text-gray-400">*สามารถเลือกรูปคู่ของเราได้ทีละหลายรูปพร้อมกันเลยนะจ๊ะ 🌸</span>
       </div>
 
-      <div id="photos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full mb-10"></div>
+      <!-- Empty State (ตอนยังไม่ได้ใส่รูป) -->
+      <div id="gallery-empty-box" class="glass-card w-full py-16 px-6 border border-dashed border-[#e2b9c3]/30 flex flex-col items-center justify-center mb-8">
+        <div class="w-16 h-16 rounded-full bg-white/[0.03] border border-[#e2b9c3]/20 flex items-center justify-center text-2xl text-[#e2b9c3]/70 mb-3 animate-pulse">
+          <i class="fa-regular fa-image"></i>
+        </div>
+        <p class="text-gray-300 text-sm font-light">ยังไม่มีรูปภาพความทรงจำถูกใส่เข้ามา</p>
+        <p class="text-gray-500 text-xs mt-1">กดปุ่มด้านบนเพื่อเลือกภาพของเรามาโชว์ในสไลด์ความทรงจำได้เลยนะ ✨</p>
+      </div>
 
-      <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8">
+      <!-- Cinematic Slide Container (จะโชว์เมื่อมีรูปแล้วเท่านั้น) -->
+      <div id="gallery-slide-box" class="w-full hidden flex-col items-center mb-8">
+        <div class="glass-card w-full p-4 sm:p-6 border border-[#e2b9c3]/30 relative overflow-hidden flex flex-col items-center">
+          
+          <!-- Image Frame with Dynamic Zoom & Rotation -->
+          <div class="w-full aspect-[4/3] sm:aspect-[16/10] max-h-[460px] rounded-xl overflow-hidden bg-black/60 border border-white/[0.1] relative flex items-center justify-center shadow-2xl">
+            <img id="slide-main-image" src="" alt="Memory Slide" class="w-full h-full object-cover transition-all duration-700">
+            
+            <!-- Quick Floating Badge -->
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono">
+              <span id="slide-index-counter">1 / 1</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Sweet Love Note per Photo -->
+          <div class="mt-5 px-3 py-3 w-full bg-white/[0.02] border border-[#e2b9c3]/20 rounded-lg min-h-[75px] flex items-center justify-center">
+            <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop">
+              "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ"
+            </p>
+          </div>
+
+          <!-- Controls: Prev, Pause/Play, Next -->
+          <div class="flex items-center justify-center gap-4 mt-4 w-full pt-2">
+            <button onclick="prevSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-chevron-left text-[10px]"></i> ก่อนหน้า
+            </button>
+            <button onclick="toggleSlideshowPlay(event)" class="keypad-btn !py-1.5 !px-5 text-xs text-[#e2b9c3]">
+              <i id="slide-play-icon" class="fa-solid fa-pause"></i>
+            </button>
+            <button onclick="nextSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
+              ถัดไป <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8 mt-2">
         <span class="btn-glow-text text-base">เปิดอ่านดูซิเบ้บ</span>
         <span>💌</span>
       </button>
@@ -826,8 +904,9 @@
         }
       });
 
-      if (sceneId === 'scene-gallery') loadGallery();
+      if (sceneId === 'scene-gallery') initGalleryView();
       if (sceneId === 'scene-lyrics') {
+        stopSlideshow();
         runTerminal();
       }
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
@@ -877,70 +956,151 @@
       }
     }
 
-    /* 7. Gallery 5 Photos System */
-    const DEFAULT_5_PHOTOS = [
-      'https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80'
+    /* 7. Multi-Photo Cinematic Slideshow System */
+    let userPhotos = [];
+    let currentSlideIdx = 0;
+    let slideTimer = null;
+    let isSlideAutoPlaying = true;
+
+    // คำพูดซึ้ง ๆ ความหมายดี ๆ ที่จะสลับแสดงตามแต่ละรูป
+    const LOVE_QUOTES = [
+      "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸",
+      "ขอบคุณที่เข้ามาเป็นเรื่องราวที่น่ารักที่สุดในชีวิตเค้านะ 🤍",
+      "ไม่ว่าจะผ่านไปกี่เดือน รอยยิ้มนี้ก็ยังทำให้ใจสั่นได้เหมือนวันแรก ✨",
+      "จับมือกันแน่น ๆ แบบนี้ แล้วเดินไปด้วยกันในทุก ๆ วันนะเบ้บ 🌷",
+      "ขอบคุณที่คอยรับฟัง เข้าใจ และอยู่ข้างกันในทุกความรู้สึก 🧸",
+      "โลกนี้น่ารักขึ้นเยอะเลย ตั้งแต่วันที่มีเธอเข้ามาเดินข้าง ๆ 💫",
+      "วันครบรอบของเรา จะมีเธอ และมีเค้าแบบนี้ตลอดไปนะ 💌",
+      "ทุกความทรงจำในรูปนี้ คือบทพิสูจน์ความรักของเราสองคน ❤️"
     ];
 
-    function loadGallery() {
-      const container = document.getElementById('photos-container');
-      container.innerHTML = '';
-      let photos = DEFAULT_5_PHOTOS;
-      const saved = localStorage.getItem('anniv_5_photos');
+    function initGalleryView() {
+      const saved = localStorage.getItem('anniv_multi_photos');
       if (saved) {
-        try { photos = JSON.parse(saved); } catch(err){}
+        try {
+          userPhotos = JSON.parse(saved);
+        } catch(e) {
+          userPhotos = [];
+        }
       }
 
-      photos.slice(0, 5).forEach((url, i) => {
-        const card = document.createElement('div');
-        card.className = 'glass-card p-4 flex flex-col items-center photo-fade-in group hover:-translate-y-1 transition-all duration-300';
-        card.style.animationDelay = (i * 120) + 'ms';
-        card.innerHTML = `
-          <div class="w-full aspect-square rounded-lg overflow-hidden mb-3 border border-white/[0.08] bg-black/40">
-            <img src="${url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="w-full flex justify-between items-center px-1">
-            <span class="text-xs text-gray-300">รูปภาพความทรงจำที่ ${i+1} ❤️</span>
-            <i class="fa-solid fa-heart text-[#e2b9c3]/70 text-xs"></i>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+      if (userPhotos && userPhotos.length > 0) {
+        document.getElementById('gallery-empty-box').classList.add('hidden');
+        document.getElementById('gallery-slide-box').classList.remove('hidden');
+        document.getElementById('gallery-slide-box').classList.add('flex');
+        currentSlideIdx = 0;
+        showSlide(currentSlideIdx);
+        startSlideshow();
+      } else {
+        document.getElementById('gallery-empty-box').classList.remove('hidden');
+        document.getElementById('gallery-slide-box').classList.add('hidden');
+        document.getElementById('gallery-slide-box').classList.remove('flex');
+        stopSlideshow();
+      }
     }
 
     function uploadMultiImages(e) {
       const files = e.target.files;
       if (!files || files.length === 0) return;
 
-      let currentPhotos = [];
-      const saved = localStorage.getItem('anniv_5_photos');
-      if (saved) {
-        try { currentPhotos = JSON.parse(saved); } catch(err){}
-      }
-
-      const fileList = Array.from(files).slice(0, 5);
-      let loadedCount = 0;
+      const newImages = [];
+      const fileList = Array.from(files);
+      let loaded = 0;
 
       fileList.forEach(file => {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          currentPhotos.unshift(evt.target.result);
-          loadedCount++;
-          if (loadedCount === fileList.length) {
-            currentPhotos = currentPhotos.slice(0, 5);
-            localStorage.setItem('anniv_5_photos', JSON.stringify(currentPhotos));
-            loadGallery();
-            for (let i = 0; i < 15; i++) {
-              setTimeout(() => popEmoji(window.innerWidth / 2, 250), i * 40);
+          newImages.push(evt.target.result);
+          loaded++;
+          if (loaded === fileList.length) {
+            // รวมกับรูปที่มีอยู่เดิม
+            userPhotos = [...newImages, ...userPhotos];
+            localStorage.setItem('anniv_multi_photos', JSON.stringify(userPhotos));
+
+            document.getElementById('gallery-empty-box').classList.add('hidden');
+            document.getElementById('gallery-slide-box').classList.remove('hidden');
+            document.getElementById('gallery-slide-box').classList.add('flex');
+
+            currentSlideIdx = 0;
+            showSlide(currentSlideIdx);
+            startSlideshow();
+
+            for (let i = 0; i < 20; i++) {
+              setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.45), i * 35);
             }
           }
         };
         reader.readAsDataURL(file);
       });
+    }
+
+    function showSlide(idx) {
+      if (!userPhotos || userPhotos.length === 0) return;
+
+      const imgEl = document.getElementById('slide-main-image');
+      const quoteEl = document.getElementById('slide-quote-text');
+      const counterEl = document.getElementById('slide-index-counter');
+
+      // เริ่มต้นด้วย Effect ค่อย ๆ ย่อรูปเก่าลงและหมุนออก
+      imgEl.className = 'w-full h-full object-cover slide-exit-shrink';
+
+      setTimeout(() => {
+        // เปลี่ยนรูปและคำพูด
+        imgEl.src = userPhotos[idx];
+        counterEl.innerText = `${idx + 1} / ${userPhotos.length}`;
+
+        const quote = LOVE_QUOTES[idx % LOVE_QUOTES.length];
+        quoteEl.innerText = `"${quote}"`;
+        quoteEl.classList.remove('text-fade-pop');
+        void quoteEl.offsetWidth;
+        quoteEl.classList.add('text-fade-pop');
+
+        // ขยายรูปใหม่ขึ้นมาเป็นรูปใหญ่
+        imgEl.className = 'w-full h-full object-cover slide-enter-large';
+      }, 400);
+    }
+
+    function nextSlide(e) {
+      if (userPhotos.length <= 1) return;
+      currentSlideIdx = (currentSlideIdx + 1) % userPhotos.length;
+      showSlide(currentSlideIdx);
+      if (e && e.clientX) popEmoji(e.clientX, e.clientY);
+    }
+
+    function prevSlide(e) {
+      if (userPhotos.length <= 1) return;
+      currentSlideIdx = (currentSlideIdx - 1 + userPhotos.length) % userPhotos.length;
+      showSlide(currentSlideIdx);
+      if (e && e.clientX) popEmoji(e.clientX, e.clientY);
+    }
+
+    function startSlideshow() {
+      stopSlideshow();
+      if (!isSlideAutoPlaying || userPhotos.length <= 1) return;
+      slideTimer = setInterval(() => {
+        currentSlideIdx = (currentSlideIdx + 1) % userPhotos.length;
+        showSlide(currentSlideIdx);
+      }, 4500); // หมุนสลับรูปทุก 4.5 วินาที
+    }
+
+    function stopSlideshow() {
+      if (slideTimer) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+      }
+    }
+
+    function toggleSlideshowPlay(e) {
+      const icon = document.getElementById('slide-play-icon');
+      isSlideAutoPlaying = !isSlideAutoPlaying;
+      if (isSlideAutoPlaying) {
+        icon.className = 'fa-solid fa-pause';
+        startSlideshow();
+      } else {
+        icon.className = 'fa-solid fa-play';
+        stopSlideshow();
+      }
+      if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
     /* 8. Terminal Typing */

@@ -8,7 +8,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Mitr:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Mitr:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Caveat:wght@600&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +25,7 @@
     }
     body {
       font-family: 'Mitr', sans-serif;
-      background-color: #0b090d;
+      background-color: #08060a;
       color: #ede9f0;
       min-height: 100vh;
       overflow-x: hidden;
@@ -35,23 +35,23 @@
     .font-mono-code { font-family: 'Fira Code', monospace; }
     .font-hand { font-family: 'Caveat', cursive, 'Mitr', sans-serif; }
 
-    /* Soft Ambient Glow */
+    /* Ambient Projector & Cinema Grain */
     .projector-lens {
       position: fixed;
-      top: -160px;
+      top: -180px;
       left: 50%;
       transform: translateX(-50%);
-      width: 130vw;
+      width: 140vw;
       height: 110vh;
-      background: radial-gradient(ellipse at 50% 0%, rgba(243, 214, 219, 0.12) 0%, rgba(186, 133, 147, 0.05) 35%, transparent 70%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(243, 214, 219, 0.16) 0%, rgba(186, 133, 147, 0.06) 40%, transparent 70%);
       pointer-events: none !important;
       z-index: 1;
-      filter: blur(28px);
+      filter: blur(35px);
       animation: projectorGentle 8s infinite alternate ease-in-out;
     }
     @keyframes projectorGentle {
-      0% { opacity: 0.7; }
-      100% { opacity: 0.95; }
+      0% { opacity: 0.65; transform: translateX(-50%) scale(1); }
+      100% { opacity: 0.95; transform: translateX(-50%) scale(1.05); }
     }
 
     .film-grain {
@@ -59,12 +59,12 @@
       inset: 0;
       background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
       background-size: 32px 32px;
-      opacity: 0.18;
+      opacity: 0.2;
       pointer-events: none !important;
       z-index: 2;
     }
 
-    /* Soft Luxury Velvet Curtain */
+    /* Velvet Curtains */
     #curtain-container {
       position: fixed;
       inset: 0;
@@ -76,8 +76,8 @@
     .curtain-panel {
       flex: 1;
       height: 100%;
-      background: linear-gradient(135deg, #150d14 0%, #20131e 50%, #110b10 100%);
-      box-shadow: inset 0 0 60px rgba(0,0,0,0.85);
+      background: linear-gradient(135deg, #130a13 0%, #1e101c 50%, #0d060d 100%);
+      box-shadow: inset 0 0 70px rgba(0,0,0,0.9);
       position: relative;
       transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
     }
@@ -95,26 +95,26 @@
       position: fixed;
       inset: 0;
       z-index: 95;
-      background: radial-gradient(circle at center, #171019 0%, #0a070c 100%);
+      background: radial-gradient(circle at center, #170f1a 0%, #070408 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.9s ease;
+      transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
       padding: 20px;
       text-align: center;
+      overflow-y: auto;
     }
 
-    /* Light Sign: ALEEN */
     .neon-board {
       display: flex;
-      gap: 14px;
-      padding: 12px 28px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(226, 185, 195, 0.25);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      margin-bottom: 28px;
+      gap: 12px;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(226, 185, 195, 0.3);
+      border-radius: 14px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(226, 185, 195, 0.1);
+      margin-bottom: 24px;
     }
     .neon-letter {
       font-family: 'Playfair Display', serif;
@@ -125,13 +125,13 @@
       opacity: 0;
       transform: translateY(30px) scale(0.7);
       animation: neonSlideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      text-shadow: 0 0 15px rgba(226, 185, 195, 0.5);
+      text-shadow: 0 0 15px rgba(226, 185, 195, 0.6);
     }
     .neon-letter:nth-child(1) { animation-delay: 0.2s; }
-    .neon-letter:nth-child(2) { animation-delay: 0.45s; }
-    .neon-letter:nth-child(3) { animation-delay: 0.7s; }
-    .neon-letter:nth-child(4) { animation-delay: 0.95s; }
-    .neon-letter:nth-child(5) { animation-delay: 1.2s; }
+    .neon-letter:nth-child(2) { animation-delay: 0.4s; }
+    .neon-letter:nth-child(3) { animation-delay: 0.6s; }
+    .neon-letter:nth-child(4) { animation-delay: 0.8s; }
+    .neon-letter:nth-child(5) { animation-delay: 1.0s; }
 
     @keyframes neonSlideUp {
       0% { opacity: 0; transform: translateY(30px) scale(0.7); filter: blur(3px); }
@@ -159,26 +159,26 @@
 
     .clean-btn {
       position: relative;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(226, 185, 195, 0.35);
-      border-radius: 10px;
-      padding: 13px 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(226, 185, 195, 0.4);
+      border-radius: 12px;
+      padding: 14px 34px;
       font-weight: 400;
       letter-spacing: 1px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(226, 185, 195, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       color: #f7e7ea;
     }
     .clean-btn:hover {
-      background: rgba(226, 185, 195, 0.12);
-      border-color: rgba(226, 185, 195, 0.6);
-      box-shadow: 0 0 20px rgba(226, 185, 195, 0.25);
-      transform: translateY(-2px);
+      background: rgba(226, 185, 195, 0.16);
+      border-color: rgba(226, 185, 195, 0.8);
+      box-shadow: 0 0 30px rgba(226, 185, 195, 0.45);
+      transform: translateY(-2px) scale(1.02);
     }
     .clean-btn:active {
       transform: scale(0.97);
@@ -188,6 +188,188 @@
       font-weight: 400;
     }
 
+    /* =========================================================
+       ULTRA GRAND: FIRST SCREEN TICKET PRINTER KIOSK
+       ========================================================= */
+    #hero-kiosk-wrapper {
+      perspective: 1200px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 15px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .kiosk-head-mouth {
+      width: 90%;
+      height: 14px;
+      background: #000;
+      border: 2px solid rgba(226, 185, 195, 0.5);
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 0 25px rgba(226, 185, 195, 0.4), inset 0 2px 6px rgba(0,0,0,0.9);
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    /* Laser Scanner Beam */
+    .kiosk-laser-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, rgba(255, 180, 200, 0.9), transparent);
+      box-shadow: 0 0 15px #ff94b4;
+      animation: laserSweep 1.6s infinite ease-in-out alternate;
+    }
+    @keyframes laserSweep {
+      0% { left: 0%; opacity: 0.3; }
+      100% { left: calc(100% - 80px); opacity: 1; }
+    }
+
+    /* 3D Ticket Container */
+    #hero-grand-ticket {
+      width: 100%;
+      background: linear-gradient(135deg, #ffffff 0%, #fbf1f3 100%);
+      color: #1a0f18;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(226, 185, 195, 0.25);
+      transform-origin: top center;
+      position: relative;
+      overflow: hidden;
+      margin-top: -6px;
+      z-index: 15;
+    }
+
+    /* Grand Laser Print Animation */
+    .hero-printing-anim {
+      animation: grandPrintFeed 2.8s cubic-bezier(0.12, 0.8, 0.2, 1) forwards;
+    }
+    @keyframes grandPrintFeed {
+      0% {
+        transform: translateY(-90%) scaleY(0.15) rotateX(25deg);
+        opacity: 0;
+        filter: blur(10px) brightness(1.6);
+      }
+      30% {
+        opacity: 1;
+        filter: blur(4px) brightness(1.3);
+      }
+      100% {
+        transform: translateY(0%) scaleY(1) rotateX(0deg);
+        opacity: 1;
+        filter: blur(0px) brightness(1);
+      }
+    }
+
+    /* Neon Perforated Tear Line */
+    .hero-tear-zone {
+      border-top: 2.5px dashed #cf889b;
+      position: relative;
+      background: #fdf0f3;
+      cursor: pointer;
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.03);
+      transition: all 0.25s ease;
+    }
+    .hero-tear-zone:hover {
+      background: #fae4ea;
+    }
+    .hero-tear-zone::before, .hero-tear-zone::after {
+      content: '';
+      position: absolute;
+      top: -14px;
+      width: 28px;
+      height: 28px;
+      background: #08060a;
+      border-radius: 50%;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.8);
+    }
+    .hero-tear-zone::before { left: -16px; }
+    .hero-tear-zone::after { right: -16px; }
+
+    /* Pulsing Cut Indicator */
+    .tear-glow-pulse {
+      animation: tearGlow 1.2s infinite alternate ease-in-out;
+    }
+    @keyframes tearGlow {
+      0% { text-shadow: 0 0 2px #cf889b; transform: scale(1); }
+      100% { text-shadow: 0 0 15px #e2b9c3, 0 0 25px #ff8da6; transform: scale(1.05); }
+    }
+
+    .hero-finger-pointer {
+      animation: fingerTap 1.2s infinite ease-in-out;
+      display: inline-block;
+    }
+    @keyframes fingerTap {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(10px) scale(1.15); }
+    }
+
+    /* Tear Off Break Animation */
+    .hero-stub-torn {
+      animation: tearAndDrop 1.1s cubic-bezier(0.2, 0.7, 0.1, 1) forwards !important;
+    }
+    @keyframes tearAndDrop {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      35% { transform: translateY(30px) rotate(8deg); opacity: 0.95; }
+      100% { transform: translateY(380px) rotate(35deg) scale(0.65); opacity: 0; }
+    }
+
+    /* Ticket Rocket Blast-Off (ส่วนหัวตั๋วพุ่งทะยานเข้าจอ) */
+    .hero-ticket-launch {
+      animation: launchTicketRocket 1.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+    }
+    @keyframes launchTicketRocket {
+      0% { transform: translateY(0) scale(1); filter: brightness(1); }
+      35% { transform: translateY(15px) scale(0.96); filter: brightness(1.2); }
+      100% { transform: translateY(-750px) scale(1.3) rotate(-4deg); opacity: 0; filter: brightness(2.2) blur(8px); }
+    }
+
+    /* Full-screen Shockwave */
+    .shockwave-blast {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      border: 4px solid rgba(226, 185, 195, 0.9);
+      border-radius: 50%;
+      opacity: 0;
+      animation: blastExpand 0.9s ease-out forwards;
+    }
+    @keyframes blastExpand {
+      0% { transform: scale(0.1); opacity: 1; }
+      100% { transform: scale(3.5); opacity: 0; border-width: 0px; }
+    }
+
+    /* Screen Haptic Shake */
+    .haptic-shake {
+      animation: screenShake 0.45s ease-in-out;
+    }
+    @keyframes screenShake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-8px, 6px); }
+      40% { transform: translate(8px, -6px); }
+      60% { transform: translate(-5px, -4px); }
+      80% { transform: translate(5px, 4px); }
+    }
+
+    /* Sparkles & Hearts Explosion */
+    .grand-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 101;
+      font-size: 24px;
+      animation: sparkleBurst 1.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+    @keyframes sparkleBurst {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.4); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.4) rotate(var(--rot)); }
+    }
+
+    /* Standard Cards, Digitals & Widgets */
     .digital-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(226, 185, 195, 0.25);
@@ -350,37 +532,21 @@
       pointer-events: none;
     }
 
-    /* Cinematic Slideshow Transitions */
+    /* Slideshow Transitions */
     .slide-enter-large {
       animation: slideInZoom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes slideInZoom {
-      0% {
-        opacity: 0;
-        transform: scale(0.75) rotate(-3deg);
-        filter: blur(8px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1.02) rotate(0deg);
-        filter: blur(0px);
-      }
+      0% { opacity: 0; transform: scale(0.75) rotate(-3deg); filter: blur(8px); }
+      100% { opacity: 1; transform: scale(1.02) rotate(0deg); filter: blur(0px); }
     }
 
     .slide-exit-shrink {
       animation: slideOutShrink 0.8s cubic-bezier(0.7, 0, 0.84, 0) forwards;
     }
     @keyframes slideOutShrink {
-      0% {
-        opacity: 1;
-        transform: scale(1.02) rotate(0deg);
-        filter: blur(0px);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.65) rotate(5deg) translateY(-20px);
-        filter: blur(6px);
-      }
+      0% { opacity: 1; transform: scale(1.02) rotate(0deg); filter: blur(0px); }
+      100% { opacity: 0; transform: scale(0.65) rotate(5deg) translateY(-20px); filter: blur(6px); }
     }
 
     .text-fade-pop {
@@ -389,142 +555,6 @@
     @keyframes textPopIn {
       0% { opacity: 0; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ========================================================
-       NEW: AIRPLANE TICKET & TRANSITIONS
-       ======================================================== */
-    .ticket-slot {
-      position: relative;
-      background: #120a14;
-      border: 3px solid #281523;
-      border-radius: 18px;
-      box-shadow: inset 0 6px 15px rgba(0,0,0,0.9), 0 0 25px rgba(226,185,195,0.15);
-      padding: 12px 14px 20px;
-      overflow: hidden;
-      max-width: 520px;
-      width: 100%;
-    }
-    .ticket-dispenser-mouth {
-      width: 100%;
-      height: 8px;
-      background: #000;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
-    }
-    .boarding-pass {
-      background: linear-gradient(135deg, #fdf6f7 0%, #faedf0 100%);
-      color: #1a1219;
-      border-radius: 14px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-      position: relative;
-      overflow: hidden;
-      transform-origin: top center;
-    }
-    .printing-motion {
-      animation: printTicket 2.5s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
-    }
-    @keyframes printTicket {
-      0% {
-        transform: translateY(-85%) scaleY(0.4);
-        opacity: 0.3;
-      }
-      100% {
-        transform: translateY(0%) scaleY(1);
-        opacity: 1;
-      }
-    }
-
-    .stub-tear-line {
-      border-top: 2px dashed #b98e9b;
-      position: relative;
-    }
-    .stub-tear-line::before, .stub-tear-line::after {
-      content: '';
-      position: absolute;
-      top: -12px;
-      width: 24px;
-      height: 24px;
-      background: #120a14;
-      border-radius: 50%;
-    }
-    .stub-tear-line::before { left: -14px; }
-    .stub-tear-line::after { right: -14px; }
-
-    .finger-guide {
-      animation: fingerBounce 1.4s infinite ease-in-out;
-    }
-    @keyframes fingerBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(12px); }
-    }
-
-    .torn-away {
-      animation: ticketTear 1.2s cubic-bezier(0.2, 0.8, 0.25, 1) forwards !important;
-    }
-    @keyframes ticketTear {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      40% { transform: translateY(35px) rotate(6deg); opacity: 0.9; }
-      100% { transform: translateY(280px) rotate(24deg) scale(0.7); opacity: 0; }
-    }
-
-    /* Airplane Door Shutter */
-    #airplane-shutter {
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: linear-gradient(180deg, #160e18 0%, #201322 50%, #0d080e 100%);
-      transform: translateY(-100%);
-      transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    #airplane-shutter.shutter-closed {
-      transform: translateY(0%);
-    }
-
-    /* Airplane Flight Path Animation */
-    .jet-flight {
-      animation: flyAcross 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-    @keyframes flyAcross {
-      0% { transform: translate(-140px, 80px) rotate(-15deg) scale(0.6); opacity: 0; }
-      40% { opacity: 1; }
-      100% { transform: translate(140px, -80px) rotate(15deg) scale(1.3); opacity: 0; }
-    }
-
-    /* Love Cloud Floating Bubble */
-    .love-bubble {
-      position: absolute;
-      white-space: nowrap;
-      padding: 8px 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(226, 185, 195, 0.35);
-      backdrop-filter: blur(8px);
-      border-radius: 9999px;
-      color: #faedf0;
-      font-size: 13px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      animation: loveFloat linear forwards;
-    }
-    @keyframes loveFloat {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.75);
-      }
-      15% {
-        opacity: 0.95;
-      }
-      85% {
-        opacity: 0.95;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-100px) scale(1.05);
-      }
     }
   </style>
 </head>
@@ -543,24 +573,9 @@
     <div class="curtain-panel curtain-right"></div>
   </div>
 
-  <!-- Airplane Door Shutter & Flight Scene (Full Overlay) -->
-  <div id="airplane-shutter">
-    <div class="flex flex-col items-center text-center px-4">
-      <div class="w-24 h-24 rounded-full bg-white/[0.04] border border-[#e2b9c3]/30 flex items-center justify-center mb-6 relative">
-        <i class="fa-solid fa-plane-departure text-4xl text-[#e2b9c3] jet-flight"></i>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-serif-title font-medium text-[#faedf0] mb-2 tracking-wide">
-        เดินทางสู่เส้นทางของสองเรา ✈️
-      </h2>
-      <p class="text-xs sm:text-sm text-gray-400 font-mono">
-        DESTINATION: FOREVER WITH YOU // ALEEN & NA
-      </p>
-    </div>
-  </div>
-
-  <!-- Screen 0: Intro -->
+  <!-- SCREEN 0: PROJECTOR INTRO + GRAND TICKET PRINTING -->
   <div id="projector-intro-screen">
-    <div class="neon-board">
+    <div class="neon-board" id="intro-neon-board">
       <span class="neon-letter">A</span>
       <span class="neon-letter">L</span>
       <span class="neon-letter">E</span>
@@ -568,14 +583,107 @@
       <span class="neon-letter">N</span>
     </div>
 
-    <h1 class="shining-title font-serif-title mb-10 px-2">
+    <h1 class="shining-title font-serif-title mb-6 px-2" id="intro-main-title">
       Happy Anniversary<br class="sm:hidden"/> ALEEN ❤️
     </h1>
 
-    <button onclick="startExperience(event)" class="clean-btn">
-      <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
-      <span class="text-xl">🎬</span>
-    </button>
+    <!-- Trigger Button -->
+    <div id="intro-btn-wrap">
+      <button onclick="triggerGrandTicketPrinting(event)" class="clean-btn">
+        <span class="btn-glow-text text-base sm:text-lg">เปิดดูข้างในสิ</span>
+        <span class="text-xl">🎬</span>
+      </button>
+    </div>
+
+    <!-- 3D Holographic Boarding Pass Kiosk (ปริ้นออกมาตรงนี้) -->
+    <div id="hero-kiosk-wrapper">
+      <div class="kiosk-head-mouth">
+        <div class="kiosk-laser-line"></div>
+      </div>
+
+      <div id="hero-grand-ticket" class="hero-printing-anim text-left">
+        <!-- Ticket Header -->
+        <div class="bg-[#180e17] px-5 py-3 text-white flex justify-between items-center border-b border-[#e2b9c3]/30">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-plane-departure text-[#e2b9c3] text-sm animate-pulse"></i>
+            <span class="font-serif-title tracking-widest text-xs font-semibold text-[#faedf0]">ANNIVERSARY AIRWAYS</span>
+          </div>
+          <span class="text-[9px] font-mono tracking-widest px-2.5 py-0.5 rounded-full bg-[#e2b9c3]/20 text-[#e2b9c3] border border-[#e2b9c3]/30 font-semibold">VIP PASS</span>
+        </div>
+
+        <!-- Ticket Body -->
+        <div class="p-5 bg-gradient-to-br from-[#ffffff] via-[#fdf5f7] to-[#faeaf0]">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-[9px] uppercase text-gray-400 font-mono tracking-widest">PASSENGER NAME</p>
+              <h3 class="text-xl font-black font-serif-title text-[#23121f] tracking-wide mt-0.5">
+                ALEEN ❤️ NA
+              </h3>
+            </div>
+            <div class="text-right">
+              <p class="text-[9px] uppercase text-gray-400 font-mono tracking-widest">FLIGHT</p>
+              <h4 class="text-sm font-bold font-mono text-[#b85d73]">LOVE-1208</h4>
+            </div>
+          </div>
+
+          <!-- Route Info -->
+          <div class="flex items-center justify-between py-2 border-y border-dashed border-[#e2b9c3]/80 mb-4">
+            <div class="text-center">
+              <span class="text-2xl sm:text-3xl font-black font-serif-title text-[#241320]">BKK</span>
+              <p class="text-[9px] text-gray-500 font-medium">จุดเริ่มต้น</p>
+            </div>
+
+            <div class="flex flex-col items-center px-4">
+              <span class="text-[9px] text-[#b85d73] font-mono font-medium tracking-wider mb-1">FIRST CLASS DESTINY</span>
+              <div class="flex items-center gap-2 text-[#e2b9c3]">
+                <span class="w-10 sm:w-16 h-[1.5px] bg-[#e2b9c3]"></span>
+                <i class="fa-solid fa-heart text-xs text-[#b85d73]"></i>
+                <span class="w-10 sm:w-16 h-[1.5px] bg-[#e2b9c3]"></span>
+              </div>
+              <span class="text-[9px] text-gray-400 mt-1 font-mono">NON-STOP 3 MONTHS</span>
+            </div>
+
+            <div class="text-center">
+              <span class="text-2xl sm:text-3xl font-black font-serif-title text-[#b85d73]">FOREVER</span>
+              <p class="text-[9px] text-gray-500 font-medium">ตลอดไป</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-black/5 p-2 rounded-lg">
+              <p class="text-[8px] text-gray-500 font-mono">SEAT</p>
+              <p class="font-bold text-[#20131e]">01A & 01B</p>
+            </div>
+            <div class="bg-black/5 p-2 rounded-lg">
+              <p class="text-[8px] text-gray-500 font-mono">DATE</p>
+              <p class="font-bold text-[#20131e]">12/08/69</p>
+            </div>
+            <div class="bg-black/5 p-2 rounded-lg">
+              <p class="text-[8px] text-gray-500 font-mono">CLASS</p>
+              <p class="font-bold text-[#b85d73]">ETERNAL</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perforated Tear Stub Section -->
+        <div id="hero-ticket-stub" class="hero-tear-zone p-4 flex items-center justify-between" onclick="tearHeroTicketAndEnter(event)">
+          <div class="flex flex-col">
+            <span class="text-[9px] text-gray-500 font-mono tracking-widest uppercase">BOARDING PASS STUB</span>
+            <span class="text-xs sm:text-sm font-semibold text-[#8a3349] tear-glow-pulse">
+              ✂️ แตะตรงนี้เพื่อตัดตั๋วเดินทางด้วยกัน
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="hero-finger-pointer text-2xl">👇</span>
+            <div class="w-8 h-8 rounded-full bg-[#f0d0d8] flex items-center justify-center text-[#9c3e55] shadow-inner">
+              <i class="fa-solid fa-scissors text-sm"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <header class="fixed top-4 right-4 z-40">
@@ -713,7 +821,6 @@
         </p>
       </div>
 
-      <!-- Action Button to Upload Multiple Images -->
       <div class="flex flex-col items-center gap-2 mb-8">
         <label class="clean-btn cursor-pointer">
           <i class="fa-solid fa-images text-[#e2b9c3]"></i>
@@ -723,7 +830,6 @@
         <span class="text-[11px] text-gray-400">*สามารถเลือกรูปคู่ของเราได้ทีละหลายรูปพร้อมกันเลยนะจ๊ะ 🌸</span>
       </div>
 
-      <!-- Empty State (ตอนยังไม่ได้ใส่รูป) -->
       <div id="gallery-empty-box" class="glass-card w-full py-16 px-6 border border-dashed border-[#e2b9c3]/30 flex flex-col items-center justify-center mb-8">
         <div class="w-16 h-16 rounded-full bg-white/[0.03] border border-[#e2b9c3]/20 flex items-center justify-center text-2xl text-[#e2b9c3]/70 mb-3 animate-pulse">
           <i class="fa-regular fa-image"></i>
@@ -732,28 +838,21 @@
         <p class="text-gray-500 text-xs mt-1">กดปุ่มด้านบนเพื่อเลือกภาพของเรามาโชว์ในสไลด์ความทรงจำได้เลยนะ ✨</p>
       </div>
 
-      <!-- Cinematic Slide Container (จะโชว์เมื่อมีรูปแล้วเท่านั้น) -->
       <div id="gallery-slide-box" class="w-full hidden flex-col items-center mb-8">
         <div class="glass-card w-full p-4 sm:p-6 border border-[#e2b9c3]/30 relative overflow-hidden flex flex-col items-center">
-          
-          <!-- Image Frame with Dynamic Zoom & Rotation -->
           <div class="w-full aspect-[4/3] sm:aspect-[16/10] max-h-[460px] rounded-xl overflow-hidden bg-black/60 border border-white/[0.1] relative flex items-center justify-center shadow-2xl">
             <img id="slide-main-image" src="" alt="Memory Slide" class="w-full h-full object-cover transition-all duration-700">
-            
-            <!-- Quick Floating Badge -->
             <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono">
               <span id="slide-index-counter">1 / 1</span>
             </div>
           </div>
 
-          <!-- Dynamic Sweet Love Note per Photo -->
           <div class="mt-5 px-3 py-3 w-full bg-white/[0.02] border border-[#e2b9c3]/20 rounded-lg min-h-[75px] flex items-center justify-center">
             <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop">
               "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ"
             </p>
           </div>
 
-          <!-- Controls: Prev, Pause/Play, Next -->
           <div class="flex items-center justify-center gap-4 mt-4 w-full pt-2">
             <button onclick="prevSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
               <i class="fa-solid fa-chevron-left text-[10px]"></i> ก่อนหน้า
@@ -765,149 +864,19 @@
               ถัดไป <i class="fa-solid fa-chevron-right text-[10px]"></i>
             </button>
           </div>
-
         </div>
       </div>
 
-      <!-- ปุ่มถัดไป เพื่อพาไปหน้าตั๋วเครื่องบิน -->
-      <button onclick="gotoScene('scene-flight-ticket', event)" class="clean-btn !py-3.5 !px-8 mt-2">
-        <span class="btn-glow-text text-base">ออกเดินทางไปกับตั๋วพิเศษ ✈️</span>
-        <i class="fa-solid fa-arrow-right text-[#e2b9c3] text-xs"></i>
+      <button onclick="handleTransitionToLetter(event)" class="clean-btn !py-3.5 !px-8 mt-2">
+        <span class="btn-glow-text text-base">เปิดอ่านดูซิเบ้บ 💌</span>
       </button>
-    </section>
-
-    <!-- NEW SCENE 3.5: AIRPLANE BOARDING PASS & LOVE WORDS CLOUD -->
-    <section id="scene-flight-ticket" class="w-full max-w-2xl hidden flex-col items-center text-center relative">
-      <div class="mb-4">
-        <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
-          EXCLUSIVE BOARDING PASS
-        </span>
-        <h2 class="text-2xl sm:text-3xl font-serif-title font-medium text-[#faedf0] mt-2">
-          ตั๋วเที่ยวบินพิเศษสู่หัวใจ ❤️
-        </h2>
-        <p class="text-gray-400 text-xs sm:text-sm mt-1">
-          กำลังพิมพ์ตั๋วความรักใบเดียวในโลกสำหรับ ALEEN & NA...
-        </p>
-      </div>
-
-      <!-- Ticket Dispenser Machine -->
-      <div class="ticket-slot mt-2">
-        <div class="ticket-dispenser-mouth"></div>
-
-        <!-- The Printed Boarding Pass -->
-        <div id="flight-boarding-pass" class="boarding-pass printing-motion text-left select-none">
-          
-          <!-- Top Header -->
-          <div class="bg-[#1f121d] px-5 py-3 text-white flex justify-between items-center border-b border-[#e2b9c3]/30">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-plane text-[#e2b9c3]"></i>
-              <span class="font-serif-title tracking-wider text-sm font-semibold text-[#faedf0]">ANNIVERSARY AIRWAYS</span>
-            </div>
-            <span class="text-[10px] font-mono tracking-widest px-2 py-0.5 rounded bg-[#e2b9c3]/20 text-[#e2b9c3]">FIRST CLASS</span>
-          </div>
-
-          <!-- Main Flight Content -->
-          <div class="p-5 bg-gradient-to-br from-[#ffffff] to-[#faeef1]">
-            <div class="flex justify-between items-center mb-4">
-              <div>
-                <p class="text-[10px] uppercase text-gray-500 font-mono tracking-wider">PASSENGER NAME</p>
-                <h3 class="text-lg sm:text-xl font-bold font-serif-title text-[#261622] tracking-wide">
-                  ALEEN ❤️ NA
-                </h3>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] uppercase text-gray-500 font-mono tracking-wider">FLIGHT NO.</p>
-                <h4 class="text-base font-bold font-mono text-[#b37080]">LOVE-1208</h4>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between py-2 border-y border-dashed border-[#e2b9c3]/60 mb-4">
-              <div class="text-center">
-                <span class="text-2xl sm:text-3xl font-black font-serif-title text-[#20131e]">BKK</span>
-                <p class="text-[10px] text-gray-500 font-medium">จุดเริ่มต้น</p>
-              </div>
-
-              <div class="flex flex-col items-center px-4">
-                <span class="text-[10px] text-[#b37080] font-mono mb-1">NON-STOP FLIGHT</span>
-                <div class="flex items-center gap-2 text-[#e2b9c3]">
-                  <span class="w-12 h-[1.5px] bg-[#e2b9c3]"></span>
-                  <i class="fa-solid fa-heart text-xs text-[#b37080]"></i>
-                  <span class="w-12 h-[1.5px] bg-[#e2b9c3]"></span>
-                </div>
-                <span class="text-[9px] text-gray-400 mt-1">3 MONTHS & FOREVER</span>
-              </div>
-
-              <div class="text-center">
-                <span class="text-2xl sm:text-3xl font-black font-serif-title text-[#b37080]">FOREVER</span>
-                <p class="text-[10px] text-gray-500 font-medium">อนาคตของเรา</p>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-2 text-center text-xs">
-              <div class="bg-black/5 p-2 rounded">
-                <p class="text-[9px] text-gray-500 font-mono">SEAT</p>
-                <p class="font-bold text-[#20131e]">01A & 01B</p>
-              </div>
-              <div class="bg-black/5 p-2 rounded">
-                <p class="text-[9px] text-gray-500 font-mono">DATE</p>
-                <p class="font-bold text-[#20131e]">12 NOV</p>
-              </div>
-              <div class="bg-black/5 p-2 rounded">
-                <p class="text-[9px] text-gray-500 font-mono">STATUS</p>
-                <p class="font-bold text-[#b37080]">CONFIRMED</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Perforated Tear-off Stub Section -->
-          <div id="ticket-stub" class="stub-tear-line p-4 bg-[#f8e7eb] flex items-center justify-between cursor-pointer transition-transform" onclick="tearTicketAndFly()">
-            <div class="flex flex-col">
-              <span class="text-[10px] text-gray-600 font-mono tracking-wider">BOARDING PASS STUB</span>
-              <span class="text-xs font-bold text-[#20131e]">แตะ/รูดตรงนี้เพื่อตัดตั๋วเดินทาง ✨</span>
-            </div>
-            
-            <div class="flex items-center gap-2">
-              <div class="finger-guide text-xl text-[#b37080]">
-                👉
-              </div>
-              <i class="fa-solid fa-scissors text-[#b37080] text-lg"></i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Love Words Cloud Stage (จะโชว์หลังจากตั๋วฉีกและประตูปิดเปิดเสร็จ) -->
-      <div id="love-cloud-stage" class="fixed inset-0 z-50 bg-[#0c080d]/95 backdrop-blur-xl hidden flex-col items-center justify-center p-4 overflow-hidden">
-        
-        <div id="floating-words-box" class="absolute inset-0 pointer-events-none"></div>
-
-        <div class="z-10 text-center max-w-lg px-4 flex flex-col items-center">
-          <div class="w-16 h-16 rounded-full bg-[#e2b9c3]/10 border border-[#e2b9c3]/30 flex items-center justify-center mb-4 text-[#e2b9c3] text-2xl animate-bounce">
-            💌
-          </div>
-          <h3 class="text-2xl sm:text-3xl font-serif-title font-medium text-[#faedf0] mb-3">
-            ถ้อยคำแทนความรู้สึกถึง ALEEN
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-300 font-light leading-relaxed mb-6">
-            ทุกช่วงเวลาที่มีเธออยู่ข้าง ๆ คือของขวัญที่ดีที่สุดในชีวิตเค้า<br class="hidden sm:inline">
-            ขอให้เรื่องราวของเราเดินทางไปด้วยกันตลอดไปนะ
-          </p>
-
-          <!-- Countdown / Continue Button -->
-          <button id="btn-to-letter" onclick="finishFlightAndGoLetter(event)" class="clean-btn !py-3 !px-8 opacity-0 pointer-events-none transition-all duration-700">
-            <span class="btn-glow-text text-base">เปิดอ่านจดหมายจาก NA 💌</span>
-            <i class="fa-solid fa-arrow-right text-[#e2b9c3] text-xs"></i>
-          </button>
-        </div>
-      </div>
     </section>
 
     <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER -->
     <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
-        <button onclick="gotoScene('scene-flight-ticket', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
-          <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูตั๋วเครื่องบิน
+        <button onclick="gotoScene('scene-gallery', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรูป
         </button>
         <span class="text-xs text-[#e2b9c3] font-mono tracking-wide">ALEEN_NA_UNIVERSE // SYNCED</span>
       </div>
@@ -1034,23 +1003,165 @@
       setTimeout(() => el.remove(), 1200);
     }
 
-    /* 3. Curtain & Start */
-    function startExperience(e) {
-      const screen = document.getElementById('projector-intro-screen');
-      screen.style.opacity = '0';
-      setTimeout(() => screen.remove(), 900);
+    /* 3. Web Audio API Engine (เสียงปริ้นตั๋ว, ฉีกกระดาษ, และเสียงทะยาน) */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioCtx;
+    }
 
-      document.getElementById('curtain-container').classList.add('curtain-open');
+    // เสียงตู้ Kiosk พิมพ์ตั๋วออกมารัว ๆ (Mechanical Paper Feed)
+    function playLaserPrinterSound() {
+      try {
+        const ctx = getAudioContext();
+        let startTime = ctx.currentTime;
+        for (let i = 0; i < 9; i++) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(600 + (i % 3) * 200, startTime + i * 0.22);
+          gain.gain.setValueAtTime(0.04, startTime + i * 0.22);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + i * 0.22 + 0.15);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startTime + i * 0.22);
+          osc.stop(startTime + i * 0.22 + 0.16);
+        }
+      } catch(e){}
+    }
+
+    // เสียงฉีกกระดาษขาดแบบชัดเจน
+    function playPaperTearSound() {
+      try {
+        const ctx = getAudioContext();
+        const bufferSize = ctx.sampleRate * 0.28;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+        }
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1600, ctx.currentTime);
+        filter.Q.setValueAtTime(3.2, ctx.currentTime);
+        noise.connect(filter);
+        filter.connect(ctx.destination);
+        noise.start();
+      } catch(e){}
+    }
+
+    // เสียงเจ็ททะยานผ่าน Shockwave
+    function playJetBlastSound() {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(100, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.5);
+        osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 1.8);
+
+        gain.gain.setValueAtTime(0.01, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.35, ctx.currentTime + 0.4);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.9);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 2.0);
+      } catch(e){}
+    }
+
+    /* 4. Trigger Grand Ticket Printing in Screen 0 */
+    function triggerGrandTicketPrinting(e) {
+      // เล่นเพลงพร้อมคลอเสียง
       playTrack1WithFadeIn();
 
-      for (let i = 0; i < 15; i++) {
+      const btnWrap = document.getElementById('intro-btn-wrap');
+      const kiosk = document.getElementById('hero-kiosk-wrapper');
+      const screen = document.getElementById('projector-intro-screen');
+
+      // Haptic Screen Shake
+      screen.classList.add('haptic-shake');
+      setTimeout(() => screen.classList.remove('haptic-shake'), 450);
+
+      // ซ่อนปุ่มเปิด
+      btnWrap.style.display = 'none';
+
+      // โชว์ Kiosk และสั่งปริ้น
+      kiosk.style.display = 'flex';
+      playLaserPrinterSound();
+
+      // สร้างเอฟเฟกต์แสงรอบ ๆ ตอนปริ้น
+      for (let i = 0; i < 18; i++) {
         setTimeout(() => {
-          popEmoji(window.innerWidth * 0.25 + Math.random() * (window.innerWidth * 0.5), window.innerHeight * 0.45);
-        }, i * 60);
+          popEmoji(window.innerWidth * 0.3 + Math.random() * (window.innerWidth * 0.4), window.innerHeight * 0.55);
+        }, i * 120);
       }
     }
 
-    /* 4. Dual YouTube Audio Engine */
+    /* 5. Tear Off Hero Ticket & Explosive Shockwave Transition */
+    let isHeroTearing = false;
+    function tearHeroTicketAndEnter(e) {
+      if (isHeroTearing) return;
+      isHeroTearing = true;
+
+      const stub = document.getElementById('hero-ticket-stub');
+      const grandTicket = document.getElementById('hero-grand-ticket');
+      const screen = document.getElementById('projector-intro-screen');
+
+      // 1. เสียงกระดาษฉีกขาด
+      playPaperTearSound();
+      stub.classList.add('hero-stub-torn');
+
+      // 2. ระเบิด Shockwave + ประกายไฟทั่วจอ
+      const shockwave = document.createElement('div');
+      shockwave.className = 'shockwave-blast';
+      document.body.appendChild(shockwave);
+      setTimeout(() => shockwave.remove(), 900);
+
+      // สั่นจออย่างสะใจ
+      screen.classList.add('haptic-shake');
+
+      // ปล่อยพลุหัวใจรอบนิ้ว
+      const touchX = e.clientX || window.innerWidth / 2;
+      const touchY = e.clientY || window.innerHeight * 0.65;
+
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'grand-sparkle';
+        p.innerText = ['❤️', '✨', '🌸', '💫', '🤍', '✈️'][Math.floor(Math.random() * 6)];
+        p.style.left = touchX + 'px';
+        p.style.top = touchY + 'px';
+        const rad = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 160 + 60;
+        p.style.setProperty('--tx', (Math.cos(rad) * dist) + 'px');
+        p.style.setProperty('--ty', (Math.sin(rad) * dist) + 'px');
+        p.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1300);
+      }
+
+      // 3. เสียงเครื่องบินพุ่ง + หัวตั๋วพุ่งทะยานเข้าจอ
+      setTimeout(() => {
+        playJetBlastSound();
+        grandTicket.classList.add('hero-ticket-launch');
+      }, 350);
+
+      // 4. ม่านกำมะหยี่เปิดออก พร้อมจอดำ Fade สู่หน้าแรก Counter
+      setTimeout(() => {
+        document.getElementById('curtain-container').classList.add('curtain-open');
+        screen.style.opacity = '0';
+        screen.style.transform = 'scale(1.15)';
+        setTimeout(() => screen.remove(), 900);
+      }, 750);
+    }
+
+    /* 6. Dual YouTube Audio Engine */
     let player1 = null;
     let player2 = null;
     let activePlayer = 1;
@@ -1168,60 +1279,9 @@
       popEmoji(e.clientX || window.innerWidth / 2, e.clientY || 50);
     }
 
-    /* 5. Web Audio API for Ticket Tear & Airplane Sounds */
-    let audioCtx = null;
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      return audioCtx;
-    }
-
-    function playPaperTearSound() {
-      try {
-        const ctx = getAudioContext();
-        const bufferSize = ctx.sampleRate * 0.25;
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
-        }
-        const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(1400, ctx.currentTime);
-        filter.Q.setValueAtTime(3.0, ctx.currentTime);
-        noise.connect(filter);
-        filter.connect(ctx.destination);
-        noise.start();
-      } catch(e){}
-    }
-
-    function playAirplaneWhooshSound() {
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(140, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(750, ctx.currentTime + 0.8);
-        osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 1.8);
-
-        gain.gain.setValueAtTime(0.01, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.28, ctx.currentTime + 0.6);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.0);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 2.1);
-      } catch(e){}
-    }
-
-    /* 6. Scene Management */
+    /* 7. Scene Management */
     function gotoScene(sceneId, e) {
-      const scenes = ['scene-counter', 'scene-passcode', 'scene-gallery', 'scene-flight-ticket', 'scene-lyrics'];
+      const scenes = ['scene-counter', 'scene-passcode', 'scene-gallery', 'scene-lyrics'];
       scenes.forEach(id => {
         const el = document.getElementById(id);
         if (id === sceneId) {
@@ -1235,7 +1295,6 @@
       });
 
       if (sceneId === 'scene-gallery') initGalleryView();
-      if (sceneId === 'scene-flight-ticket') initTicketScene();
       if (sceneId === 'scene-lyrics') {
         stopSlideshow();
         runTerminal();
@@ -1243,7 +1302,13 @@
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
-    /* 7. Passcode Logic */
+    function handleTransitionToLetter(e) {
+      popEmoji(e.clientX || window.innerWidth / 2, e.clientY || 500);
+      transitionToTrack2();
+      gotoScene('scene-lyrics', e);
+    }
+
+    /* 8. Passcode Logic */
     let inputPass = '';
     const correctCodes = ['120869', '12/08/69', '12082569'];
 
@@ -1281,7 +1346,7 @@
       }
     }
 
-    /* 8. Multi-Photo Cinematic Slideshow System */
+    /* 9. Multi-Photo Cinematic Slideshow System */
     let userPhotos = [];
     let currentSlideIdx = 0;
     let slideTimer = null;
@@ -1421,116 +1486,6 @@
         stopSlideshow();
       }
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
-    }
-
-    /* 9. AIRPLANE TICKET & LOVE WORDS STAGE LOGIC */
-    const ONLINE_LOVE_QUOTES = [
-      "เธอคือเหตุผลที่ทำให้ทุกวันมีความหมาย ❤️",
-      "ขอบคุณที่เข้ามาเป็นความสุขที่น่ารักที่สุดในชีวิต",
-      "รักที่ไม่มีเงื่อนไข คือการได้เห็นเธอยิ้มในทุกวัน",
-      "ไม่ว่าโลกจะหมุนไปทางไหน ฉันจะอยู่ข้างเธอเสมอ",
-      "เธอไม่ใช่แค่แฟน แต่คือพื้นที่ปลอดภัยที่สุด",
-      "ขอให้เรื่องราวของเราเดินทางไปด้วยกันตลอดไป",
-      "การได้พบเธอ คือความโชคดีที่ดีที่สุดของชีวิต",
-      "แม้ระยะทางหรือเวลาก็ไม่เคยลดความรู้สึกดี ๆ ลงเลย",
-      "ขอบคุณที่จับมือกันแน่นในทุก ๆ วันที่ผ่านมา",
-      "รักเธอในแบบที่เธอเป็น และจะรักมากขึ้นทุก ๆ วัน",
-      "โลกนี้น่าอยู่ขึ้นเยอะ ตั้งแต่วันที่เธอเข้ามา",
-      "ทุกความทรงจำที่มีเธอ ล้วนสวยงามเสมอ",
-      "กอดกันแน่น ๆ แบบนี้นาน ๆ นะเบ้บ 💕",
-      "เธอคือบ้าน และคือความสงบในหัวใจของฉัน",
-      "อยู่เติบโตไปด้วยกันในทุกความฝันนะที่รัก"
-    ];
-
-    function initTicketScene() {
-      stopSlideshow();
-      const ticket = document.getElementById('flight-boarding-pass');
-      const stub = document.getElementById('ticket-stub');
-      stub.classList.remove('torn-away');
-      ticket.classList.remove('printing-motion');
-      void ticket.offsetWidth;
-      ticket.classList.add('printing-motion');
-    }
-
-    let isTearing = false;
-    function tearTicketAndFly() {
-      if (isTearing) return;
-      isTearing = true;
-
-      const stub = document.getElementById('ticket-stub');
-      stub.classList.add('torn-away');
-
-      // 1. เสียงกระดาษขาด
-      playPaperTearSound();
-
-      // 2. เสียงเครื่องบินบินผ่าน ฟิ้ว
-      setTimeout(() => {
-        playAirplaneWhooshSound();
-      }, 350);
-
-      // 3. ประตูเครื่องบินเลื่อนปิดหน้าจอ
-      setTimeout(() => {
-        const shutter = document.getElementById('airplane-shutter');
-        shutter.classList.add('shutter-closed');
-      }, 700);
-
-      // 4. เปิดประตูสู่ Love Clouds Screen
-      setTimeout(() => {
-        const shutter = document.getElementById('airplane-shutter');
-        shutter.classList.remove('shutter-closed');
-        launchLoveClouds();
-      }, 2400);
-    }
-
-    let cloudInterval = null;
-    function launchLoveClouds() {
-      const stage = document.getElementById('love-cloud-stage');
-      const box = document.getElementById('floating-words-box');
-      const btn = document.getElementById('btn-to-letter');
-
-      stage.classList.remove('hidden');
-      stage.classList.add('flex');
-      box.innerHTML = '';
-
-      let count = 0;
-      cloudInterval = setInterval(() => {
-        if (count > 28) return;
-        count++;
-
-        const bubble = document.createElement('div');
-        bubble.className = 'love-bubble';
-        const text = ONLINE_LOVE_QUOTES[Math.floor(Math.random() * ONLINE_LOVE_QUOTES.length)];
-        bubble.innerHTML = `<i class="fa-solid fa-heart text-[#e2b9c3] mr-1 text-xs"></i> ${text}`;
-
-        const randomX = Math.random() * (window.innerWidth - 220) + 15;
-        const randomY = Math.random() * (window.innerHeight - 150) + 70;
-        const duration = (Math.random() * 2.5 + 4).toFixed(2);
-
-        bubble.style.left = `${randomX}px`;
-        bubble.style.top = `${randomY}px`;
-        bubble.style.animationDuration = `${duration}s`;
-
-        box.appendChild(bubble);
-        setTimeout(() => bubble.remove(), duration * 1000);
-      }, 280);
-
-      // โชว์กลุ่มข้อความรักประมาณ 8-9 วินาที แล้วปุ่มจะเด้งขึ้นมา
-      setTimeout(() => {
-        btn.classList.remove('opacity-0', 'pointer-events-none');
-        btn.classList.add('opacity-100', 'pointer-events-auto', 'animate-pulse');
-      }, 8500);
-    }
-
-    function finishFlightAndGoLetter(e) {
-      if (cloudInterval) clearInterval(cloudInterval);
-      const stage = document.getElementById('love-cloud-stage');
-      stage.classList.add('hidden');
-      stage.classList.remove('flex');
-      isTearing = false;
-
-      // สลับเพลงเป็น Track 2 และไปยังหน้า Terminal จดหมาย
-      transitionToTrack2();
-      gotoScene('scene-lyrics', e);
     }
 
     /* 10. Terminal Typing */

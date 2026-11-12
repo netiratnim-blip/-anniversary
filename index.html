@@ -14,7 +14,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- PDF.js Engine สำหรับเรนเดอร์ภาพจากไฟล์ beba .pdf -->
+  <!-- PDF.js Engine -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <!-- html2canvas -->
@@ -351,7 +351,7 @@
       position: relative;
       width: 100%;
       max-width: 440px;
-      height: 520px;
+      height: 460px;
       perspective: 1000px;
       display: flex;
       align-items: center;
@@ -945,7 +945,7 @@
       </div>
     </section>
 
-    <!-- SCENE 3: FRAMELESS FLOATING MEMORY SLIDESHOW (ปรับปรุงใหม่ไร้กรอบ + แสดงภาพจริงจาก beba.pdf) -->
+    <!-- SCENE 3: FRAMELESS FLOATING MEMORY SLIDESHOW (แก้ไขบั๊กปุ่มใส่รูปไม่ขึ้นแล้ว) -->
     <section id="scene-gallery" class="w-full max-w-2xl hidden flex-col items-center text-center">
       <div class="mb-3">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
@@ -959,17 +959,29 @@
         </p>
       </div>
 
+      <!-- Action Button (รองรับทั้งไฟล์รูปภาพ JPG/PNG และไฟล์ PDF เช่น beba.pdf) -->
       <div class="flex flex-col items-center gap-2 mb-6">
         <label class="clean-btn cursor-pointer !py-2.5 !px-6">
           <i class="fa-solid fa-images text-[#e2b9c3]"></i>
-          <span class="btn-glow-text text-sm">เพิ่มรูปภาพความทรงจำของเรา (เลือกได้หลายรูป)</span>
-          <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
+          <span class="btn-glow-text text-sm">เพิ่มรูปภาพความทรงจำของเรา (เลือกได้หลายรูป / PDF)</span>
+          <input type="file" id="photo-upload" accept="image/*,.pdf" multiple class="hidden" onchange="uploadMultiFiles(event)">
         </label>
-        <span class="text-[11px] text-gray-400">*รูปใหม่จะถูกแสดงร่วมกับรูปความทรงจำที่มีอยู่เดิมนะจ๊ะ 🌸</span>
+        <span id="upload-status-text" class="text-[11px] text-gray-400">
+          *เลือกไฟล์รูปภาพหรือเลือกไฟล์ beba.pdf มาเปิดดูได้เลยนะจ๊ะ 🌸
+        </span>
       </div>
 
-      <!-- Frameless Floating Orbit Stage (ภาพลอยเด่น ไม่มีกรอบแข็งขวางกั้น) -->
-      <div id="gallery-slide-box" class="w-full flex flex-col items-center mb-6">
+      <!-- Empty State (โชว์ตอนยังไม่มีรูปถูกเลือก) -->
+      <div id="gallery-empty-box" class="w-full max-w-md py-16 px-6 rounded-2xl border border-dashed border-[#e2b9c3]/30 bg-white/[0.02] flex flex-col items-center justify-center mb-6">
+        <div class="w-16 h-16 rounded-full bg-[#e2b9c3]/10 border border-[#e2b9c3]/30 flex items-center justify-center text-2xl text-[#e2b9c3] mb-3 animate-pulse">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <p class="text-gray-200 text-sm font-normal">กดปุ่มด้านบนเพื่อใส่รูปหรือเลือกไฟล์ beba.pdf</p>
+        <p class="text-gray-400 text-xs mt-1">รูปจะเด้งขึ้นมาหมุนโชว์แบบไม่มีกรอบพร้อมข้อความซึ้งๆ ทันที ✨</p>
+      </div>
+
+      <!-- Frameless Floating Orbit Stage (โชว์ทันทีที่มีรูป) -->
+      <div id="gallery-slide-box" class="w-full hidden flex-col items-center mb-6">
         <div class="frameless-stage-container">
           <div class="frameless-halo"></div>
           
@@ -978,13 +990,13 @@
           </div>
           
           <div class="absolute bottom-4 right-6 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono z-20 shadow-lg">
-            <span id="slide-index-counter">1 / 7</span>
+            <span id="slide-index-counter">1 / 1</span>
           </div>
         </div>
 
         <div class="mt-4 px-4 py-2 w-full max-w-md min-h-[60px] flex items-center justify-center">
           <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop italic">
-            "ทุกรอยยิ้มและเสียงหัวเราะที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸"
+            "ทุกรอยยิ้มและเสียงหัวเราะกวนๆ ที่มีเธอ คือความสุขที่สุดเสมอ 🌸"
           </p>
         </div>
 
@@ -1007,7 +1019,7 @@
       </button>
     </section>
 
-    <!-- SCENE 3.5: BOARDING PASS 2 & LOVE CLOUDS SCREEN (จุดที่ 2: หน้าระหว่างรูปกับเพลง คงเดิมไว้ 100%) -->
+    <!-- SCENE 3.5: BOARDING PASS 2 & LOVE CLOUDS SCREEN -->
     <section id="scene-flight-ticket" class="w-full max-w-2xl hidden flex-col items-center text-center relative">
       <div class="mb-4">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
@@ -1323,7 +1335,7 @@
       } catch(e){}
     }
 
-    /* 4. Trigger Grand Ticket Printing in Screen 0 (จุดที่ 1) */
+    /* 4. Trigger Grand Ticket Printing in Screen 0 */
     function triggerGrandTicketPrinting(e) {
       playTrack1WithFadeIn();
 
@@ -1575,37 +1587,9 @@
       }
     }
 
-    /* 8. Frameless Floating Memory Slideshow System (ดึงภาพจาก beba .pdf) */
-    let DEFAULT_BEBA_PHOTOS = [];
-
-    // ดึงหน้าภาพทั้ง 7 หน้าจากไฟล์ beba .pdf อัตโนมัติ
+    /* 8. Frameless Floating Memory Slideshow System (แก้ไขให้ใส่รูปแล้วโชว์ทันที ไม่ค้าง) */
     if (window.pdfjsLib) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-      fetch('beba .pdf')
-        .then(res => res.arrayBuffer())
-        .then(ab => {
-          pdfjsLib.getDocument({ data: ab }).promise.then(async (pdf) => {
-            let list = [];
-            for (let p = 1; p <= pdf.numPages; p++) {
-              let page = await pdf.getPage(p);
-              let viewport = page.getViewport({ scale: 1.5 });
-              let canvas = document.createElement('canvas');
-              let ctx = canvas.getContext('2d');
-              canvas.width = viewport.width;
-              canvas.height = viewport.height;
-              await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-              list.push(canvas.toDataURL('image/jpeg', 0.92));
-            }
-            if (list.length > 0) {
-              DEFAULT_BEBA_PHOTOS = list;
-              // ถ้าหน้ารูปเปิดอยู่ให้อัปเดตทันที
-              const currentScene = document.getElementById('scene-gallery');
-              if (!currentScene.classList.contains('hidden')) {
-                initGalleryView();
-              }
-            }
-          }).catch(err => console.log('PDF loading error:', err));
-        }).catch(err => console.log('File fetch error:', err));
     }
 
     let activePhotos = [];
@@ -1613,7 +1597,6 @@
     let slideTimer = null;
     let isSlideAutoPlaying = true;
 
-    // คำพูดประกอบรูปภาพความหมายลึกซึ้ง
     const LOVE_QUOTES = [
       "ทุกรอยยิ้มและเสียงหัวเราะกวนๆ ที่มีเธอ คือความสุขที่สุดเสมอ 🌸",
       "แค่นั่งกินข้าวด้วยกัน เรื่องธรรมดาก็กลายเป็นความทรงจำที่น่ารัก 🍗✨",
@@ -1625,59 +1608,74 @@
     ];
 
     function initGalleryView() {
-      const userAdded = localStorage.getItem('anniv_user_uploaded_photos');
-      let customPhotos = [];
-      if (userAdded) {
-        try { customPhotos = JSON.parse(userAdded); } catch(e){}
-      }
-
-      if (DEFAULT_BEBA_PHOTOS.length > 0) {
-        activePhotos = [...customPhotos, ...DEFAULT_BEBA_PHOTOS];
-      } else if (customPhotos.length > 0) {
-        activePhotos = [...customPhotos];
-      }
-
       if (activePhotos.length > 0) {
-        currentSlideIdx = 0;
+        document.getElementById('gallery-empty-box').classList.add('hidden');
+        document.getElementById('gallery-slide-box').classList.remove('hidden');
+        document.getElementById('gallery-slide-box').classList.add('flex');
         showSlide(currentSlideIdx);
         startSlideshow();
+      } else {
+        document.getElementById('gallery-empty-box').classList.remove('hidden');
+        document.getElementById('gallery-slide-box').classList.add('hidden');
+        document.getElementById('gallery-slide-box').classList.remove('flex');
+        stopSlideshow();
       }
     }
 
-    function uploadMultiImages(e) {
+    // ฟังก์ชันรองรับการอัปโหลดทั้งภาพและไฟล์ PDF (เช่น beba.pdf) พร้อมกัน
+    async function uploadMultiFiles(e) {
       const files = e.target.files;
       if (!files || files.length === 0) return;
 
-      const newImages = [];
-      const fileList = Array.from(files);
-      let loaded = 0;
+      const statusText = document.getElementById('upload-status-text');
+      statusText.innerText = "⏳ กำลังเตรียมภาพความทรงจำของสองเรา...";
 
-      fileList.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          newImages.push(evt.target.result);
-          loaded++;
-          if (loaded === fileList.length) {
-            let saved = [];
-            const old = localStorage.getItem('anniv_user_uploaded_photos');
-            if (old) {
-              try { saved = JSON.parse(old); } catch(err){}
+      const newlyAdded = [];
+
+      for (const file of Array.from(files)) {
+        if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+          try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            for (let p = 1; p <= pdf.numPages; p++) {
+              const page = await pdf.getPage(p);
+              const viewport = page.getViewport({ scale: 1.5 });
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+              newlyAdded.push(canvas.toDataURL('image/jpeg', 0.9));
             }
-            saved = [...newImages, ...saved];
-            localStorage.setItem('anniv_user_uploaded_photos', JSON.stringify(saved));
-
-            activePhotos = [...newImages, ...activePhotos];
-            currentSlideIdx = 0;
-            showSlide(currentSlideIdx);
-            startSlideshow();
-
-            for (let i = 0; i < 20; i++) {
-              setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.45), i * 35);
-            }
+          } catch (err) {
+            console.error('PDF Render Error:', err);
           }
-        };
-        reader.readAsDataURL(file);
-      });
+        } else if (file.type.startsWith('image/')) {
+          const url = URL.createObjectURL(file);
+          newlyAdded.push(url);
+        }
+      }
+
+      if (newlyAdded.length > 0) {
+        activePhotos = [...newlyAdded, ...activePhotos];
+        statusText.innerText = `✨ เพิ่มรูปความทรงจำเรียบร้อยแล้ว (${activePhotos.length} รูป) 🌸`;
+
+        document.getElementById('gallery-empty-box').classList.add('hidden');
+        document.getElementById('gallery-slide-box').classList.remove('hidden');
+        document.getElementById('gallery-slide-box').classList.add('flex');
+
+        currentSlideIdx = 0;
+        showSlide(currentSlideIdx);
+        startSlideshow();
+
+        for (let i = 0; i < 20; i++) {
+          setTimeout(() => popEmoji(window.innerWidth / 2, window.innerHeight * 0.45), i * 35);
+        }
+      } else {
+        statusText.innerText = "⚠️ ไม่พบไฟล์รูปภาพ ลองเลือกใหม่อีกครั้งนะ";
+      }
+
+      e.target.value = '';
     }
 
     function showSlide(idx) {
@@ -1700,7 +1698,7 @@
         quoteEl.classList.add('text-fade-pop');
 
         imgEl.className = 'frameless-photo-canvas slide-fluid-enter';
-      }, 350);
+      }, 300);
     }
 
     function nextSlide(e) {
@@ -1746,7 +1744,7 @@
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
-    /* 9. BOARDING PASS 2 & CLOUDS STAGE (จุดที่ 2: หน้าระหว่างรูปกับเพลง คงเดิมไว้ 100%) */
+    /* 9. BOARDING PASS 2 & CLOUDS STAGE */
     const ONLINE_LOVE_QUOTES = [
       "เธอคือเหตุผลที่ทำให้ทุกวันมีความหมาย ❤️",
       "ขอบคุณที่เข้ามาเป็นความสุขที่น่ารักที่สุดในชีวิต",
@@ -1939,4 +1937,3 @@
   </script>
 </body>
 </html>
-

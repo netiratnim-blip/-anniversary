@@ -14,6 +14,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- PDF.js เพื่อดึงรูปภาพคมชัดจากไฟล์ PDF โดยตรง -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
   <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -610,20 +613,59 @@
       pointer-events: none;
     }
 
-    .slide-enter-large {
-      animation: slideInZoom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* ========================================================
+       NEW: FRAMELESS CINEMATIC FLOATING SLIDESHOW
+       ======================================================== */
+    .frameless-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
     }
-    @keyframes slideInZoom {
-      0% { opacity: 0; transform: scale(0.75) rotate(-3deg); filter: blur(8px); }
-      100% { opacity: 1; transform: scale(1.02) rotate(0deg); filter: blur(0px); }
+    
+    .frameless-halo-glow {
+      position: absolute;
+      inset: -15px;
+      background: radial-gradient(circle, rgba(226, 185, 195, 0.28) 0%, rgba(226, 185, 195, 0.08) 45%, transparent 70%);
+      filter: blur(28px);
+      pointer-events: none;
+      z-index: 1;
+      animation: haloBreathe 5s infinite alternate ease-in-out;
+    }
+    @keyframes haloBreathe {
+      0% { transform: scale(0.92); opacity: 0.5; }
+      100% { transform: scale(1.08); opacity: 0.85; }
     }
 
-    .slide-exit-shrink {
-      animation: slideOutShrink 0.8s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    .frameless-photo-canvas {
+      position: relative;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(226, 185, 195, 0.2);
+      object-fit: contain;
+      z-index: 5;
+      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    @keyframes slideOutShrink {
-      0% { opacity: 1; transform: scale(1.02) rotate(0deg); filter: blur(0px); }
-      100% { opacity: 0; transform: scale(0.65) rotate(5deg) translateY(-20px); filter: blur(6px); }
+
+    .slide-fluid-enter {
+      animation: fluidIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fluidIn {
+      0% { opacity: 0; transform: scale(0.85) rotate(-2deg); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
+    }
+
+    .slide-fluid-exit {
+      animation: fluidOut 0.7s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    }
+    @keyframes fluidOut {
+      0% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0px); }
+      100% { opacity: 0; transform: scale(0.7) rotate(3deg) translateY(-25px); filter: blur(8px); }
     }
 
     .text-fade-pop {
@@ -895,9 +937,9 @@
       </div>
     </section>
 
-    <!-- SCENE 3: PHOTO CINEMATIC SLIDESHOW -->
+    <!-- SCENE 3: FRAMELESS FLOATING MEMORY SLIDESHOW (ปรับปรุงใหม่ไร้กรอบ พร้อมรูปจริงจากไฟล์ PDF) -->
     <section id="scene-gallery" class="w-full max-w-2xl hidden flex-col items-center text-center">
-      <div class="mb-5">
+      <div class="mb-3">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
           OUR MEMORIES
         </span>
@@ -909,49 +951,47 @@
         </p>
       </div>
 
-      <div class="flex flex-col items-center gap-2 mb-8">
-        <label class="clean-btn cursor-pointer">
+      <!-- Action Button to Upload Multiple Images -->
+      <div class="flex flex-col items-center gap-2 mb-6">
+        <label class="clean-btn cursor-pointer !py-2.5 !px-6">
           <i class="fa-solid fa-images text-[#e2b9c3]"></i>
           <span class="btn-glow-text text-sm">เพิ่มรูปภาพความทรงจำของเรา (เลือกได้หลายรูป)</span>
           <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="uploadMultiImages(event)">
         </label>
-        <span class="text-[11px] text-gray-400">*สามารถเลือกรูปคู่ของเราได้ทีละหลายรูปพร้อมกันเลยนะจ๊ะ 🌸</span>
+        <span class="text-[11px] text-gray-400">*สามารถเลือกรูปคู่ใหม่ๆ เพิ่มเติมเข้ามาหมุนสลับกับรูปเดิมได้นะจ๊ะ 🌸</span>
       </div>
 
-      <div id="gallery-empty-box" class="glass-card w-full py-16 px-6 border border-dashed border-[#e2b9c3]/30 flex flex-col items-center justify-center mb-8">
-        <div class="w-16 h-16 rounded-full bg-white/[0.03] border border-[#e2b9c3]/20 flex items-center justify-center text-2xl text-[#e2b9c3]/70 mb-3 animate-pulse">
-          <i class="fa-regular fa-image"></i>
+      <!-- Frameless Floating Slideshow Stage (ไม่มีกรอบแข็ง ลอยเด่นสวยงาม) -->
+      <div id="gallery-slide-box" class="w-full flex flex-col items-center mb-6">
+        <div class="frameless-viewport">
+          <div class="frameless-halo-glow"></div>
+          
+          <img id="slide-main-image" src="" alt="Our Memory" class="frameless-photo-canvas slide-fluid-enter">
+          
+          <!-- Indicator Badge -->
+          <div class="absolute bottom-3 right-5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono z-10 shadow-lg">
+            <span id="slide-index-counter">1 / 7</span>
+          </div>
         </div>
-        <p class="text-gray-300 text-sm font-light">ยังไม่มีรูปภาพความทรงจำถูกใส่เข้ามา</p>
-        <p class="text-gray-500 text-xs mt-1">กดปุ่มด้านบนเพื่อเลือกภาพของเรามาโชว์ในสไลด์ความทรงจำได้เลยนะ ✨</p>
-      </div>
 
-      <div id="gallery-slide-box" class="w-full hidden flex-col items-center mb-8">
-        <div class="glass-card w-full p-4 sm:p-6 border border-[#e2b9c3]/30 relative overflow-hidden flex flex-col items-center">
-          <div class="w-full aspect-[4/3] sm:aspect-[16/10] max-h-[460px] rounded-xl overflow-hidden bg-black/60 border border-white/[0.1] relative flex items-center justify-center shadow-2xl">
-            <img id="slide-main-image" src="" alt="Memory Slide" class="w-full h-full object-cover transition-all duration-700">
-            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#e2b9c3]/30 text-[11px] text-[#faedf0] font-mono">
-              <span id="slide-index-counter">1 / 1</span>
-            </div>
-          </div>
+        <!-- Sweet Love Note per Photo -->
+        <div class="mt-4 px-4 py-2 w-full max-w-md min-h-[60px] flex items-center justify-center">
+          <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop italic">
+            "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸"
+          </p>
+        </div>
 
-          <div class="mt-5 px-3 py-3 w-full bg-white/[0.02] border border-[#e2b9c3]/20 rounded-lg min-h-[75px] flex items-center justify-center">
-            <p id="slide-quote-text" class="text-sm sm:text-base text-[#f7e7ea] font-light leading-relaxed text-fade-pop">
-              "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ"
-            </p>
-          </div>
-
-          <div class="flex items-center justify-center gap-4 mt-4 w-full pt-2">
-            <button onclick="prevSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
-              <i class="fa-solid fa-chevron-left text-[10px]"></i> ก่อนหน้า
-            </button>
-            <button onclick="toggleSlideshowPlay(event)" class="keypad-btn !py-1.5 !px-5 text-xs text-[#e2b9c3]">
-              <i id="slide-play-icon" class="fa-solid fa-pause"></i>
-            </button>
-            <button onclick="nextSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
-              ถัดไป <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-          </div>
+        <!-- Controls: Prev, Pause/Play, Next -->
+        <div class="flex items-center justify-center gap-4 mt-2 w-full">
+          <button onclick="prevSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i> ก่อนหน้า
+          </button>
+          <button onclick="toggleSlideshowPlay(event)" class="keypad-btn !py-1.5 !px-5 text-xs text-[#e2b9c3]">
+            <i id="slide-play-icon" class="fa-solid fa-pause"></i>
+          </button>
+          <button onclick="nextSlide(event)" class="keypad-btn !py-1.5 !px-4 text-xs flex items-center gap-1.5">
+            ถัดไป <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
         </div>
       </div>
 
@@ -962,7 +1002,7 @@
       </button>
     </section>
 
-    <!-- SCENE 3.5: BOARDING PASS 2 & LOVE CLOUDS SCREEN (จุดที่ 2: หน้าระหว่างรูปกับเพลง) -->
+    <!-- SCENE 3.5: BOARDING PASS 2 & LOVE CLOUDS SCREEN (จุดที่ 2: หน้าระหว่างรูปกับเพลง คงเดิมไว้ 100%) -->
     <section id="scene-flight-ticket" class="w-full max-w-2xl hidden flex-col items-center text-center relative">
       <div class="mb-4">
         <span class="px-3 py-1 rounded-md bg-white/[0.04] border border-[#e2b9c3]/25 text-[#e2b9c3] text-[11px] tracking-wider uppercase">
@@ -1080,7 +1120,7 @@
       </div>
     </section>
 
-    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER -->
+    <!-- SCENE 4: CODE TERMINAL & SPECIAL LETTER (คงเดิมไว้ 100%) -->
     <section id="scene-lyrics" class="w-full max-w-3xl hidden flex-col items-center">
       <div class="w-full flex justify-between items-center mb-4 px-2">
         <button onclick="gotoScene('scene-flight-ticket', event)" class="text-gray-400 text-xs hover:text-[#e2b9c3] flex items-center gap-1.5 transition-colors">
@@ -1533,45 +1573,72 @@
       }
     }
 
-    /* 8. Multi-Photo Cinematic Slideshow System */
-    let userPhotos = [];
+    /* 8. Frameless Floating Memory Slideshow System (รูปจริงจากไฟล์ beba.pdf) */
+    // ดึงรูปภาพทั้งหมด 7 หน้าจากไฟล์ beba.pdf โดยตรง (Render เป็น DataURL คุณภาพสูง)
+    let DEFAULT_BEBA_PHOTOS = [];
+    
+    // โหลด PDF อัตโนมัติเมื่อเปิดหน้าเว็บ
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+      fetch('beba .pdf').then(res => res.arrayBuffer()).then(ab => {
+        pdfjsLib.getDocument({ data: ab }).promise.then(async (pdf) => {
+          let list = [];
+          for (let p = 1; p <= pdf.numPages; p++) {
+            let page = await pdf.getPage(p);
+            let viewport = page.getViewport({ scale: 1.5 });
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            list.push(canvas.toDataURL('image/jpeg', 0.9));
+          }
+          if (list.length > 0) {
+            DEFAULT_BEBA_PHOTOS = list;
+            // อัปเดตรูปถ้าหน้าสไลด์เปิดอยู่
+            if (activePhotos.length === 0) {
+              activePhotos = [...DEFAULT_BEBA_PHOTOS];
+              showSlide(0);
+            }
+          }
+        }).catch(err => console.log('Loaded without direct PDF fetch'));
+      }).catch(err => console.log('Offline / static mode'));
+    }
+
+    let activePhotos = [];
     let currentSlideIdx = 0;
     let slideTimer = null;
     let isSlideAutoPlaying = true;
 
     const LOVE_QUOTES = [
-      "ทุกรอยยิ้มที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸",
-      "ขอบคุณที่เข้ามาเป็นเรื่องราวที่น่ารักที่สุดในชีวิตเค้านะ 🤍",
-      "ไม่ว่าจะผ่านไปกี่เดือน รอยยิ้มนี้ก็ยังทำให้ใจสั่นได้เหมือนวันแรก ✨",
-      "จับมือกันแน่น ๆ แบบนี้ แล้วเดินไปด้วยกันในทุก ๆ วันนะเบ้บ 🌷",
-      "ขอบคุณที่คอยรับฟัง เข้าใจ และอยู่ข้างกันในทุกความรู้สึก 🧸",
-      "โลกนี้น่ารักขึ้นเยอะเลย ตั้งแต่วันที่มีเธอเข้ามาเดินข้าง ๆ 💫",
-      "วันครบรอบของเรา จะมีเธอ และมีเค้าแบบนี้ตลอดไปนะ 💌",
-      "ทุกความทรงจำในรูปนี้ คือบทพิสูจน์ความรักของเราสองคน ❤️"
+      "ทุกรอยยิ้มและเสียงหัวเราะที่มีเธอ คือช่วงเวลาที่มีค่าที่สุดเสมอ 🌸",
+      "เรื่องธรรมดาๆ พอนั่งกินข้าวด้วยกัน ก็กลายเป็นความทรงจำที่อบอุ่นที่สุด 🍗✨",
+      "ขอบคุณที่คอยเป็นที่พักพิง และอยู่เคียงข้างกันในทุกๆ วันนะ 🤍",
+      "ตั๋วหนังเรื่องโปรด กับคนที่รักที่สุดในโลก 🎬❤️",
+      "ทุกรูปสติกเกอร์ photobooth บันทึกความน่ารักของเราสองคนไว้ตลอดไป 🌷",
+      "โลกใบนี้น่ารักขึ้นเยอะเลย ตั้งแต่วันที่เธอเข้ามาเดินข้างๆ 💫",
+      "ในทุกๆ ก้าว ทุกๆ ที่ที่ไปด้วยกัน ขอให้มีเธอเคียงข้างแบบนี้ตลอดไปนะ 💌"
     ];
 
     function initGalleryView() {
-      const saved = localStorage.getItem('anniv_multi_photos');
-      if (saved) {
-        try {
-          userPhotos = JSON.parse(saved);
-        } catch(e) {
-          userPhotos = [];
-        }
+      // ดึงรูปที่แฟนอัปโหลดเพิ่มไว้ (ถ้ามี)
+      const userAdded = localStorage.getItem('anniv_user_uploaded_photos');
+      let customPhotos = [];
+      if (userAdded) {
+        try { customPhotos = JSON.parse(userAdded); } catch(e){}
       }
 
-      if (userPhotos && userPhotos.length > 0) {
-        document.getElementById('gallery-empty-box').classList.add('hidden');
-        document.getElementById('gallery-slide-box').classList.remove('hidden');
-        document.getElementById('gallery-slide-box').classList.add('flex');
+      // รวมรูปจริงจากไฟล์ PDF + รูปใหม่ที่แฟนอัปโหลดเพิ่ม
+      if (DEFAULT_BEBA_PHOTOS.length > 0) {
+        activePhotos = [...customPhotos, ...DEFAULT_BEBA_PHOTOS];
+      } else {
+        activePhotos = customPhotos.length > 0 ? customPhotos : [];
+      }
+
+      if (activePhotos.length > 0) {
         currentSlideIdx = 0;
         showSlide(currentSlideIdx);
         startSlideshow();
-      } else {
-        document.getElementById('gallery-empty-box').classList.remove('hidden');
-        document.getElementById('gallery-slide-box').classList.add('hidden');
-        document.getElementById('gallery-slide-box').classList.remove('flex');
-        stopSlideshow();
       }
     }
 
@@ -1589,13 +1656,17 @@
           newImages.push(evt.target.result);
           loaded++;
           if (loaded === fileList.length) {
-            userPhotos = [...newImages, ...userPhotos];
-            localStorage.setItem('anniv_multi_photos', JSON.stringify(userPhotos));
+            // บันทึกรูปที่แฟนเพิ่มลง LocalStorage
+            let saved = [];
+            const old = localStorage.getItem('anniv_user_uploaded_photos');
+            if (old) {
+              try { saved = JSON.parse(old); } catch(err){}
+            }
+            saved = [...newImages, ...saved];
+            localStorage.setItem('anniv_user_uploaded_photos', JSON.stringify(saved));
 
-            document.getElementById('gallery-empty-box').classList.add('hidden');
-            document.getElementById('gallery-slide-box').classList.remove('hidden');
-            document.getElementById('gallery-slide-box').classList.add('flex');
-
+            // แสดงร่วมกับรูปเดิมที่มีอยู่ทันที
+            activePhotos = [...newImages, ...activePhotos];
             currentSlideIdx = 0;
             showSlide(currentSlideIdx);
             startSlideshow();
@@ -1610,17 +1681,17 @@
     }
 
     function showSlide(idx) {
-      if (!userPhotos || userPhotos.length === 0) return;
+      if (!activePhotos || activePhotos.length === 0) return;
 
       const imgEl = document.getElementById('slide-main-image');
       const quoteEl = document.getElementById('slide-quote-text');
       const counterEl = document.getElementById('slide-index-counter');
 
-      imgEl.className = 'w-full h-full object-cover slide-exit-shrink';
+      imgEl.className = 'frameless-photo-canvas slide-fluid-exit';
 
       setTimeout(() => {
-        imgEl.src = userPhotos[idx];
-        counterEl.innerText = `${idx + 1} / ${userPhotos.length}`;
+        imgEl.src = activePhotos[idx];
+        counterEl.innerText = `${idx + 1} / ${activePhotos.length}`;
 
         const quote = LOVE_QUOTES[idx % LOVE_QUOTES.length];
         quoteEl.innerText = `"${quote}"`;
@@ -1628,31 +1699,31 @@
         void quoteEl.offsetWidth;
         quoteEl.classList.add('text-fade-pop');
 
-        imgEl.className = 'w-full h-full object-cover slide-enter-large';
-      }, 400);
+        imgEl.className = 'frameless-photo-canvas slide-fluid-enter';
+      }, 350);
     }
 
     function nextSlide(e) {
-      if (userPhotos.length <= 1) return;
-      currentSlideIdx = (currentSlideIdx + 1) % userPhotos.length;
+      if (activePhotos.length <= 1) return;
+      currentSlideIdx = (currentSlideIdx + 1) % activePhotos.length;
       showSlide(currentSlideIdx);
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
     function prevSlide(e) {
-      if (userPhotos.length <= 1) return;
-      currentSlideIdx = (currentSlideIdx - 1 + userPhotos.length) % userPhotos.length;
+      if (activePhotos.length <= 1) return;
+      currentSlideIdx = (currentSlideIdx - 1 + activePhotos.length) % activePhotos.length;
       showSlide(currentSlideIdx);
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
     function startSlideshow() {
       stopSlideshow();
-      if (!isSlideAutoPlaying || userPhotos.length <= 1) return;
+      if (!isSlideAutoPlaying || activePhotos.length <= 1) return;
       slideTimer = setInterval(() => {
-        currentSlideIdx = (currentSlideIdx + 1) % userPhotos.length;
+        currentSlideIdx = (currentSlideIdx + 1) % activePhotos.length;
         showSlide(currentSlideIdx);
-      }, 4500);
+      }, 4200);
     }
 
     function stopSlideshow() {
@@ -1675,7 +1746,7 @@
       if (e && e.clientX) popEmoji(e.clientX, e.clientY);
     }
 
-    /* 9. BOARDING PASS 2 & CLOUDS STAGE (จุดที่ 2: หน้าระหว่างรูปกับเพลง) */
+    /* 9. BOARDING PASS 2 & CLOUDS STAGE (จุดที่ 2: หน้าระหว่างรูปกับเพลง คงเดิมไว้ 100%) */
     const ONLINE_LOVE_QUOTES = [
       "เธอคือเหตุผลที่ทำให้ทุกวันมีความหมาย ❤️",
       "ขอบคุณที่เข้ามาเป็นความสุขที่น่ารักที่สุดในชีวิต",
@@ -1763,7 +1834,6 @@
         setTimeout(() => bubble.remove(), duration * 1000);
       }, 280);
 
-      // โชว์ข้อความรักประมาณ 8.5 วินาที แล้วปุ่มจะเด้งขึ้นมา
       setTimeout(() => {
         btn.classList.remove('opacity-0', 'pointer-events-none');
         btn.classList.add('opacity-100', 'pointer-events-auto', 'animate-pulse');
